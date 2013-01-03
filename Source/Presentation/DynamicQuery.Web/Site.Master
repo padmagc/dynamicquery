@@ -1,0 +1,42 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="DynamicQuery.Web.SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title>QB Report Designer</title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/absolution.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/absolution.mobile.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="page">
+        <div style="width: 960px; min-height: 620px; margin: 20px auto 0px auto;border: 1px solid #ABABAB;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" 
+            tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-dialog">
+            <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+                <span class="ui-dialog-title" id="ui-dialog-title-dialog">QB Report Designer</span>
+            </div>
+            
+            <div id="dialog" style="width: auto; min-height: 100%; height: auto;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+			    <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all"> 
+		            <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"> 
+		                <li class="ui-state-default ui-corner-top">
+		                    <a href="Default.aspx">Kezdőlap</a>
+		                </li> 
+		                <li class="ui-state-default ui-corner-top">
+		                    <a href="Default.aspx">Típusok</a>
+		                </li>
+		            </ul> 
+		            <div id="main" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+		                <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+		            </div> 
+		        </div>
+		    </div>
+            
+
+        </div>
+    </div>
+    
+   
+
+</body>
+</html>
