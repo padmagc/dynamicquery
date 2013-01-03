@@ -97,7 +97,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <ProjectReference Include="..\..\BusinessLogic\DynamicQuery.Entity\DynamicQuery.Entity.csproj">
+      <Project>{CD72EB22-F202-4139-95D4-1627A8649C3D}</Project>
+      <Name>DynamicQuery.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BusinessLogic\DynamicQuery.Logic\DynamicQuery.Logic.csproj">
+      <Project>{31A32475-15C4-4D4F-A00A-6737F2444B5C}</Project>
+      <Name>DynamicQuery.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />
