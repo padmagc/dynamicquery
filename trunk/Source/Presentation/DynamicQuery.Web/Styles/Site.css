@@ -1,0 +1,15 @@
+﻿html {
+    display: block;
+}
+
+body {
+    display: block;
+    font: 80% "Trebuchet MS", sans-serif;
+}
+
+.page
+{
+    width: 960px;
+    margin: 20px auto 0px auto;
+    /*border: 1px solid #ABABAB;*/
+}
