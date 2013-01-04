@@ -7,6 +7,17 @@
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/absolution.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/absolution.mobile.css" rel="stylesheet" type="text/css" />
+    
+    <script type="text/javascript" src="/Scripts/jquery-1.7.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // TODO
+            /*$('#navigation li').click(function () {
+                $('#navigation li').removeClass('ui-state-active');
+                $(this).addClass('ui-state-active');
+            });*/
+        });
+    </script>
 </head>
 <body>
     <div class="page">
@@ -15,10 +26,9 @@
             <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
                 <span class="ui-dialog-title" id="ui-dialog-title-dialog">QB Report Designer</span>
             </div>
-            
             <div id="dialog" style="width: auto; min-height: 100%; height: auto;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
 			    <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all"> 
-		            <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"> 
+		            <ul id="navigation" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"> 
 		                <li class="ui-state-default ui-corner-top">
 		                    <a href="Default.aspx">Kezdőlap</a>
 		                </li> 
@@ -27,12 +37,10 @@
 		                </li>
 		            </ul> 
 		            <div id="main" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-		                <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
 		            </div> 
 		        </div>
 		    </div>
-            
-
         </div>
     </div>
     

@@ -40,7 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Documentation\DynamicQueryCalculatedColumn.cs" />
+    <Compile Include="Documentation\DynamicQueryDatabase.cs" />
+    <Compile Include="Documentation\DynamicQueryTable.cs" />
+    <Compile Include="Documentation\DynamicQueryTableAssociation.cs" />
+    <Compile Include="Documentation\DynamicQueryTableColumn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryBuilder\DynamicQueryColumn.cs" />
+    <Compile Include="QueryBuilder\DynamicQueryQuery.cs" />
+    <Compile Include="QueryBuilder\FieldType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
