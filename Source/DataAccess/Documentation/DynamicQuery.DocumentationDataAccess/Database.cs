@@ -36,6 +36,7 @@ namespace DynamicQuery.Entity.Documentation
             					   {
                                     	new DynamicQueryTableAssociation() { Name = "FK_bevet_afakod", ForeignKeyColumn = "afakod", ForeignKeyTable = "bevet", PrimaryKeyColumn = "kod", PrimaryKeyTable = "afakod" },
                                     	new DynamicQueryTableAssociation() { Name = "FK_cikk_afakod", ForeignKeyColumn = "afakod", ForeignKeyTable = "cikk", PrimaryKeyColumn = "kod", PrimaryKeyTable = "afakod" },
+                                    	new DynamicQueryTableAssociation() { Name = "FK_arajanlattet_afakod", ForeignKeyColumn = "afakod", ForeignKeyTable = "arajanlattet", PrimaryKeyColumn = "kod", PrimaryKeyTable = "afakod" },
                                    }			
         	});	
         	
@@ -57,6 +58,83 @@ namespace DynamicQuery.Entity.Documentation
                                 	new DynamicQueryTableColumn(){ Name = "engparam", Description = "Adatgyüjtés engedély paraméter azonosító (PARAM tábla)", ColumnType = "string", Length = 20  },
                                 	new DynamicQueryTableColumn(){ Name = "sorszam_param", Description = "Adatgyűjtés sorszám paraméter azonosító (PARAM tábla)", ColumnType = "string", Length = 30  },
                               },
+            		Associations = new List<DynamicQueryTableAssociation>()
+            					   {
+                                    	new DynamicQueryTableAssociation() { Name = "FK_agyujt_patikak_agyujt", ForeignKeyColumn = "agyujtaz", ForeignKeyTable = "agyujt_patikak", PrimaryKeyColumn = "agyujtaz", PrimaryKeyTable = "agyujt" },
+                                   }			
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("agyujt_patikak")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	new DynamicQueryTableColumn(){ Name = "kod", Description = "identity", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "agyujtaz", Description = "adatgyűjtés azonosító", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "qb_azon", Description = "patika azonosító (levélcím) /varchar(50) volt/", ColumnType = "string", Length = 40  },
+                                	new DynamicQueryTableColumn(){ Name = "kulso_azon", Description = "külső azonosító (adatgyüjtés megrendelője által adott azonosító)", ColumnType = "string", Length = 50  },
+                                	new DynamicQueryTableColumn(){ Name = "nev", Description = "patika neve", ColumnType = "string", Length = 50  },
+                                	new DynamicQueryTableColumn(){ Name = "datum_tol", Description = "gyüjtés érvényességének kezdete", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "datum_ig", Description = "gyüjtés érvényességének vége", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "kuldes", Description = "küldés típus kód", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "levelcim", Description = "küldés címzettje", ColumnType = "string", Length = 40  },
+                                	new DynamicQueryTableColumn(){ Name = "auttar_utv", Description = "küldéskor cél könyvtár neve", ColumnType = "string", Length = 50  },
+                                	new DynamicQueryTableColumn(){ Name = "agyujtaz2", Description = "kapcsolódó gyüjtés azonosító", ColumnType  = "bool" },
+                              },
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("agyujt_sanofi")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	new DynamicQueryTableColumn(){ Name = "kod", Description = "identity", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "alimed", Description = "Alimed kód (SZALLTORZS.AZONOSITO)", ColumnType = "string", Length = 255  },
+                                	new DynamicQueryTableColumn(){ Name = "cikknev", Description = "Cikk neve", ColumnType = "string", Length = 255  },
+                                	new DynamicQueryTableColumn(){ Name = "alimednev", Description = "Alimed törzsbeli neév", ColumnType = "string", Length = 255  },
+                                	new DynamicQueryTableColumn(){ Name = "piac", Description = "Piac azonosító", ColumnType = "string", Length = 255  },
+                                	new DynamicQueryTableColumn(){ Name = "piacnev1", Description = "Piac neve", ColumnType = "string", Length = 255  },
+                                	new DynamicQueryTableColumn(){ Name = "piackod1", Description = "Piac azonosító", ColumnType = "string", Length = 255  },
+                                	new DynamicQueryTableColumn(){ Name = "piacnev2", Description = "Piac neve", ColumnType = "string", Length = 255  },
+                                	new DynamicQueryTableColumn(){ Name = "piackod2", Description = "Piac azonosító", ColumnType = "string", Length = 255  },
+                                	new DynamicQueryTableColumn(){ Name = "sf", Description = "Sanofi termék", ColumnType = "string", Length = 255  },
+                              },
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("arajanlatfej")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	new DynamicQueryTableColumn(){ Name = "kod", Description = "identity", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "sorszam", Description = "Árajánlat azonosító", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "pkod", Description = "Partner kód", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "kedvezmeny100", Description = "Kedvezmény %", ColumnType  = "decimal", Length = 10, DecimalLength = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "megjegyzes", Description = "Megjegyzés", ColumnType = "string", Length = 100  },
+                                	new DynamicQueryTableColumn(){ Name = "datum", Description = "Dátum", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "torolve", Description = "Törölve", ColumnType  = "bool" },
+                              },
+            		Associations = new List<DynamicQueryTableAssociation>()
+            					   {
+                                    	new DynamicQueryTableAssociation() { Name = "FK_arajanlattet_arajanlatfej", ForeignKeyColumn = "sorszam", ForeignKeyTable = "arajanlattet", PrimaryKeyColumn = "sorszam", PrimaryKeyTable = "arajanlatfej" },
+                                   }			
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("arajanlattet")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	new DynamicQueryTableColumn(){ Name = "kod", Description = "identity", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "sorszam", Description = "Árajánlat azonosító", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "cikkszam", Description = "Cikkszám", ColumnType = "string", Length = 13  },
+                                	new DynamicQueryTableColumn(){ Name = "menny", Description = "Mennyiség", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
+                                	new DynamicQueryTableColumn(){ Name = "tipus", Description = "Eladás típusa", ColumnType = "string", Length = 1  },
+                                	new DynamicQueryTableColumn(){ Name = "jogcim", Description = "Eladás jogcíme", ColumnType = "string", Length = 1  },
+                                	new DynamicQueryTableColumn(){ Name = "fogyar", Description = "Fogy.ár nettó", ColumnType  = "decimal", Length = 16, DecimalLength = 8  },
+                                	new DynamicQueryTableColumn(){ Name = "tamogatas", Description = "Támogatás nettó", ColumnType  = "decimal", Length = 16, DecimalLength = 8  },
+                                	new DynamicQueryTableColumn(){ Name = "terites", Description = "Térítési díj nettó", ColumnType  = "decimal", Length = 16, DecimalLength = 8  },
+                                	new DynamicQueryTableColumn(){ Name = "afakod", Description = "ÁFA kód", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "afakulcs", Description = "ÁFA kulcs", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "kedvezmeny100", Description = "Kedvezmény %", ColumnType  = "decimal", Length = 10, DecimalLength = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "kedvezmeny", Description = "Kedvezmény értéke nettó", ColumnType  = "decimal", Length = 16, DecimalLength = 8  },
+                              },
         	});	
         	
         	this.Tables.Add(new DynamicQueryTable("arazo")
@@ -72,6 +150,111 @@ namespace DynamicQuery.Entity.Documentation
                                 	new DynamicQueryTableColumn(){ Name = "polc", Description = "Polc", ColumnType = "string", Length = 20  },
                                 	new DynamicQueryTableColumn(){ Name = "rekesz", Description = "Rekesz azonosító", ColumnType = "string", Length = 10  },
                                 	new DynamicQueryTableColumn(){ Name = "nyomtatva", Description = "Nyomtatva", ColumnType  = "bool" },
+                              },
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("archivalas")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	new DynamicQueryTableColumn(){ Name = "tablanev", Description = "Tábla neve", ColumnType = "string", Length = 50  },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "archiv_tipus", Description = "", ColumnType  = "bool" },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "archiv_tipus_doro", Description = "", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "datum_mezo", Description = "Dátumot tartalmazó mező neve", ColumnType = "string", Length = 50  },
+                                	new DynamicQueryTableColumn(){ Name = "azonosito_mezo", Description = "Rekord azonosító mező neve", ColumnType = "string", Length = 50  },
+                                	new DynamicQueryTableColumn(){ Name = "torles_sql", Description = "Törlés where feltétele", ColumnType = "string", Length = 500  },
+                                	new DynamicQueryTableColumn(){ Name = "torles_sql_doro", Description = "Törlés where feltétele (Dorottya)", ColumnType = "string", Length = 500  },
+                                	new DynamicQueryTableColumn(){ Name = "join_mezo", Description = "Lapcsolódás más táblához", ColumnType = "string", Length = 500  },
+                                	new DynamicQueryTableColumn(){ Name = "where_sql", Description = "-", ColumnType = "string", Length = 500  },
+                              },
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("arkepzcikk")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "kod", Description = "", ColumnType  = "int" },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "cikkszam", Description = "", ColumnType = "string", Length = 13  },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "eltertartos", Description = "", ColumnType  = "int" },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "elteridosz", Description = "", ColumnType  = "int" },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "elternap1", Description = "", ColumnType = "string", Length = 5  },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "elternap2", Description = "", ColumnType = "string", Length = 5  },
+                              },
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("arkepzfogyar")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "kod", Description = "", ColumnType  = "int" },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "tol", Description = "", ColumnType  = "int" },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "ig", Description = "", ColumnType  = "int" },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "modosit", Description = "", ColumnType  = "bool" },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "vege", Description = "", ColumnType  = "int" },
+                              },
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("arres")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	new DynamicQueryTableColumn(){ Name = "nagykerar1", Description = "Nagyker.ár intervallum kezdete", ColumnType  = "decimal", Length = 18, DecimalLength = 0  },
+                                	new DynamicQueryTableColumn(){ Name = "nagykerar2", Description = "Nagyker.ár intervallum vége", ColumnType  = "decimal", Length = 18, DecimalLength = 0  },
+                                	// Documentation is null on this field, please check it
+                                	new DynamicQueryTableColumn(){ Name = "arres1", Description = "", ColumnType  = "decimal", Length = 18, DecimalLength = 0  },
+                                	new DynamicQueryTableColumn(){ Name = "arresjel", Description = "Árrés típusa (% vagy Ft)", ColumnType = "string", Length = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "fogyar1", Description = "Fogy.ár intervallum kezdete", ColumnType  = "decimal", Length = 18, DecimalLength = 0  },
+                                	new DynamicQueryTableColumn(){ Name = "fogyar2", Description = "Fogy.ár intervallum vége", ColumnType  = "decimal", Length = 18, DecimalLength = 0  },
+                                	new DynamicQueryTableColumn(){ Name = "datum1", Description = "-", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "datum2", Description = "-", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "cikkcsop", Description = "Cikkcsoport azonosítója /varchar(20) volt/", ColumnType = "string", Length = 1  },
+                                	new DynamicQueryTableColumn(){ Name = "torolve", Description = "törölve", ColumnType  = "bool" },
+                              },
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("arvaltidoszakfej")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	new DynamicQueryTableColumn(){ Name = "kod", Description = "identity", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "megn", Description = "Időszakos árváltozás megnevezése", ColumnType = "string", Length = 50  },
+                                	new DynamicQueryTableColumn(){ Name = "datum_tol", Description = "Időszak kezdete", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "datum_ig", Description = "Időszak vége", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "storno", Description = "stornírozva", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "tdatum", Description = "stornó időpontja", ColumnType  = "DateTime" },
+                              },
+            		Associations = new List<DynamicQueryTableAssociation>()
+            					   {
+                                    	new DynamicQueryTableAssociation() { Name = "FK_arvaltidoszaktet_arvaltidoszakfej", ForeignKeyColumn = "arvaltkod", ForeignKeyTable = "arvaltidoszaktet", PrimaryKeyColumn = "kod", PrimaryKeyTable = "arvaltidoszakfej" },
+                                   }			
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("arvaltidoszaktet")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	new DynamicQueryTableColumn(){ Name = "kod", Description = "identity", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "arvaltkod", Description = "dőszakos árváltozás belső kódja", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "cikkszam", Description = "Cikkszám", ColumnType = "string", Length = 13  },
+                                	new DynamicQueryTableColumn(){ Name = "bfogyar", Description = "Új fogy.ár bruttó", ColumnType  = "decimal", Length = 14, DecimalLength = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "rfogyar", Description = "Régi fogy.ár bruttó", ColumnType  = "decimal", Length = 14, DecimalLength = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "arvalt_oraperc", Description = "Árváltozás megtörtének időpontja", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "vissza_oraperc", Description = "Visszaárazás időpontja", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "storno", Description = "sztornírozva", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "tdatum", Description = "sztornó időpontja", ColumnType  = "DateTime" },
                               },
         	});	
         	
@@ -113,6 +296,28 @@ namespace DynamicQuery.Entity.Documentation
                                 	new DynamicQueryTableColumn(){ Name = "oraperc", Description = "Rögzítés időpontja", ColumnType  = "DateTime" },
                                 	// Documentation is null on this field, please check it
                                 	new DynamicQueryTableColumn(){ Name = "torolve", Description = "", ColumnType  = "bool" },
+                              },
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("BankTerminalForg")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	new DynamicQueryTableColumn(){ Name = "BankTerminalForgID", Description = "identity", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "Inyugta", Description = "ideiglenes nyugta azonosító", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "Felvdat", Description = "rekord bekerülésének dátuma", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "Fizetendo", Description = "kártyával fizetendő összeg", ColumnType  = "decimal", Length = 10, DecimalLength = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "Storno", Description = "vásárlás sztornó", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "TerminalTipus", Description = "Terminál típus kód", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "Comport", Description = "COM port", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "Gep", Description = "Gép sorszáma", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "FelhasznaloId", Description = "Felhasználó azonosító kód", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "Feldolgozva", Description = "Kérés feldolgozva", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "Elfogadva", Description = "Kártyás fizetés elfogadva", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "TranzakcioAzon", Description = "Tranzakció azonosító", ColumnType = "string", Length = 40  },
+                                	new DynamicQueryTableColumn(){ Name = "Kartyaszam", Description = "Kártya sorszáma", ColumnType = "string", Length = 30  },
+                                	new DynamicQueryTableColumn(){ Name = "HibaUzenet", Description = "Hibaüzenet", ColumnType = "string", Length = 50  },
+                                	new DynamicQueryTableColumn(){ Name = "SlipSzam", Description = "Slip száma", ColumnType = "string", Length = 50  },
                               },
         	});	
         	
@@ -168,6 +373,57 @@ namespace DynamicQuery.Entity.Documentation
                                 	new DynamicQueryTableColumn(){ Name = "rowamenny", Description = "ROWA-ba bevételezett mennyiség", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
                                 	new DynamicQueryTableColumn(){ Name = "ktrkod", Description = "Készlet tranzakció kód", ColumnType  = "int" },
                                 	new DynamicQueryTableColumn(){ Name = "bizom", Description = "Bizomyányosi áru jelölése", ColumnType  = "bool" },
+                              },
+        	});	
+        	
+        	this.Tables.Add(new DynamicQueryTable("bevettemp")
+        	{
+            		Columns = new List<DynamicQueryTableColumn>()
+            				  {
+                                	new DynamicQueryTableColumn(){ Name = "kod", Description = "identity", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "gep", Description = "Gép sorszáma /int volt/", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "tipus", Description = "Bevételezés típusa (tételenként, rendelésből, modem)", ColumnType = "string", Length = 1  },
+                                	new DynamicQueryTableColumn(){ Name = "keszleten", Description = "A tétel már készleten van (gyors készletfelvitellel)", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "pkod", Description = "Partner kód", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "bevetszam", Description = "Bevételezés sorszáma", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "szlaszam", Description = "Számlaszám", ColumnType = "string", Length = 20  },
+                                	new DynamicQueryTableColumn(){ Name = "bevetdat", Description = "Bevételezés dátuma", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "cikkszam", Description = "Cikkszám", ColumnType = "string", Length = 13  },
+                                	new DynamicQueryTableColumn(){ Name = "mennyiseg", Description = "Bevételezett mennyiség", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
+                                	new DynamicQueryTableColumn(){ Name = "nagykerar", Description = "Nagyker. ár", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
+                                	new DynamicQueryTableColumn(){ Name = "arengsz", Description = "Árengedmény százalékosan", ColumnType  = "decimal", Length = 5, DecimalLength = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "arenge", Description = "Árengedmény értékben", ColumnType  = "decimal", Length = 10, DecimalLength = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "beszar", Description = "Beszerzési ár", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
+                                	new DynamicQueryTableColumn(){ Name = "fogyar", Description = "Fogyasztói ár", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
+                                	new DynamicQueryTableColumn(){ Name = "afakulcs", Description = "ÁFA kulcs", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "gyartszam", Description = "Gyártási szám", ColumnType = "string", Length = 20  },
+                                	new DynamicQueryTableColumn(){ Name = "gyartev", Description = "Gyártás éve", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "gyartho", Description = "Gyártás hónapja", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "lejardat", Description = "Lejárat dátuma", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "vtsz", Description = "VTSZ", ColumnType = "string", Length = 10  },
+                                	new DynamicQueryTableColumn(){ Name = "rendszam", Description = "Rendelés szám", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "bmennyiseg", Description = "Dorottya : bevételezett mennyiség kiszerelési egys.", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
+                                	new DynamicQueryTableColumn(){ Name = "efogyar", Description = "Előző fogyasztói ár", ColumnType  = "decimal", Length = 10, DecimalLength = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "enagykerar", Description = "Előző nagyker. ár", ColumnType  = "decimal", Length = 10, DecimalLength = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "ebdatum", Description = "Dorottya : utolsó bevételezés dátuma erre a tételre", ColumnType  = "DateTime" },
+                                	new DynamicQueryTableColumn(){ Name = "kezelo", Description = "Kezelő kódja", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "bevettempsz", Description = "Ideiglenes bevételezési azonosító", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "gtv", Description = "-", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "tbeszar", Description = "-", ColumnType  = "decimal", Length = 10, DecimalLength = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "btip", Description = "Bevételezés típusa (0-Kézi, 1-Gyors készlet, 2-Betöltés rendelésből,3-Elektronikus számlából)", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "szfogyar", Description = "Számított fogy.ár", ColumnType  = "decimal", Length = 12, DecimalLength = 2  },
+                                	new DynamicQueryTableColumn(){ Name = "bizom", Description = "Bizomyányosi áru jelölése", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "arkepz_bazis", Description = "Árképzés bázis típus (0-Utolsó besz.ár,1-S.besz.ár)", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "arkepz_beszar", Description = "Bázis beszerzési ár", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
+                                	new DynamicQueryTableColumn(){ Name = "arkepz_elter", Description = "-", ColumnType  = "int" },
+                                	new DynamicQueryTableColumn(){ Name = "arres_csop", Description = "Árrés csoport", ColumnType = "string", Length = 20  },
+                                	new DynamicQueryTableColumn(){ Name = "arres", Description = "Árrés értéke", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
+                                	new DynamicQueryTableColumn(){ Name = "sbeszar", Description = "Súlyozott beszerzési ár", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
+                                	new DynamicQueryTableColumn(){ Name = "szamlafile", Description = "Száma fájl neve", ColumnType = "string", Length = 25  },
+                                	new DynamicQueryTableColumn(){ Name = "atvett_menny", Description = "Átvett mennyiség", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
+                                	new DynamicQueryTableColumn(){ Name = "szamla_menny", Description = "Számlán szereplő mennyiség", ColumnType  = "decimal", Length = 12, DecimalLength = 4  },
+                                	new DynamicQueryTableColumn(){ Name = "keszletrevetel", Description = "Készletre vétel típusa (0-Számlázott mennyiség,1-Átvett mennyiség)", ColumnType  = "bool" },
+                                	new DynamicQueryTableColumn(){ Name = "aruatvetellezarva", Description = "Áru átvétel lezárva", ColumnType  = "bool" },
                               },
         	});	
         	
@@ -325,6 +581,9 @@ namespace DynamicQuery.Entity.Documentation
             					   {
                                     	new DynamicQueryTableAssociation() { Name = "FK_arazo_cikk", ForeignKeyColumn = "cikkszam", ForeignKeyTable = "arazo", PrimaryKeyColumn = "cikkszam", PrimaryKeyTable = "cikk" },
                                     	new DynamicQueryTableAssociation() { Name = "FK_bevet_cikk", ForeignKeyColumn = "cikkszam", ForeignKeyTable = "bevet", PrimaryKeyColumn = "cikkszam", PrimaryKeyTable = "cikk" },
+                                    	new DynamicQueryTableAssociation() { Name = "FK_arajanlattet_cikk", ForeignKeyColumn = "cikkszam", ForeignKeyTable = "arajanlattet", PrimaryKeyColumn = "cikkszam", PrimaryKeyTable = "cikk" },
+                                    	new DynamicQueryTableAssociation() { Name = "FK_arvaltidoszaktet_cikk", ForeignKeyColumn = "cikkszam", ForeignKeyTable = "arvaltidoszaktet", PrimaryKeyColumn = "cikkszam", PrimaryKeyTable = "cikk" },
+                                    	new DynamicQueryTableAssociation() { Name = "FK_bevettemp_cikk", ForeignKeyColumn = "cikkszam", ForeignKeyTable = "bevettemp", PrimaryKeyColumn = "cikkszam", PrimaryKeyTable = "cikk" },
                                    }			
         	});	
         	
@@ -350,6 +609,7 @@ namespace DynamicQuery.Entity.Documentation
             		Associations = new List<DynamicQueryTableAssociation>()
             					   {
                                     	new DynamicQueryTableAssociation() { Name = "FK_cikk_cikkcsop", ForeignKeyColumn = "cikkcsop", ForeignKeyTable = "cikk", PrimaryKeyColumn = "azonosito", PrimaryKeyTable = "cikkcsop" },
+                                    	new DynamicQueryTableAssociation() { Name = "FK_arres_cikkcsop", ForeignKeyColumn = "cikkcsop", ForeignKeyTable = "arres", PrimaryKeyColumn = "azonosito", PrimaryKeyTable = "cikkcsop" },
                                    }			
         	});	
         	
@@ -398,6 +658,8 @@ namespace DynamicQuery.Entity.Documentation
             					   {
                                     	new DynamicQueryTableAssociation() { Name = "FK_bankforg_felhasznalo", ForeignKeyColumn = "kezelo", ForeignKeyTable = "bankforg", PrimaryKeyColumn = "kod", PrimaryKeyTable = "felhasznalo" },
                                     	new DynamicQueryTableAssociation() { Name = "FK_bevet_felhasznalo", ForeignKeyColumn = "kezelo", ForeignKeyTable = "bevet", PrimaryKeyColumn = "kod", PrimaryKeyTable = "felhasznalo" },
+                                    	new DynamicQueryTableAssociation() { Name = "FK_BankTerminalForg_felhasznalo", ForeignKeyColumn = "FelhasznaloId", ForeignKeyTable = "BankTerminalForg", PrimaryKeyColumn = "kod", PrimaryKeyTable = "felhasznalo" },
+                                    	new DynamicQueryTableAssociation() { Name = "FK_bevettemp_felhasznalo", ForeignKeyColumn = "kezelo", ForeignKeyTable = "bevettemp", PrimaryKeyColumn = "kod", PrimaryKeyTable = "felhasznalo" },
                                    }			
         	});	
         } // konstruktor end

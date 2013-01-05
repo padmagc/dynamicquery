@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicQuery.EFTSQLDocument
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynaimcQuery.QueryBuilderDataAccess", "DataAccess\QueryBuilder\DynaimcQuery.QueryBuilderDataAccess\DynaimcQuery.QueryBuilderDataAccess.csproj", "{4BD116FB-AD4F-496B-A9B3-C483FBDA9EE1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{92862818-35E2-41F0-85CB-5F6A51165CA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicQuery.Core", "Core\DynamicQuery.Core\DynamicQuery.Core.csproj", "{8375C154-0A62-4626-ADB3-66A1CAC00200}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,10 @@ Global
 		{4BD116FB-AD4F-496B-A9B3-C483FBDA9EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BD116FB-AD4F-496B-A9B3-C483FBDA9EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BD116FB-AD4F-496B-A9B3-C483FBDA9EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8375C154-0A62-4626-ADB3-66A1CAC00200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8375C154-0A62-4626-ADB3-66A1CAC00200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8375C154-0A62-4626-ADB3-66A1CAC00200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8375C154-0A62-4626-ADB3-66A1CAC00200}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,5 +74,6 @@ Global
 		{7BA574AA-D147-4A09-8C4A-B2D7CB44CA3B} = {24ABEC10-8349-4CD3-BB90-76B51DFDD834}
 		{FBEE6B23-8759-444F-9431-7A0C868DCE22} = {24ABEC10-8349-4CD3-BB90-76B51DFDD834}
 		{4BD116FB-AD4F-496B-A9B3-C483FBDA9EE1} = {9A36470C-5EC9-4CB2-8CE8-AC51CD8AA0C3}
+		{8375C154-0A62-4626-ADB3-66A1CAC00200} = {92862818-35E2-41F0-85CB-5F6A51165CA2}
 	EndGlobalSection
 EndGlobal

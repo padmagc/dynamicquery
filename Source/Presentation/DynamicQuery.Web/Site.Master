@@ -9,13 +9,25 @@
     <link href="~/Styles/absolution.mobile.css" rel="stylesheet" type="text/css" />
     
     <script type="text/javascript" src="/Scripts/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.stepy.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.tmpl.js"></script>
+    
+    <script type="text/javascript" src="/Scripts/Core/LocalStorage.js"></script>
+    <script type="text/javascript" src="/Scripts/Core/Utils.js"></script>
+    
+    <script type="text/javascript" src="/Scripts/Pages/Default.js"></script>
+    <script type="text/javascript" src="/Scripts/Pages/Documentation.js"></script>
+    
+
     <script type="text/javascript">
         $(document).ready(function () {
             // TODO
             /*$('#navigation li').click(function () {
-                $('#navigation li').removeClass('ui-state-active');
-                $(this).addClass('ui-state-active');
+            $('#navigation li').removeClass('ui-state-active');
+            $(this).addClass('ui-state-active');
             });*/
+            InitForm();
         });
     </script>
 </head>
@@ -33,18 +45,18 @@
 		                    <a href="Default.aspx">Kezdőlap</a>
 		                </li> 
 		                <li class="ui-state-default ui-corner-top">
-		                    <a href="Default.aspx">Típusok</a>
+		                    <a href="Documentation.aspx">Dokumentáció</a>
 		                </li>
 		            </ul> 
 		            <div id="main" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+		                <div id="info" style="visibility: hidden">
+                            <span class="ui-state-error-text" id="message">&nbsp;</span>
+		                </div>
                         <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
 		            </div> 
 		        </div>
 		    </div>
         </div>
     </div>
-    
-   
-
 </body>
 </html>
