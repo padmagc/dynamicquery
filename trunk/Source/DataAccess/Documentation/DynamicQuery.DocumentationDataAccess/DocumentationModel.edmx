@@ -8,6 +8,53 @@
         <EntityContainer Name="QbPharmaSpecModelStoreContainer">
           <EntitySet Name="afakod" EntityType="QbPharmaSpecModel.Store.afakod" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="agyujt" EntityType="QbPharmaSpecModel.Store.agyujt" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="agyujt_patikak" EntityType="QbPharmaSpecModel.Store.agyujt_patikak" store:Type="Tables" store:Schema="dbo" store:Name="agyujt_patikak">
+            <DefiningQuery>SELECT 
+      [agyujt_patikak].[kod] AS [kod], 
+      [agyujt_patikak].[agyujtaz] AS [agyujtaz], 
+      [agyujt_patikak].[qb_azon] AS [qb_azon], 
+      [agyujt_patikak].[kulso_azon] AS [kulso_azon], 
+      [agyujt_patikak].[nev] AS [nev], 
+      [agyujt_patikak].[datum_tol] AS [datum_tol], 
+      [agyujt_patikak].[datum_ig] AS [datum_ig], 
+      [agyujt_patikak].[kuldes] AS [kuldes], 
+      [agyujt_patikak].[levelcim] AS [levelcim], 
+      [agyujt_patikak].[auttar_utv] AS [auttar_utv], 
+      [agyujt_patikak].[agyujtaz2] AS [agyujtaz2]
+      FROM [dbo].[agyujt_patikak] AS [agyujt_patikak]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="agyujt_sanofi" EntityType="QbPharmaSpecModel.Store.agyujt_sanofi" store:Type="Tables" store:Schema="dbo" store:Name="agyujt_sanofi">
+            <DefiningQuery>SELECT 
+      [agyujt_sanofi].[kod] AS [kod], 
+      [agyujt_sanofi].[alimed] AS [alimed], 
+      [agyujt_sanofi].[cikknev] AS [cikknev], 
+      [agyujt_sanofi].[alimednev] AS [alimednev], 
+      [agyujt_sanofi].[piac] AS [piac], 
+      [agyujt_sanofi].[piacnev1] AS [piacnev1], 
+      [agyujt_sanofi].[piackod1] AS [piackod1], 
+      [agyujt_sanofi].[piacnev2] AS [piacnev2], 
+      [agyujt_sanofi].[piackod2] AS [piackod2], 
+      [agyujt_sanofi].[sf] AS [sf]
+      FROM [dbo].[agyujt_sanofi] AS [agyujt_sanofi]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="arajanlatfej" EntityType="QbPharmaSpecModel.Store.arajanlatfej" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="arajanlattet" EntityType="QbPharmaSpecModel.Store.arajanlattet" store:Type="Tables" store:Schema="dbo" store:Name="arajanlattet">
+            <DefiningQuery>SELECT 
+      [arajanlattet].[kod] AS [kod], 
+      [arajanlattet].[sorszam] AS [sorszam], 
+      [arajanlattet].[cikkszam] AS [cikkszam], 
+      [arajanlattet].[menny] AS [menny], 
+      [arajanlattet].[tipus] AS [tipus], 
+      [arajanlattet].[jogcim] AS [jogcim], 
+      [arajanlattet].[fogyar] AS [fogyar], 
+      [arajanlattet].[tamogatas] AS [tamogatas], 
+      [arajanlattet].[terites] AS [terites], 
+      [arajanlattet].[afakod] AS [afakod], 
+      [arajanlattet].[afakulcs] AS [afakulcs], 
+      [arajanlattet].[kedvezmeny100] AS [kedvezmeny100], 
+      [arajanlattet].[kedvezmeny] AS [kedvezmeny]
+      FROM [dbo].[arajanlattet] AS [arajanlattet]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="arazo" EntityType="QbPharmaSpecModel.Store.arazo" store:Type="Tables" store:Schema="dbo" store:Name="arazo">
             <DefiningQuery>SELECT 
       [arazo].[kod] AS [kod], 
@@ -20,6 +67,66 @@
       [arazo].[rekesz] AS [rekesz], 
       [arazo].[nyomtatva] AS [nyomtatva]
       FROM [dbo].[arazo] AS [arazo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="archivalas" EntityType="QbPharmaSpecModel.Store.archivalas" store:Type="Tables" store:Schema="dbo" store:Name="archivalas">
+            <DefiningQuery>SELECT 
+      [archivalas].[tablanev] AS [tablanev], 
+      [archivalas].[archiv_tipus] AS [archiv_tipus], 
+      [archivalas].[archiv_tipus_doro] AS [archiv_tipus_doro], 
+      [archivalas].[datum_mezo] AS [datum_mezo], 
+      [archivalas].[azonosito_mezo] AS [azonosito_mezo], 
+      [archivalas].[torles_sql] AS [torles_sql], 
+      [archivalas].[torles_sql_doro] AS [torles_sql_doro], 
+      [archivalas].[join_mezo] AS [join_mezo], 
+      [archivalas].[where_sql] AS [where_sql]
+      FROM [dbo].[archivalas] AS [archivalas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="arkepzcikk" EntityType="QbPharmaSpecModel.Store.arkepzcikk" store:Type="Tables" store:Schema="dbo" store:Name="arkepzcikk">
+            <DefiningQuery>SELECT 
+      [arkepzcikk].[kod] AS [kod], 
+      [arkepzcikk].[cikkszam] AS [cikkszam], 
+      [arkepzcikk].[eltertartos] AS [eltertartos], 
+      [arkepzcikk].[elteridosz] AS [elteridosz], 
+      [arkepzcikk].[elternap1] AS [elternap1], 
+      [arkepzcikk].[elternap2] AS [elternap2]
+      FROM [dbo].[arkepzcikk] AS [arkepzcikk]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="arkepzfogyar" EntityType="QbPharmaSpecModel.Store.arkepzfogyar" store:Type="Tables" store:Schema="dbo" store:Name="arkepzfogyar">
+            <DefiningQuery>SELECT 
+      [arkepzfogyar].[kod] AS [kod], 
+      [arkepzfogyar].[tol] AS [tol], 
+      [arkepzfogyar].[ig] AS [ig], 
+      [arkepzfogyar].[modosit] AS [modosit], 
+      [arkepzfogyar].[vege] AS [vege]
+      FROM [dbo].[arkepzfogyar] AS [arkepzfogyar]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="arres" EntityType="QbPharmaSpecModel.Store.arres" store:Type="Tables" store:Schema="dbo" store:Name="arres">
+            <DefiningQuery>SELECT 
+      [arres].[nagykerar1] AS [nagykerar1], 
+      [arres].[nagykerar2] AS [nagykerar2], 
+      [arres].[arres] AS [arres], 
+      [arres].[arresjel] AS [arresjel], 
+      [arres].[fogyar1] AS [fogyar1], 
+      [arres].[fogyar2] AS [fogyar2], 
+      [arres].[datum1] AS [datum1], 
+      [arres].[datum2] AS [datum2], 
+      [arres].[cikkcsop] AS [cikkcsop], 
+      [arres].[torolve] AS [torolve]
+      FROM [dbo].[arres] AS [arres]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="arvaltidoszakfej" EntityType="QbPharmaSpecModel.Store.arvaltidoszakfej" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="arvaltidoszaktet" EntityType="QbPharmaSpecModel.Store.arvaltidoszaktet" store:Type="Tables" store:Schema="dbo" store:Name="arvaltidoszaktet">
+            <DefiningQuery>SELECT 
+      [arvaltidoszaktet].[kod] AS [kod], 
+      [arvaltidoszaktet].[arvaltkod] AS [arvaltkod], 
+      [arvaltidoszaktet].[cikkszam] AS [cikkszam], 
+      [arvaltidoszaktet].[bfogyar] AS [bfogyar], 
+      [arvaltidoszaktet].[rfogyar] AS [rfogyar], 
+      [arvaltidoszaktet].[arvalt_oraperc] AS [arvalt_oraperc], 
+      [arvaltidoszaktet].[vissza_oraperc] AS [vissza_oraperc], 
+      [arvaltidoszaktet].[storno] AS [storno], 
+      [arvaltidoszaktet].[tdatum] AS [tdatum]
+      FROM [dbo].[arvaltidoszaktet] AS [arvaltidoszaktet]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="bank" EntityType="QbPharmaSpecModel.Store.bank" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="bankforg" EntityType="QbPharmaSpecModel.Store.bankforg" store:Type="Tables" store:Schema="dbo" store:Name="bankforg">
@@ -38,6 +145,25 @@
       [bankforg].[oraperc] AS [oraperc], 
       [bankforg].[torolve] AS [torolve]
       FROM [dbo].[bankforg] AS [bankforg]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BankTerminalForg" EntityType="QbPharmaSpecModel.Store.BankTerminalForg" store:Type="Tables" store:Schema="dbo" store:Name="BankTerminalForg">
+            <DefiningQuery>SELECT 
+      [BankTerminalForg].[BankTerminalForgID] AS [BankTerminalForgID], 
+      [BankTerminalForg].[Inyugta] AS [Inyugta], 
+      [BankTerminalForg].[Felvdat] AS [Felvdat], 
+      [BankTerminalForg].[Fizetendo] AS [Fizetendo], 
+      [BankTerminalForg].[Storno] AS [Storno], 
+      [BankTerminalForg].[TerminalTipus] AS [TerminalTipus], 
+      [BankTerminalForg].[Comport] AS [Comport], 
+      [BankTerminalForg].[Gep] AS [Gep], 
+      [BankTerminalForg].[FelhasznaloId] AS [FelhasznaloId], 
+      [BankTerminalForg].[Feldolgozva] AS [Feldolgozva], 
+      [BankTerminalForg].[Elfogadva] AS [Elfogadva], 
+      [BankTerminalForg].[TranzakcioAzon] AS [TranzakcioAzon], 
+      [BankTerminalForg].[Kartyaszam] AS [Kartyaszam], 
+      [BankTerminalForg].[HibaUzenet] AS [HibaUzenet], 
+      [BankTerminalForg].[SlipSzam] AS [SlipSzam]
+      FROM [dbo].[BankTerminalForg] AS [BankTerminalForg]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="beosztas" EntityType="QbPharmaSpecModel.Store.beosztas" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="bevet" EntityType="QbPharmaSpecModel.Store.bevet" store:Type="Tables" store:Schema="dbo" store:Name="bevet">
@@ -77,6 +203,54 @@
       [bevet].[bizom] AS [bizom]
       FROM [dbo].[bevet] AS [bevet]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="bevettemp" EntityType="QbPharmaSpecModel.Store.bevettemp" store:Type="Tables" store:Schema="dbo" store:Name="bevettemp">
+            <DefiningQuery>SELECT 
+      [bevettemp].[kod] AS [kod], 
+      [bevettemp].[gep] AS [gep], 
+      [bevettemp].[tipus] AS [tipus], 
+      [bevettemp].[keszleten] AS [keszleten], 
+      [bevettemp].[pkod] AS [pkod], 
+      [bevettemp].[bevetszam] AS [bevetszam], 
+      [bevettemp].[szlaszam] AS [szlaszam], 
+      [bevettemp].[bevetdat] AS [bevetdat], 
+      [bevettemp].[cikkszam] AS [cikkszam], 
+      [bevettemp].[mennyiseg] AS [mennyiseg], 
+      [bevettemp].[nagykerar] AS [nagykerar], 
+      [bevettemp].[arengsz] AS [arengsz], 
+      [bevettemp].[arenge] AS [arenge], 
+      [bevettemp].[beszar] AS [beszar], 
+      [bevettemp].[fogyar] AS [fogyar], 
+      [bevettemp].[afakulcs] AS [afakulcs], 
+      [bevettemp].[gyartszam] AS [gyartszam], 
+      [bevettemp].[gyartev] AS [gyartev], 
+      [bevettemp].[gyartho] AS [gyartho], 
+      [bevettemp].[lejardat] AS [lejardat], 
+      [bevettemp].[vtsz] AS [vtsz], 
+      [bevettemp].[rendszam] AS [rendszam], 
+      [bevettemp].[bmennyiseg] AS [bmennyiseg], 
+      [bevettemp].[efogyar] AS [efogyar], 
+      [bevettemp].[enagykerar] AS [enagykerar], 
+      [bevettemp].[ebdatum] AS [ebdatum], 
+      [bevettemp].[kezelo] AS [kezelo], 
+      [bevettemp].[bevettempsz] AS [bevettempsz], 
+      [bevettemp].[gtv] AS [gtv], 
+      [bevettemp].[tbeszar] AS [tbeszar], 
+      [bevettemp].[btip] AS [btip], 
+      [bevettemp].[szfogyar] AS [szfogyar], 
+      [bevettemp].[bizom] AS [bizom], 
+      [bevettemp].[arkepz_bazis] AS [arkepz_bazis], 
+      [bevettemp].[arkepz_beszar] AS [arkepz_beszar], 
+      [bevettemp].[arkepz_elter] AS [arkepz_elter], 
+      [bevettemp].[arres_csop] AS [arres_csop], 
+      [bevettemp].[arres] AS [arres], 
+      [bevettemp].[sbeszar] AS [sbeszar], 
+      [bevettemp].[szamlafile] AS [szamlafile], 
+      [bevettemp].[atvett_menny] AS [atvett_menny], 
+      [bevettemp].[szamla_menny] AS [szamla_menny], 
+      [bevettemp].[keszletrevetel] AS [keszletrevetel], 
+      [bevettemp].[aruatvetellezarva] AS [aruatvetellezarva]
+      FROM [dbo].[bevettemp] AS [bevettemp]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="bnotorzs" EntityType="QbPharmaSpecModel.Store.bnotorzs" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="cardtipus" EntityType="QbPharmaSpecModel.Store.cardtipus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="cikk" EntityType="QbPharmaSpecModel.Store.cikk" store:Type="Tables" Schema="dbo" />
@@ -91,9 +265,37 @@
       FROM [dbo].[feladatok] AS [feladatok]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="felhasznalo" EntityType="QbPharmaSpecModel.Store.felhasznalo" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_agyujt_patikak_agyujt" Association="QbPharmaSpecModel.Store.FK_agyujt_patikak_agyujt">
+            <End Role="agyujt" EntitySet="agyujt" />
+            <End Role="agyujt_patikak" EntitySet="agyujt_patikak" />
+          </AssociationSet>
+          <AssociationSet Name="FK_arajanlattet_afakod" Association="QbPharmaSpecModel.Store.FK_arajanlattet_afakod">
+            <End Role="afakod" EntitySet="afakod" />
+            <End Role="arajanlattet" EntitySet="arajanlattet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_arajanlattet_arajanlatfej" Association="QbPharmaSpecModel.Store.FK_arajanlattet_arajanlatfej">
+            <End Role="arajanlatfej" EntitySet="arajanlatfej" />
+            <End Role="arajanlattet" EntitySet="arajanlattet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_arajanlattet_cikk" Association="QbPharmaSpecModel.Store.FK_arajanlattet_cikk">
+            <End Role="cikk" EntitySet="cikk" />
+            <End Role="arajanlattet" EntitySet="arajanlattet" />
+          </AssociationSet>
           <AssociationSet Name="FK_arazo_cikk" Association="QbPharmaSpecModel.Store.FK_arazo_cikk">
             <End Role="cikk" EntitySet="cikk" />
             <End Role="arazo" EntitySet="arazo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_arres_cikkcsop" Association="QbPharmaSpecModel.Store.FK_arres_cikkcsop">
+            <End Role="cikkcsop" EntitySet="cikkcsop" />
+            <End Role="arres" EntitySet="arres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_arvaltidoszaktet_arvaltidoszakfej" Association="QbPharmaSpecModel.Store.FK_arvaltidoszaktet_arvaltidoszakfej">
+            <End Role="arvaltidoszakfej" EntitySet="arvaltidoszakfej" />
+            <End Role="arvaltidoszaktet" EntitySet="arvaltidoszaktet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_arvaltidoszaktet_cikk" Association="QbPharmaSpecModel.Store.FK_arvaltidoszaktet_cikk">
+            <End Role="cikk" EntitySet="cikk" />
+            <End Role="arvaltidoszaktet" EntitySet="arvaltidoszaktet" />
           </AssociationSet>
           <AssociationSet Name="FK_bankforg_bank" Association="QbPharmaSpecModel.Store.FK_bankforg_bank">
             <End Role="bank" EntitySet="bank" />
@@ -102,6 +304,10 @@
           <AssociationSet Name="FK_bankforg_felhasznalo" Association="QbPharmaSpecModel.Store.FK_bankforg_felhasznalo">
             <End Role="felhasznalo" EntitySet="felhasznalo" />
             <End Role="bankforg" EntitySet="bankforg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankTerminalForg_felhasznalo" Association="QbPharmaSpecModel.Store.FK_BankTerminalForg_felhasznalo">
+            <End Role="felhasznalo" EntitySet="felhasznalo" />
+            <End Role="BankTerminalForg" EntitySet="BankTerminalForg" />
           </AssociationSet>
           <AssociationSet Name="FK_bevet_afakod" Association="QbPharmaSpecModel.Store.FK_bevet_afakod">
             <End Role="afakod" EntitySet="afakod" />
@@ -114,6 +320,14 @@
           <AssociationSet Name="FK_bevet_felhasznalo" Association="QbPharmaSpecModel.Store.FK_bevet_felhasznalo">
             <End Role="felhasznalo" EntitySet="felhasznalo" />
             <End Role="bevet" EntitySet="bevet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bevettemp_cikk" Association="QbPharmaSpecModel.Store.FK_bevettemp_cikk">
+            <End Role="cikk" EntitySet="cikk" />
+            <End Role="bevettemp" EntitySet="bevettemp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bevettemp_felhasznalo" Association="QbPharmaSpecModel.Store.FK_bevettemp_felhasznalo">
+            <End Role="felhasznalo" EntitySet="felhasznalo" />
+            <End Role="bevettemp" EntitySet="bevettemp" />
           </AssociationSet>
           <AssociationSet Name="FK_cikk_afakod" Association="QbPharmaSpecModel.Store.FK_cikk_afakod">
             <End Role="afakod" EntitySet="afakod" />
@@ -161,6 +375,90 @@
           <Property Name="sorszam_param" Type="varchar" MaxLength="30" />
         </EntityType>
         <!--Errors Found During Generation:
+      warning 6002: The table/view 'QbPharmaSpec.dbo.agyujt_patikak' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="agyujt_patikak">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="agyujtaz" />
+            <PropertyRef Name="kuldes" />
+          </Key>
+          <Property Name="kod" Type="int" Nullable="false" />
+          <Property Name="agyujtaz" Type="tinyint" Nullable="false" />
+          <Property Name="qb_azon" Type="varchar" MaxLength="40" />
+          <Property Name="kulso_azon" Type="varchar" MaxLength="50" />
+          <Property Name="nev" Type="varchar" MaxLength="50" />
+          <Property Name="datum_tol" Type="datetime" />
+          <Property Name="datum_ig" Type="datetime" />
+          <Property Name="kuldes" Type="tinyint" Nullable="false" />
+          <Property Name="levelcim" Type="varchar" MaxLength="40" />
+          <Property Name="auttar_utv" Type="varchar" MaxLength="50" />
+          <Property Name="agyujtaz2" Type="tinyint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'QbPharmaSpec.dbo.agyujt_sanofi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="agyujt_sanofi">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Name="kod" Type="int" Nullable="false" />
+          <Property Name="alimed" Type="nvarchar" MaxLength="255" />
+          <Property Name="cikknev" Type="nvarchar" MaxLength="255" />
+          <Property Name="alimednev" Type="nvarchar" MaxLength="255" />
+          <Property Name="piac" Type="nvarchar" MaxLength="255" />
+          <Property Name="piacnev1" Type="nvarchar" MaxLength="255" />
+          <Property Name="piackod1" Type="nvarchar" MaxLength="255" />
+          <Property Name="piacnev2" Type="nvarchar" MaxLength="255" />
+          <Property Name="piackod2" Type="nvarchar" MaxLength="255" />
+          <Property Name="sf" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="arajanlatfej">
+          <Key>
+            <PropertyRef Name="sorszam" />
+          </Key>
+          <Property Name="kod" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="sorszam" Type="int" Nullable="false" />
+          <Property Name="pkod" Type="int" Nullable="false" />
+          <Property Name="kedvezmeny100" Type="numeric" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="megjegyzes" Type="varchar" MaxLength="100" />
+          <Property Name="datum" Type="datetime" />
+          <Property Name="torolve" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'QbPharmaSpec.dbo.arajanlattet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="arajanlattet">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="sorszam" />
+            <PropertyRef Name="cikkszam" />
+            <PropertyRef Name="menny" />
+            <PropertyRef Name="tipus" />
+            <PropertyRef Name="jogcim" />
+            <PropertyRef Name="fogyar" />
+            <PropertyRef Name="tamogatas" />
+            <PropertyRef Name="terites" />
+            <PropertyRef Name="afakod" />
+            <PropertyRef Name="afakulcs" />
+            <PropertyRef Name="kedvezmeny100" />
+            <PropertyRef Name="kedvezmeny" />
+          </Key>
+          <Property Name="kod" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="sorszam" Type="int" Nullable="false" />
+          <Property Name="cikkszam" Type="char" Nullable="false" MaxLength="13" />
+          <Property Name="menny" Type="numeric" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="tipus" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="jogcim" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="fogyar" Type="numeric" Nullable="false" Precision="16" Scale="8" />
+          <Property Name="tamogatas" Type="numeric" Nullable="false" Precision="16" Scale="8" />
+          <Property Name="terites" Type="numeric" Nullable="false" Precision="16" Scale="8" />
+          <Property Name="afakod" Type="int" Nullable="false" />
+          <Property Name="afakulcs" Type="int" Nullable="false" />
+          <Property Name="kedvezmeny100" Type="numeric" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="kedvezmeny" Type="numeric" Nullable="false" Precision="16" Scale="8" />
+        </EntityType>
+        <!--Errors Found During Generation:
       warning 6002: The table/view 'QbPharmaSpec.dbo.arazo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="arazo">
@@ -176,6 +474,125 @@
           <Property Name="polc" Type="char" MaxLength="20" />
           <Property Name="rekesz" Type="char" MaxLength="10" />
           <Property Name="nyomtatva" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'QbPharmaSpec.dbo.archivalas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="archivalas">
+          <Key>
+            <PropertyRef Name="tablanev" />
+            <PropertyRef Name="archiv_tipus" />
+            <PropertyRef Name="archiv_tipus_doro" />
+            <PropertyRef Name="datum_mezo" />
+            <PropertyRef Name="azonosito_mezo" />
+            <PropertyRef Name="torles_sql" />
+            <PropertyRef Name="torles_sql_doro" />
+            <PropertyRef Name="join_mezo" />
+            <PropertyRef Name="where_sql" />
+          </Key>
+          <Property Name="tablanev" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="archiv_tipus" Type="tinyint" Nullable="false" />
+          <Property Name="archiv_tipus_doro" Type="tinyint" Nullable="false" />
+          <Property Name="datum_mezo" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="azonosito_mezo" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="torles_sql" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="torles_sql_doro" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="join_mezo" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="where_sql" Type="varchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'QbPharmaSpec.dbo.arkepzcikk' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="arkepzcikk">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="cikkszam" />
+            <PropertyRef Name="eltertartos" />
+            <PropertyRef Name="elteridosz" />
+            <PropertyRef Name="elternap1" />
+            <PropertyRef Name="elternap2" />
+          </Key>
+          <Property Name="kod" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="cikkszam" Type="char" Nullable="false" MaxLength="13" />
+          <Property Name="eltertartos" Type="int" Nullable="false" />
+          <Property Name="elteridosz" Type="int" Nullable="false" />
+          <Property Name="elternap1" Type="varchar" Nullable="false" MaxLength="5" />
+          <Property Name="elternap2" Type="varchar" Nullable="false" MaxLength="5" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'QbPharmaSpec.dbo.arkepzfogyar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="arkepzfogyar">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="tol" />
+            <PropertyRef Name="ig" />
+            <PropertyRef Name="modosit" />
+            <PropertyRef Name="vege" />
+          </Key>
+          <Property Name="kod" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tol" Type="int" Nullable="false" />
+          <Property Name="ig" Type="int" Nullable="false" />
+          <Property Name="modosit" Type="bit" Nullable="false" />
+          <Property Name="vege" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'QbPharmaSpec.dbo.arres' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="arres">
+          <Key>
+            <PropertyRef Name="nagykerar1" />
+            <PropertyRef Name="nagykerar2" />
+            <PropertyRef Name="arres" />
+            <PropertyRef Name="arresjel" />
+            <PropertyRef Name="fogyar1" />
+            <PropertyRef Name="fogyar2" />
+            <PropertyRef Name="cikkcsop" />
+            <PropertyRef Name="torolve" />
+          </Key>
+          <Property Name="nagykerar1" Type="numeric" Nullable="false" />
+          <Property Name="nagykerar2" Type="numeric" Nullable="false" />
+          <Property Name="arres" Type="numeric" Nullable="false" />
+          <Property Name="arresjel" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="fogyar1" Type="numeric" Nullable="false" />
+          <Property Name="fogyar2" Type="numeric" Nullable="false" />
+          <Property Name="datum1" Type="datetime" />
+          <Property Name="datum2" Type="datetime" />
+          <Property Name="cikkcsop" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="torolve" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="arvaltidoszakfej">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Name="kod" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="megn" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="datum_tol" Type="datetime" />
+          <Property Name="datum_ig" Type="datetime" />
+          <Property Name="storno" Type="bit" Nullable="false" />
+          <Property Name="tdatum" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'QbPharmaSpec.dbo.arvaltidoszaktet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="arvaltidoszaktet">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="arvaltkod" />
+            <PropertyRef Name="cikkszam" />
+            <PropertyRef Name="bfogyar" />
+            <PropertyRef Name="rfogyar" />
+            <PropertyRef Name="storno" />
+          </Key>
+          <Property Name="kod" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="arvaltkod" Type="int" Nullable="false" />
+          <Property Name="cikkszam" Type="char" Nullable="false" MaxLength="13" />
+          <Property Name="bfogyar" Type="numeric" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="rfogyar" Type="numeric" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="arvalt_oraperc" Type="datetime" />
+          <Property Name="vissza_oraperc" Type="datetime" />
+          <Property Name="storno" Type="bit" Nullable="false" />
+          <Property Name="tdatum" Type="datetime" />
         </EntityType>
         <EntityType Name="bank">
           <Key>
@@ -220,6 +637,42 @@
           <Property Name="kezelo" Type="int" Nullable="false" />
           <Property Name="oraperc" Type="datetime" />
           <Property Name="torolve" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'QbPharmaSpec.dbo.BankTerminalForg' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="BankTerminalForg">
+          <Key>
+            <PropertyRef Name="BankTerminalForgID" />
+            <PropertyRef Name="Inyugta" />
+            <PropertyRef Name="Fizetendo" />
+            <PropertyRef Name="Storno" />
+            <PropertyRef Name="TerminalTipus" />
+            <PropertyRef Name="Comport" />
+            <PropertyRef Name="Gep" />
+            <PropertyRef Name="FelhasznaloId" />
+            <PropertyRef Name="Feldolgozva" />
+            <PropertyRef Name="Elfogadva" />
+            <PropertyRef Name="TranzakcioAzon" />
+            <PropertyRef Name="Kartyaszam" />
+            <PropertyRef Name="HibaUzenet" />
+            <PropertyRef Name="SlipSzam" />
+          </Key>
+          <Property Name="BankTerminalForgID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Inyugta" Type="int" Nullable="false" />
+          <Property Name="Felvdat" Type="datetime" />
+          <Property Name="Fizetendo" Type="numeric" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Storno" Type="bit" Nullable="false" />
+          <Property Name="TerminalTipus" Type="tinyint" Nullable="false" />
+          <Property Name="Comport" Type="tinyint" Nullable="false" />
+          <Property Name="Gep" Type="tinyint" Nullable="false" />
+          <Property Name="FelhasznaloId" Type="int" Nullable="false" />
+          <Property Name="Feldolgozva" Type="bit" Nullable="false" />
+          <Property Name="Elfogadva" Type="bit" Nullable="false" />
+          <Property Name="TranzakcioAzon" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Kartyaszam" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="HibaUzenet" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SlipSzam" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="beosztas">
           <Key>
@@ -298,6 +751,97 @@
           <Property Name="rowamenny" Type="numeric" Nullable="false" Precision="12" Scale="4" />
           <Property Name="ktrkod" Type="int" Nullable="false" />
           <Property Name="bizom" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'QbPharmaSpec.dbo.bevettemp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="bevettemp">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="gep" />
+            <PropertyRef Name="tipus" />
+            <PropertyRef Name="keszleten" />
+            <PropertyRef Name="pkod" />
+            <PropertyRef Name="bevetszam" />
+            <PropertyRef Name="szlaszam" />
+            <PropertyRef Name="cikkszam" />
+            <PropertyRef Name="mennyiseg" />
+            <PropertyRef Name="nagykerar" />
+            <PropertyRef Name="arengsz" />
+            <PropertyRef Name="arenge" />
+            <PropertyRef Name="beszar" />
+            <PropertyRef Name="fogyar" />
+            <PropertyRef Name="afakulcs" />
+            <PropertyRef Name="gyartszam" />
+            <PropertyRef Name="gyartev" />
+            <PropertyRef Name="gyartho" />
+            <PropertyRef Name="vtsz" />
+            <PropertyRef Name="rendszam" />
+            <PropertyRef Name="bmennyiseg" />
+            <PropertyRef Name="efogyar" />
+            <PropertyRef Name="enagykerar" />
+            <PropertyRef Name="kezelo" />
+            <PropertyRef Name="bevettempsz" />
+            <PropertyRef Name="gtv" />
+            <PropertyRef Name="tbeszar" />
+            <PropertyRef Name="szfogyar" />
+            <PropertyRef Name="bizom" />
+            <PropertyRef Name="arkepz_bazis" />
+            <PropertyRef Name="arkepz_beszar" />
+            <PropertyRef Name="arkepz_elter" />
+            <PropertyRef Name="arres_csop" />
+            <PropertyRef Name="arres" />
+            <PropertyRef Name="sbeszar" />
+            <PropertyRef Name="szamlafile" />
+            <PropertyRef Name="atvett_menny" />
+            <PropertyRef Name="szamla_menny" />
+            <PropertyRef Name="keszletrevetel" />
+            <PropertyRef Name="aruatvetellezarva" />
+          </Key>
+          <Property Name="kod" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="gep" Type="tinyint" Nullable="false" />
+          <Property Name="tipus" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="keszleten" Type="bit" Nullable="false" />
+          <Property Name="pkod" Type="int" Nullable="false" />
+          <Property Name="bevetszam" Type="int" Nullable="false" />
+          <Property Name="szlaszam" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="bevetdat" Type="datetime" />
+          <Property Name="cikkszam" Type="char" Nullable="false" MaxLength="13" />
+          <Property Name="mennyiseg" Type="numeric" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="nagykerar" Type="numeric" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="arengsz" Type="numeric" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="arenge" Type="numeric" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="beszar" Type="numeric" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="fogyar" Type="numeric" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="afakulcs" Type="int" Nullable="false" />
+          <Property Name="gyartszam" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="gyartev" Type="int" Nullable="false" />
+          <Property Name="gyartho" Type="int" Nullable="false" />
+          <Property Name="lejardat" Type="datetime" />
+          <Property Name="vtsz" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="rendszam" Type="int" Nullable="false" />
+          <Property Name="bmennyiseg" Type="numeric" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="efogyar" Type="numeric" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="enagykerar" Type="numeric" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="ebdatum" Type="datetime" />
+          <Property Name="kezelo" Type="int" Nullable="false" />
+          <Property Name="bevettempsz" Type="int" Nullable="false" />
+          <Property Name="gtv" Type="bit" Nullable="false" />
+          <Property Name="tbeszar" Type="numeric" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="btip" Type="tinyint" />
+          <Property Name="szfogyar" Type="numeric" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="bizom" Type="tinyint" Nullable="false" />
+          <Property Name="arkepz_bazis" Type="int" Nullable="false" />
+          <Property Name="arkepz_beszar" Type="numeric" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="arkepz_elter" Type="int" Nullable="false" />
+          <Property Name="arres_csop" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="arres" Type="numeric" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="sbeszar" Type="numeric" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="szamlafile" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="atvett_menny" Type="numeric" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="szamla_menny" Type="numeric" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="keszletrevetel" Type="bit" Nullable="false" />
+          <Property Name="aruatvetellezarva" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="bnotorzs">
           <Key>
@@ -494,6 +1038,54 @@
           <Property Name="munkalapjelszo" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="ujjelszo" Type="varchar" Nullable="false" MaxLength="60" />
         </EntityType>
+        <Association Name="FK_agyujt_patikak_agyujt">
+          <End Role="agyujt" Type="QbPharmaSpecModel.Store.agyujt" Multiplicity="1" />
+          <End Role="agyujt_patikak" Type="QbPharmaSpecModel.Store.agyujt_patikak" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agyujt">
+              <PropertyRef Name="agyujtaz" />
+            </Principal>
+            <Dependent Role="agyujt_patikak">
+              <PropertyRef Name="agyujtaz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_arajanlattet_afakod">
+          <End Role="afakod" Type="QbPharmaSpecModel.Store.afakod" Multiplicity="1" />
+          <End Role="arajanlattet" Type="QbPharmaSpecModel.Store.arajanlattet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="afakod">
+              <PropertyRef Name="kod" />
+            </Principal>
+            <Dependent Role="arajanlattet">
+              <PropertyRef Name="afakod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_arajanlattet_arajanlatfej">
+          <End Role="arajanlatfej" Type="QbPharmaSpecModel.Store.arajanlatfej" Multiplicity="1" />
+          <End Role="arajanlattet" Type="QbPharmaSpecModel.Store.arajanlattet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="arajanlatfej">
+              <PropertyRef Name="sorszam" />
+            </Principal>
+            <Dependent Role="arajanlattet">
+              <PropertyRef Name="sorszam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_arajanlattet_cikk">
+          <End Role="cikk" Type="QbPharmaSpecModel.Store.cikk" Multiplicity="1" />
+          <End Role="arajanlattet" Type="QbPharmaSpecModel.Store.arajanlattet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cikk">
+              <PropertyRef Name="cikkszam" />
+            </Principal>
+            <Dependent Role="arajanlattet">
+              <PropertyRef Name="cikkszam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_arazo_cikk">
           <End Role="cikk" Type="QbPharmaSpecModel.Store.cikk" Multiplicity="0..1" />
           <End Role="arazo" Type="QbPharmaSpecModel.Store.arazo" Multiplicity="*" />
@@ -502,6 +1094,42 @@
               <PropertyRef Name="cikkszam" />
             </Principal>
             <Dependent Role="arazo">
+              <PropertyRef Name="cikkszam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_arres_cikkcsop">
+          <End Role="cikkcsop" Type="QbPharmaSpecModel.Store.cikkcsop" Multiplicity="1" />
+          <End Role="arres" Type="QbPharmaSpecModel.Store.arres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cikkcsop">
+              <PropertyRef Name="azonosito" />
+            </Principal>
+            <Dependent Role="arres">
+              <PropertyRef Name="cikkcsop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_arvaltidoszaktet_arvaltidoszakfej">
+          <End Role="arvaltidoszakfej" Type="QbPharmaSpecModel.Store.arvaltidoszakfej" Multiplicity="1" />
+          <End Role="arvaltidoszaktet" Type="QbPharmaSpecModel.Store.arvaltidoszaktet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="arvaltidoszakfej">
+              <PropertyRef Name="kod" />
+            </Principal>
+            <Dependent Role="arvaltidoszaktet">
+              <PropertyRef Name="arvaltkod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_arvaltidoszaktet_cikk">
+          <End Role="cikk" Type="QbPharmaSpecModel.Store.cikk" Multiplicity="1" />
+          <End Role="arvaltidoszaktet" Type="QbPharmaSpecModel.Store.arvaltidoszaktet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cikk">
+              <PropertyRef Name="cikkszam" />
+            </Principal>
+            <Dependent Role="arvaltidoszaktet">
               <PropertyRef Name="cikkszam" />
             </Dependent>
           </ReferentialConstraint>
@@ -527,6 +1155,18 @@
             </Principal>
             <Dependent Role="bankforg">
               <PropertyRef Name="kezelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankTerminalForg_felhasznalo">
+          <End Role="felhasznalo" Type="QbPharmaSpecModel.Store.felhasznalo" Multiplicity="1" />
+          <End Role="BankTerminalForg" Type="QbPharmaSpecModel.Store.BankTerminalForg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="felhasznalo">
+              <PropertyRef Name="kod" />
+            </Principal>
+            <Dependent Role="BankTerminalForg">
+              <PropertyRef Name="FelhasznaloId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -562,6 +1202,30 @@
               <PropertyRef Name="kod" />
             </Principal>
             <Dependent Role="bevet">
+              <PropertyRef Name="kezelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bevettemp_cikk">
+          <End Role="cikk" Type="QbPharmaSpecModel.Store.cikk" Multiplicity="1" />
+          <End Role="bevettemp" Type="QbPharmaSpecModel.Store.bevettemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cikk">
+              <PropertyRef Name="cikkszam" />
+            </Principal>
+            <Dependent Role="bevettemp">
+              <PropertyRef Name="cikkszam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bevettemp_felhasznalo">
+          <End Role="felhasznalo" Type="QbPharmaSpecModel.Store.felhasznalo" Multiplicity="1" />
+          <End Role="bevettemp" Type="QbPharmaSpecModel.Store.bevettemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="felhasznalo">
+              <PropertyRef Name="kod" />
+            </Principal>
+            <Dependent Role="bevettemp">
               <PropertyRef Name="kezelo" />
             </Dependent>
           </ReferentialConstraint>
@@ -657,6 +1321,58 @@
             <End Role="cikkcsop" EntitySet="cikkcsop" />
             <End Role="cikk" EntitySet="cikk" />
           </AssociationSet>
+          <EntitySet Name="agyujt_patikak" EntityType="QbPharmaSpecModel.agyujt_patikak" />
+          <EntitySet Name="agyujt_sanofi" EntityType="QbPharmaSpecModel.agyujt_sanofi" />
+          <EntitySet Name="arajanlatfej" EntityType="QbPharmaSpecModel.arajanlatfej" />
+          <EntitySet Name="arajanlattet" EntityType="QbPharmaSpecModel.arajanlattet" />
+          <EntitySet Name="archivalas" EntityType="QbPharmaSpecModel.archivalas" />
+          <EntitySet Name="arkepzcikk" EntityType="QbPharmaSpecModel.arkepzcikk" />
+          <EntitySet Name="arkepzfogyar" EntityType="QbPharmaSpecModel.arkepzfogyar" />
+          <EntitySet Name="arres" EntityType="QbPharmaSpecModel.arres" />
+          <EntitySet Name="arvaltidoszakfej" EntityType="QbPharmaSpecModel.arvaltidoszakfej" />
+          <EntitySet Name="arvaltidoszaktet" EntityType="QbPharmaSpecModel.arvaltidoszaktet" />
+          <EntitySet Name="BankTerminalForg" EntityType="QbPharmaSpecModel.BankTerminalForg" />
+          <EntitySet Name="bevettemp" EntityType="QbPharmaSpecModel.bevettemp" />
+          <AssociationSet Name="FK_arajanlattet_afakod" Association="QbPharmaSpecModel.FK_arajanlattet_afakod">
+            <End Role="afakod" EntitySet="afakod" />
+            <End Role="arajanlattet" EntitySet="arajanlattet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agyujt_patikak_agyujt" Association="QbPharmaSpecModel.FK_agyujt_patikak_agyujt">
+            <End Role="agyujt" EntitySet="agyujt" />
+            <End Role="agyujt_patikak" EntitySet="agyujt_patikak" />
+          </AssociationSet>
+          <AssociationSet Name="FK_arajanlattet_arajanlatfej" Association="QbPharmaSpecModel.FK_arajanlattet_arajanlatfej">
+            <End Role="arajanlatfej" EntitySet="arajanlatfej" />
+            <End Role="arajanlattet" EntitySet="arajanlattet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_arajanlattet_cikk" Association="QbPharmaSpecModel.FK_arajanlattet_cikk">
+            <End Role="cikk" EntitySet="cikk" />
+            <End Role="arajanlattet" EntitySet="arajanlattet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_arres_cikkcsop" Association="QbPharmaSpecModel.FK_arres_cikkcsop">
+            <End Role="cikkcsop" EntitySet="cikkcsop" />
+            <End Role="arres" EntitySet="arres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_arvaltidoszaktet_arvaltidoszakfej" Association="QbPharmaSpecModel.FK_arvaltidoszaktet_arvaltidoszakfej">
+            <End Role="arvaltidoszakfej" EntitySet="arvaltidoszakfej" />
+            <End Role="arvaltidoszaktet" EntitySet="arvaltidoszaktet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_arvaltidoszaktet_cikk" Association="QbPharmaSpecModel.FK_arvaltidoszaktet_cikk">
+            <End Role="cikk" EntitySet="cikk" />
+            <End Role="arvaltidoszaktet" EntitySet="arvaltidoszaktet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankTerminalForg_felhasznalo" Association="QbPharmaSpecModel.FK_BankTerminalForg_felhasznalo">
+            <End Role="felhasznalo" EntitySet="felhasznalo" />
+            <End Role="BankTerminalForg" EntitySet="BankTerminalForg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bevettemp_cikk" Association="QbPharmaSpecModel.FK_bevettemp_cikk">
+            <End Role="cikk" EntitySet="cikk" />
+            <End Role="bevettemp" EntitySet="bevettemp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bevettemp_felhasznalo" Association="QbPharmaSpecModel.FK_bevettemp_felhasznalo">
+            <End Role="felhasznalo" EntitySet="felhasznalo" />
+            <End Role="bevettemp" EntitySet="bevettemp" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="afakod">
           <Key>
@@ -709,6 +1425,7 @@
           </Property>
           <NavigationProperty Name="bevet" Relationship="QbPharmaSpecModel.FK_bevet_afakod" FromRole="afakod" ToRole="bevet" />
           <NavigationProperty Name="cikk" Relationship="QbPharmaSpecModel.FK_cikk_afakod" FromRole="afakod" ToRole="cikk" />
+          <NavigationProperty Name="arajanlattet" Relationship="QbPharmaSpecModel.FK_arajanlattet_afakod" FromRole="afakod" ToRole="arajanlattet" />
         </EntityType>
         <EntityType Name="agyujt">
           <Key>
@@ -779,6 +1496,7 @@
               <Summary>Adatgyűjtés sorszám paraméter azonosító (PARAM tábla)</Summary>
             </Documentation>
           </Property>
+          <NavigationProperty Name="agyujt_patikak" Relationship="QbPharmaSpecModel.FK_agyujt_patikak_agyujt" FromRole="agyujt" ToRole="agyujt_patikak" />
         </EntityType>
         <EntityType Name="arazo">
           <Key>
@@ -1788,6 +2506,9 @@
           <NavigationProperty Name="arazo" Relationship="QbPharmaSpecModel.FK_arazo_cikk" FromRole="cikk" ToRole="arazo" />
           <NavigationProperty Name="bevet" Relationship="QbPharmaSpecModel.FK_bevet_cikk" FromRole="cikk" ToRole="bevet" />
           <NavigationProperty Name="cikkcsop1" Relationship="QbPharmaSpecModel.FK_cikk_cikkcsop" FromRole="cikk" ToRole="cikkcsop" />
+          <NavigationProperty Name="arajanlattet" Relationship="QbPharmaSpecModel.FK_arajanlattet_cikk" FromRole="cikk" ToRole="arajanlattet" />
+          <NavigationProperty Name="arvaltidoszaktet" Relationship="QbPharmaSpecModel.FK_arvaltidoszaktet_cikk" FromRole="cikk" ToRole="arvaltidoszaktet" />
+          <NavigationProperty Name="bevettemp" Relationship="QbPharmaSpecModel.FK_bevettemp_cikk" FromRole="cikk" ToRole="bevettemp" />
         </EntityType>
         <EntityType Name="cikkcsop">
           <Key>
@@ -1864,6 +2585,7 @@
             </Documentation>
           </Property>
           <NavigationProperty Name="cikk" Relationship="QbPharmaSpecModel.FK_cikk_cikkcsop" FromRole="cikkcsop" ToRole="cikk" />
+          <NavigationProperty Name="arres" Relationship="QbPharmaSpecModel.FK_arres_cikkcsop" FromRole="cikkcsop" ToRole="arres" />
         </EntityType>
         <EntityType Name="feladatok">
           <Key>
@@ -1977,6 +2699,8 @@
           <NavigationProperty Name="bankforg" Relationship="QbPharmaSpecModel.FK_bankforg_felhasznalo" FromRole="felhasznalo" ToRole="bankforg" />
           <NavigationProperty Name="beosztas1" Relationship="QbPharmaSpecModel.FK_felhasznalo_beosztas" FromRole="felhasznalo" ToRole="beosztas" />
           <NavigationProperty Name="bevet" Relationship="QbPharmaSpecModel.FK_bevet_felhasznalo" FromRole="felhasznalo" ToRole="bevet" />
+          <NavigationProperty Name="BankTerminalForg" Relationship="QbPharmaSpecModel.FK_BankTerminalForg_felhasznalo" FromRole="felhasznalo" ToRole="BankTerminalForg" />
+          <NavigationProperty Name="bevettemp" Relationship="QbPharmaSpecModel.FK_bevettemp_felhasznalo" FromRole="felhasznalo" ToRole="bevettemp" />
         </EntityType>
         <Association Name="FK_bevet_afakod">
           <End Role="afakod" Type="QbPharmaSpecModel.afakod" Multiplicity="1" />
@@ -2083,6 +2807,962 @@
             </Principal>
             <Dependent Role="cikk">
               <PropertyRef Name="cikkcsop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="agyujt_patikak">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="agyujtaz" />
+            <PropertyRef Name="kuldes" />
+          </Key>
+          <Property Type="Int32" Name="kod" Nullable="false">
+            <Documentation>
+              <Summary>identity</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="agyujtaz" Nullable="false">
+            <Documentation>
+              <Summary>adatgyűjtés azonosító</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="qb_azon" MaxLength="40" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>patika azonosító (levélcím) /varchar(50) volt/</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="kulso_azon" MaxLength="50" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>külső azonosító (adatgyüjtés megrendelője által adott azonosító)</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="nev" MaxLength="50" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>patika neve</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="datum_tol">
+            <Documentation>
+              <Summary>gyüjtés érvényességének kezdete</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="datum_ig">
+            <Documentation>
+              <Summary>gyüjtés érvényességének vége</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="kuldes" Nullable="false">
+            <Documentation>
+              <Summary>küldés típus kód</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="levelcim" MaxLength="40" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>küldés címzettje</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="auttar_utv" MaxLength="50" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>küldéskor cél könyvtár neve</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="agyujtaz2">
+            <Documentation>
+              <Summary>kapcsolódó gyüjtés azonosító</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="agyujt" Relationship="QbPharmaSpecModel.FK_agyujt_patikak_agyujt" FromRole="agyujt_patikak" ToRole="agyujt" />
+        </EntityType>
+        <EntityType Name="agyujt_sanofi">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Type="Int32" Name="kod" Nullable="false">
+            <Documentation>
+              <Summary>identity</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="alimed" MaxLength="255" FixedLength="false" Unicode="true">
+            <Documentation>
+              <Summary>Alimed kód (SZALLTORZS.AZONOSITO)</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="cikknev" MaxLength="255" FixedLength="false" Unicode="true">
+            <Documentation>
+              <Summary>Cikk neve</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="alimednev" MaxLength="255" FixedLength="false" Unicode="true">
+            <Documentation>
+              <Summary>Alimed törzsbeli neév</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="piac" MaxLength="255" FixedLength="false" Unicode="true">
+            <Documentation>
+              <Summary>Piac azonosító</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="piacnev1" MaxLength="255" FixedLength="false" Unicode="true">
+            <Documentation>
+              <Summary>Piac neve</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="piackod1" MaxLength="255" FixedLength="false" Unicode="true">
+            <Documentation>
+              <Summary>Piac azonosító</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="piacnev2" MaxLength="255" FixedLength="false" Unicode="true">
+            <Documentation>
+              <Summary>Piac neve</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="piackod2" MaxLength="255" FixedLength="false" Unicode="true">
+            <Documentation>
+              <Summary>Piac azonosító</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="sf" MaxLength="255" FixedLength="false" Unicode="true">
+            <Documentation>
+              <Summary>Sanofi termék</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="arajanlatfej">
+          <Key>
+            <PropertyRef Name="sorszam" />
+          </Key>
+          <Property Type="Int32" Name="kod" Nullable="false" annotation:StoreGeneratedPattern="Identity">
+            <Documentation>
+              <Summary>identity</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="sorszam" Nullable="false">
+            <Documentation>
+              <Summary>Árajánlat azonosító</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="pkod" Nullable="false">
+            <Documentation>
+              <Summary>Partner kód</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="kedvezmeny100" Nullable="false" Precision="10" Scale="2">
+            <Documentation>
+              <Summary>Kedvezmény %</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="megjegyzes" MaxLength="100" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Megjegyzés</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="datum">
+            <Documentation>
+              <Summary>Dátum</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="torolve" Nullable="false">
+            <Documentation>
+              <Summary>Törölve</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="arajanlattet" Relationship="QbPharmaSpecModel.FK_arajanlattet_arajanlatfej" FromRole="arajanlatfej" ToRole="arajanlattet" />
+        </EntityType>
+        <EntityType Name="arajanlattet">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="sorszam" />
+            <PropertyRef Name="cikkszam" />
+            <PropertyRef Name="menny" />
+            <PropertyRef Name="tipus" />
+            <PropertyRef Name="jogcim" />
+            <PropertyRef Name="fogyar" />
+            <PropertyRef Name="tamogatas" />
+            <PropertyRef Name="terites" />
+            <PropertyRef Name="afakod" />
+            <PropertyRef Name="afakulcs" />
+            <PropertyRef Name="kedvezmeny100" />
+            <PropertyRef Name="kedvezmeny" />
+          </Key>
+          <Property Type="Int32" Name="kod" Nullable="false" annotation:StoreGeneratedPattern="Identity">
+            <Documentation>
+              <Summary>identity</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="sorszam" Nullable="false">
+            <Documentation>
+              <Summary>Árajánlat azonosító</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="cikkszam" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false">
+            <Documentation>
+              <Summary>Cikkszám</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="menny" Nullable="false" Precision="12" Scale="4">
+            <Documentation>
+              <Summary>Mennyiség</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="tipus" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false">
+            <Documentation>
+              <Summary>Eladás típusa</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="jogcim" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false">
+            <Documentation>
+              <Summary>Eladás jogcíme</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="fogyar" Nullable="false" Precision="16" Scale="8">
+            <Documentation>
+              <Summary>Fogy.ár nettó</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="tamogatas" Nullable="false" Precision="16" Scale="8">
+            <Documentation>
+              <Summary>Támogatás nettó</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="terites" Nullable="false" Precision="16" Scale="8">
+            <Documentation>
+              <Summary>Térítési díj nettó</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="afakod" Nullable="false">
+            <Documentation>
+              <Summary>ÁFA kód</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="afakulcs" Nullable="false">
+            <Documentation>
+              <Summary>ÁFA kulcs</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="kedvezmeny100" Nullable="false" Precision="10" Scale="2">
+            <Documentation>
+              <Summary>Kedvezmény %</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="kedvezmeny" Nullable="false" Precision="16" Scale="8">
+            <Documentation>
+              <Summary>Kedvezmény értéke nettó</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="afakod1" Relationship="QbPharmaSpecModel.FK_arajanlattet_afakod" FromRole="arajanlattet" ToRole="afakod" />
+          <NavigationProperty Name="arajanlatfej" Relationship="QbPharmaSpecModel.FK_arajanlattet_arajanlatfej" FromRole="arajanlattet" ToRole="arajanlatfej" />
+          <NavigationProperty Name="cikk" Relationship="QbPharmaSpecModel.FK_arajanlattet_cikk" FromRole="arajanlattet" ToRole="cikk" />
+        </EntityType>
+        <EntityType Name="archivalas">
+          <Key>
+            <PropertyRef Name="tablanev" />
+            <PropertyRef Name="archiv_tipus" />
+            <PropertyRef Name="archiv_tipus_doro" />
+            <PropertyRef Name="datum_mezo" />
+            <PropertyRef Name="azonosito_mezo" />
+            <PropertyRef Name="torles_sql" />
+            <PropertyRef Name="torles_sql_doro" />
+            <PropertyRef Name="join_mezo" />
+            <PropertyRef Name="where_sql" />
+          </Key>
+          <Property Type="String" Name="tablanev" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Tábla neve</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="archiv_tipus" Nullable="false" />
+          <Property Type="Byte" Name="archiv_tipus_doro" Nullable="false" />
+          <Property Type="String" Name="datum_mezo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Dátumot tartalmazó mező neve</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="azonosito_mezo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Rekord azonosító mező neve</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="torles_sql" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Törlés where feltétele</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="torles_sql_doro" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Törlés where feltétele (Dorottya)</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="join_mezo" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Lapcsolódás más táblához</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="where_sql" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>-</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="arkepzcikk">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="cikkszam" />
+            <PropertyRef Name="eltertartos" />
+            <PropertyRef Name="elteridosz" />
+            <PropertyRef Name="elternap1" />
+            <PropertyRef Name="elternap2" />
+          </Key>
+          <Property Type="Int32" Name="kod" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="cikkszam" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="eltertartos" Nullable="false" />
+          <Property Type="Int32" Name="elteridosz" Nullable="false" />
+          <Property Type="String" Name="elternap1" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="elternap2" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="arkepzfogyar">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="tol" />
+            <PropertyRef Name="ig" />
+            <PropertyRef Name="modosit" />
+            <PropertyRef Name="vege" />
+          </Key>
+          <Property Type="Int32" Name="kod" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="tol" Nullable="false" />
+          <Property Type="Int32" Name="ig" Nullable="false" />
+          <Property Type="Boolean" Name="modosit" Nullable="false" />
+          <Property Type="Int32" Name="vege" Nullable="false" />
+        </EntityType>
+        <EntityType Name="arres">
+          <Key>
+            <PropertyRef Name="nagykerar1" />
+            <PropertyRef Name="nagykerar2" />
+            <PropertyRef Name="arres1" />
+            <PropertyRef Name="arresjel" />
+            <PropertyRef Name="fogyar1" />
+            <PropertyRef Name="fogyar2" />
+            <PropertyRef Name="cikkcsop" />
+            <PropertyRef Name="torolve" />
+          </Key>
+          <Property Type="Decimal" Name="nagykerar1" Nullable="false" Precision="18" Scale="0">
+            <Documentation>
+              <Summary>Nagyker.ár intervallum kezdete</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="nagykerar2" Nullable="false" Precision="18" Scale="0">
+            <Documentation>
+              <Summary>Nagyker.ár intervallum vége</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="arres1" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="arresjel" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Árrés típusa (% vagy Ft)</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="fogyar1" Nullable="false" Precision="18" Scale="0">
+            <Documentation>
+              <Summary>Fogy.ár intervallum kezdete</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="fogyar2" Nullable="false" Precision="18" Scale="0">
+            <Documentation>
+              <Summary>Fogy.ár intervallum vége</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="datum1">
+            <Documentation>
+              <Summary>-</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="datum2">
+            <Documentation>
+              <Summary>-</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="cikkcsop" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false">
+            <Documentation>
+              <Summary>Cikkcsoport azonosítója /varchar(20) volt/</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="torolve" Nullable="false">
+            <Documentation>
+              <Summary>törölve</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="cikkcsop1" Relationship="QbPharmaSpecModel.FK_arres_cikkcsop" FromRole="arres" ToRole="cikkcsop" />
+        </EntityType>
+        <EntityType Name="arvaltidoszakfej">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Type="Int32" Name="kod" Nullable="false" annotation:StoreGeneratedPattern="Identity">
+            <Documentation>
+              <Summary>identity</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="megn" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Időszakos árváltozás megnevezése</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="datum_tol">
+            <Documentation>
+              <Summary>Időszak kezdete</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="datum_ig">
+            <Documentation>
+              <Summary>Időszak vége</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="storno" Nullable="false">
+            <Documentation>
+              <Summary>stornírozva</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="tdatum">
+            <Documentation>
+              <Summary>stornó időpontja</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="arvaltidoszaktet" Relationship="QbPharmaSpecModel.FK_arvaltidoszaktet_arvaltidoszakfej" FromRole="arvaltidoszakfej" ToRole="arvaltidoszaktet" />
+        </EntityType>
+        <EntityType Name="arvaltidoszaktet">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="arvaltkod" />
+            <PropertyRef Name="cikkszam" />
+            <PropertyRef Name="bfogyar" />
+            <PropertyRef Name="rfogyar" />
+            <PropertyRef Name="storno" />
+          </Key>
+          <Property Type="Int32" Name="kod" Nullable="false" annotation:StoreGeneratedPattern="Identity">
+            <Documentation>
+              <Summary>identity</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="arvaltkod" Nullable="false">
+            <Documentation>
+              <Summary>dőszakos árváltozás belső kódja</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="cikkszam" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false">
+            <Documentation>
+              <Summary>Cikkszám</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="bfogyar" Nullable="false" Precision="14" Scale="2">
+            <Documentation>
+              <Summary>Új fogy.ár bruttó</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="rfogyar" Nullable="false" Precision="14" Scale="2">
+            <Documentation>
+              <Summary>Régi fogy.ár bruttó</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="arvalt_oraperc">
+            <Documentation>
+              <Summary>Árváltozás megtörtének időpontja</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="vissza_oraperc">
+            <Documentation>
+              <Summary>Visszaárazás időpontja</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="storno" Nullable="false">
+            <Documentation>
+              <Summary>sztornírozva</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="tdatum">
+            <Documentation>
+              <Summary>sztornó időpontja</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="arvaltidoszakfej" Relationship="QbPharmaSpecModel.FK_arvaltidoszaktet_arvaltidoszakfej" FromRole="arvaltidoszaktet" ToRole="arvaltidoszakfej" />
+          <NavigationProperty Name="cikk" Relationship="QbPharmaSpecModel.FK_arvaltidoszaktet_cikk" FromRole="arvaltidoszaktet" ToRole="cikk" />
+        </EntityType>
+        <EntityType Name="BankTerminalForg">
+          <Key>
+            <PropertyRef Name="BankTerminalForgID" />
+            <PropertyRef Name="Inyugta" />
+            <PropertyRef Name="Fizetendo" />
+            <PropertyRef Name="Storno" />
+            <PropertyRef Name="TerminalTipus" />
+            <PropertyRef Name="Comport" />
+            <PropertyRef Name="Gep" />
+            <PropertyRef Name="FelhasznaloId" />
+            <PropertyRef Name="Feldolgozva" />
+            <PropertyRef Name="Elfogadva" />
+            <PropertyRef Name="TranzakcioAzon" />
+            <PropertyRef Name="Kartyaszam" />
+            <PropertyRef Name="HibaUzenet" />
+            <PropertyRef Name="SlipSzam" />
+          </Key>
+          <Property Type="Int32" Name="BankTerminalForgID" Nullable="false" annotation:StoreGeneratedPattern="Identity">
+            <Documentation>
+              <Summary>identity</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="Inyugta" Nullable="false">
+            <Documentation>
+              <Summary>ideiglenes nyugta azonosító</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="Felvdat">
+            <Documentation>
+              <Summary>rekord bekerülésének dátuma</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="Fizetendo" Nullable="false" Precision="10" Scale="2">
+            <Documentation>
+              <Summary>kártyával fizetendő összeg</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="Storno" Nullable="false">
+            <Documentation>
+              <Summary>vásárlás sztornó</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="TerminalTipus" Nullable="false">
+            <Documentation>
+              <Summary>Terminál típus kód</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="Comport" Nullable="false">
+            <Documentation>
+              <Summary>COM port</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="Gep" Nullable="false">
+            <Documentation>
+              <Summary>Gép sorszáma</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="FelhasznaloId" Nullable="false">
+            <Documentation>
+              <Summary>Felhasználó azonosító kód</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="Feldolgozva" Nullable="false">
+            <Documentation>
+              <Summary>Kérés feldolgozva</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="Elfogadva" Nullable="false">
+            <Documentation>
+              <Summary>Kártyás fizetés elfogadva</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="TranzakcioAzon" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Tranzakció azonosító</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Kartyaszam" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Kártya sorszáma</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="HibaUzenet" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Hibaüzenet</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="SlipSzam" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Slip száma</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="felhasznalo" Relationship="QbPharmaSpecModel.FK_BankTerminalForg_felhasznalo" FromRole="BankTerminalForg" ToRole="felhasznalo" />
+        </EntityType>
+        <EntityType Name="bevettemp">
+          <Key>
+            <PropertyRef Name="kod" />
+            <PropertyRef Name="gep" />
+            <PropertyRef Name="tipus" />
+            <PropertyRef Name="keszleten" />
+            <PropertyRef Name="pkod" />
+            <PropertyRef Name="bevetszam" />
+            <PropertyRef Name="szlaszam" />
+            <PropertyRef Name="cikkszam" />
+            <PropertyRef Name="mennyiseg" />
+            <PropertyRef Name="nagykerar" />
+            <PropertyRef Name="arengsz" />
+            <PropertyRef Name="arenge" />
+            <PropertyRef Name="beszar" />
+            <PropertyRef Name="fogyar" />
+            <PropertyRef Name="afakulcs" />
+            <PropertyRef Name="gyartszam" />
+            <PropertyRef Name="gyartev" />
+            <PropertyRef Name="gyartho" />
+            <PropertyRef Name="vtsz" />
+            <PropertyRef Name="rendszam" />
+            <PropertyRef Name="bmennyiseg" />
+            <PropertyRef Name="efogyar" />
+            <PropertyRef Name="enagykerar" />
+            <PropertyRef Name="kezelo" />
+            <PropertyRef Name="bevettempsz" />
+            <PropertyRef Name="gtv" />
+            <PropertyRef Name="tbeszar" />
+            <PropertyRef Name="szfogyar" />
+            <PropertyRef Name="bizom" />
+            <PropertyRef Name="arkepz_bazis" />
+            <PropertyRef Name="arkepz_beszar" />
+            <PropertyRef Name="arkepz_elter" />
+            <PropertyRef Name="arres_csop" />
+            <PropertyRef Name="arres" />
+            <PropertyRef Name="sbeszar" />
+            <PropertyRef Name="szamlafile" />
+            <PropertyRef Name="atvett_menny" />
+            <PropertyRef Name="szamla_menny" />
+            <PropertyRef Name="keszletrevetel" />
+            <PropertyRef Name="aruatvetellezarva" />
+          </Key>
+          <Property Type="Int32" Name="kod" Nullable="false" annotation:StoreGeneratedPattern="Identity">
+            <Documentation>
+              <Summary>identity</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="gep" Nullable="false">
+            <Documentation>
+              <Summary>Gép sorszáma /int volt/</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="tipus" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false">
+            <Documentation>
+              <Summary>Bevételezés típusa (tételenként, rendelésből, modem)</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="keszleten" Nullable="false">
+            <Documentation>
+              <Summary>A tétel már készleten van (gyors készletfelvitellel)</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="pkod" Nullable="false">
+            <Documentation>
+              <Summary>Partner kód</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="bevetszam" Nullable="false">
+            <Documentation>
+              <Summary>Bevételezés sorszáma</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="szlaszam" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Számlaszám</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="bevetdat">
+            <Documentation>
+              <Summary>Bevételezés dátuma</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="cikkszam" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false">
+            <Documentation>
+              <Summary>Cikkszám</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="mennyiseg" Nullable="false" Precision="12" Scale="4">
+            <Documentation>
+              <Summary>Bevételezett mennyiség</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="nagykerar" Nullable="false" Precision="12" Scale="4">
+            <Documentation>
+              <Summary>Nagyker. ár</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="arengsz" Nullable="false" Precision="5" Scale="2">
+            <Documentation>
+              <Summary>Árengedmény százalékosan</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="arenge" Nullable="false" Precision="10" Scale="2">
+            <Documentation>
+              <Summary>Árengedmény értékben</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="beszar" Nullable="false" Precision="12" Scale="4">
+            <Documentation>
+              <Summary>Beszerzési ár</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="fogyar" Nullable="false" Precision="12" Scale="4">
+            <Documentation>
+              <Summary>Fogyasztói ár</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="afakulcs" Nullable="false">
+            <Documentation>
+              <Summary>ÁFA kulcs</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="gyartszam" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Gyártási szám</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="gyartev" Nullable="false">
+            <Documentation>
+              <Summary>Gyártás éve</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="gyartho" Nullable="false">
+            <Documentation>
+              <Summary>Gyártás hónapja</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="lejardat">
+            <Documentation>
+              <Summary>Lejárat dátuma</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="vtsz" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>VTSZ</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="rendszam" Nullable="false">
+            <Documentation>
+              <Summary>Rendelés szám</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="bmennyiseg" Nullable="false" Precision="12" Scale="4">
+            <Documentation>
+              <Summary>Dorottya : bevételezett mennyiség kiszerelési egys.</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="efogyar" Nullable="false" Precision="10" Scale="2">
+            <Documentation>
+              <Summary>Előző fogyasztói ár</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="enagykerar" Nullable="false" Precision="10" Scale="2">
+            <Documentation>
+              <Summary>Előző nagyker. ár</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="ebdatum">
+            <Documentation>
+              <Summary>Dorottya : utolsó bevételezés dátuma erre a tételre</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="kezelo" Nullable="false">
+            <Documentation>
+              <Summary>Kezelő kódja</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="bevettempsz" Nullable="false">
+            <Documentation>
+              <Summary>Ideiglenes bevételezési azonosító</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="gtv" Nullable="false">
+            <Documentation>
+              <Summary>-</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="tbeszar" Nullable="false" Precision="10" Scale="2">
+            <Documentation>
+              <Summary>-</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="btip">
+            <Documentation>
+              <Summary>Bevételezés típusa (0-Kézi, 1-Gyors készlet, 2-Betöltés rendelésből,3-Elektronikus számlából)</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="szfogyar" Nullable="false" Precision="12" Scale="2">
+            <Documentation>
+              <Summary>Számított fogy.ár</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="bizom" Nullable="false">
+            <Documentation>
+              <Summary>Bizomyányosi áru jelölése</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="arkepz_bazis" Nullable="false">
+            <Documentation>
+              <Summary>Árképzés bázis típus (0-Utolsó besz.ár,1-S.besz.ár)</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="arkepz_beszar" Nullable="false" Precision="12" Scale="4">
+            <Documentation>
+              <Summary>Bázis beszerzési ár</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="arkepz_elter" Nullable="false">
+            <Documentation>
+              <Summary>-</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="arres_csop" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Árrés csoport</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="arres" Nullable="false" Precision="12" Scale="4">
+            <Documentation>
+              <Summary>Árrés értéke</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="sbeszar" Nullable="false" Precision="12" Scale="4">
+            <Documentation>
+              <Summary>Súlyozott beszerzési ár</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="szamlafile" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false">
+            <Documentation>
+              <Summary>Száma fájl neve</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="atvett_menny" Nullable="false" Precision="12" Scale="4">
+            <Documentation>
+              <Summary>Átvett mennyiség</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="szamla_menny" Nullable="false" Precision="12" Scale="4">
+            <Documentation>
+              <Summary>Számlán szereplő mennyiség</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="keszletrevetel" Nullable="false">
+            <Documentation>
+              <Summary>Készletre vétel típusa (0-Számlázott mennyiség,1-Átvett mennyiség)</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="aruatvetellezarva" Nullable="false">
+            <Documentation>
+              <Summary>Áru átvétel lezárva</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="cikk" Relationship="QbPharmaSpecModel.FK_bevettemp_cikk" FromRole="bevettemp" ToRole="cikk" />
+          <NavigationProperty Name="felhasznalo" Relationship="QbPharmaSpecModel.FK_bevettemp_felhasznalo" FromRole="bevettemp" ToRole="felhasznalo" />
+        </EntityType>
+        <Association Name="FK_arajanlattet_afakod">
+          <End Type="QbPharmaSpecModel.afakod" Role="afakod" Multiplicity="1" />
+          <End Type="QbPharmaSpecModel.arajanlattet" Role="arajanlattet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="afakod">
+              <PropertyRef Name="kod" />
+            </Principal>
+            <Dependent Role="arajanlattet">
+              <PropertyRef Name="afakod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agyujt_patikak_agyujt">
+          <End Type="QbPharmaSpecModel.agyujt" Role="agyujt" Multiplicity="1" />
+          <End Type="QbPharmaSpecModel.agyujt_patikak" Role="agyujt_patikak" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agyujt">
+              <PropertyRef Name="agyujtaz" />
+            </Principal>
+            <Dependent Role="agyujt_patikak">
+              <PropertyRef Name="agyujtaz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_arajanlattet_arajanlatfej">
+          <End Type="QbPharmaSpecModel.arajanlatfej" Role="arajanlatfej" Multiplicity="1" />
+          <End Type="QbPharmaSpecModel.arajanlattet" Role="arajanlattet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="arajanlatfej">
+              <PropertyRef Name="sorszam" />
+            </Principal>
+            <Dependent Role="arajanlattet">
+              <PropertyRef Name="sorszam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_arajanlattet_cikk">
+          <End Type="QbPharmaSpecModel.cikk" Role="cikk" Multiplicity="1" />
+          <End Type="QbPharmaSpecModel.arajanlattet" Role="arajanlattet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cikk">
+              <PropertyRef Name="cikkszam" />
+            </Principal>
+            <Dependent Role="arajanlattet">
+              <PropertyRef Name="cikkszam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_arres_cikkcsop">
+          <End Type="QbPharmaSpecModel.cikkcsop" Role="cikkcsop" Multiplicity="1" />
+          <End Type="QbPharmaSpecModel.arres" Role="arres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cikkcsop">
+              <PropertyRef Name="azonosito" />
+            </Principal>
+            <Dependent Role="arres">
+              <PropertyRef Name="cikkcsop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_arvaltidoszaktet_arvaltidoszakfej">
+          <End Type="QbPharmaSpecModel.arvaltidoszakfej" Role="arvaltidoszakfej" Multiplicity="1" />
+          <End Type="QbPharmaSpecModel.arvaltidoszaktet" Role="arvaltidoszaktet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="arvaltidoszakfej">
+              <PropertyRef Name="kod" />
+            </Principal>
+            <Dependent Role="arvaltidoszaktet">
+              <PropertyRef Name="arvaltkod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_arvaltidoszaktet_cikk">
+          <End Type="QbPharmaSpecModel.cikk" Role="cikk" Multiplicity="1" />
+          <End Type="QbPharmaSpecModel.arvaltidoszaktet" Role="arvaltidoszaktet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cikk">
+              <PropertyRef Name="cikkszam" />
+            </Principal>
+            <Dependent Role="arvaltidoszaktet">
+              <PropertyRef Name="cikkszam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankTerminalForg_felhasznalo">
+          <End Type="QbPharmaSpecModel.felhasznalo" Role="felhasznalo" Multiplicity="1" />
+          <End Type="QbPharmaSpecModel.BankTerminalForg" Role="BankTerminalForg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="felhasznalo">
+              <PropertyRef Name="kod" />
+            </Principal>
+            <Dependent Role="BankTerminalForg">
+              <PropertyRef Name="FelhasznaloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bevettemp_cikk">
+          <End Type="QbPharmaSpecModel.cikk" Role="cikk" Multiplicity="1" />
+          <End Type="QbPharmaSpecModel.bevettemp" Role="bevettemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cikk">
+              <PropertyRef Name="cikkszam" />
+            </Principal>
+            <Dependent Role="bevettemp">
+              <PropertyRef Name="cikkszam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bevettemp_felhasznalo">
+          <End Type="QbPharmaSpecModel.felhasznalo" Role="felhasznalo" Multiplicity="1" />
+          <End Type="QbPharmaSpecModel.bevettemp" Role="bevettemp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="felhasznalo">
+              <PropertyRef Name="kod" />
+            </Principal>
+            <Dependent Role="bevettemp">
+              <PropertyRef Name="kezelo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2421,6 +4101,223 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="agyujt_patikak">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.agyujt_patikak">
+              <MappingFragment StoreEntitySet="agyujt_patikak">
+                <ScalarProperty Name="agyujtaz2" ColumnName="agyujtaz2" />
+                <ScalarProperty Name="auttar_utv" ColumnName="auttar_utv" />
+                <ScalarProperty Name="levelcim" ColumnName="levelcim" />
+                <ScalarProperty Name="kuldes" ColumnName="kuldes" />
+                <ScalarProperty Name="datum_ig" ColumnName="datum_ig" />
+                <ScalarProperty Name="datum_tol" ColumnName="datum_tol" />
+                <ScalarProperty Name="nev" ColumnName="nev" />
+                <ScalarProperty Name="kulso_azon" ColumnName="kulso_azon" />
+                <ScalarProperty Name="qb_azon" ColumnName="qb_azon" />
+                <ScalarProperty Name="agyujtaz" ColumnName="agyujtaz" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="agyujt_sanofi">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.agyujt_sanofi">
+              <MappingFragment StoreEntitySet="agyujt_sanofi">
+                <ScalarProperty Name="sf" ColumnName="sf" />
+                <ScalarProperty Name="piackod2" ColumnName="piackod2" />
+                <ScalarProperty Name="piacnev2" ColumnName="piacnev2" />
+                <ScalarProperty Name="piackod1" ColumnName="piackod1" />
+                <ScalarProperty Name="piacnev1" ColumnName="piacnev1" />
+                <ScalarProperty Name="piac" ColumnName="piac" />
+                <ScalarProperty Name="alimednev" ColumnName="alimednev" />
+                <ScalarProperty Name="cikknev" ColumnName="cikknev" />
+                <ScalarProperty Name="alimed" ColumnName="alimed" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="arajanlatfej">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.arajanlatfej">
+              <MappingFragment StoreEntitySet="arajanlatfej">
+                <ScalarProperty Name="torolve" ColumnName="torolve" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+                <ScalarProperty Name="megjegyzes" ColumnName="megjegyzes" />
+                <ScalarProperty Name="kedvezmeny100" ColumnName="kedvezmeny100" />
+                <ScalarProperty Name="pkod" ColumnName="pkod" />
+                <ScalarProperty Name="sorszam" ColumnName="sorszam" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="arajanlattet">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.arajanlattet">
+              <MappingFragment StoreEntitySet="arajanlattet">
+                <ScalarProperty Name="kedvezmeny" ColumnName="kedvezmeny" />
+                <ScalarProperty Name="kedvezmeny100" ColumnName="kedvezmeny100" />
+                <ScalarProperty Name="afakulcs" ColumnName="afakulcs" />
+                <ScalarProperty Name="afakod" ColumnName="afakod" />
+                <ScalarProperty Name="terites" ColumnName="terites" />
+                <ScalarProperty Name="tamogatas" ColumnName="tamogatas" />
+                <ScalarProperty Name="fogyar" ColumnName="fogyar" />
+                <ScalarProperty Name="jogcim" ColumnName="jogcim" />
+                <ScalarProperty Name="tipus" ColumnName="tipus" />
+                <ScalarProperty Name="menny" ColumnName="menny" />
+                <ScalarProperty Name="cikkszam" ColumnName="cikkszam" />
+                <ScalarProperty Name="sorszam" ColumnName="sorszam" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="archivalas">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.archivalas">
+              <MappingFragment StoreEntitySet="archivalas">
+                <ScalarProperty Name="where_sql" ColumnName="where_sql" />
+                <ScalarProperty Name="join_mezo" ColumnName="join_mezo" />
+                <ScalarProperty Name="torles_sql_doro" ColumnName="torles_sql_doro" />
+                <ScalarProperty Name="torles_sql" ColumnName="torles_sql" />
+                <ScalarProperty Name="azonosito_mezo" ColumnName="azonosito_mezo" />
+                <ScalarProperty Name="datum_mezo" ColumnName="datum_mezo" />
+                <ScalarProperty Name="archiv_tipus_doro" ColumnName="archiv_tipus_doro" />
+                <ScalarProperty Name="archiv_tipus" ColumnName="archiv_tipus" />
+                <ScalarProperty Name="tablanev" ColumnName="tablanev" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="arkepzcikk">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.arkepzcikk">
+              <MappingFragment StoreEntitySet="arkepzcikk">
+                <ScalarProperty Name="elternap2" ColumnName="elternap2" />
+                <ScalarProperty Name="elternap1" ColumnName="elternap1" />
+                <ScalarProperty Name="elteridosz" ColumnName="elteridosz" />
+                <ScalarProperty Name="eltertartos" ColumnName="eltertartos" />
+                <ScalarProperty Name="cikkszam" ColumnName="cikkszam" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="arkepzfogyar">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.arkepzfogyar">
+              <MappingFragment StoreEntitySet="arkepzfogyar">
+                <ScalarProperty Name="vege" ColumnName="vege" />
+                <ScalarProperty Name="modosit" ColumnName="modosit" />
+                <ScalarProperty Name="ig" ColumnName="ig" />
+                <ScalarProperty Name="tol" ColumnName="tol" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="arres">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.arres">
+              <MappingFragment StoreEntitySet="arres">
+                <ScalarProperty Name="torolve" ColumnName="torolve" />
+                <ScalarProperty Name="cikkcsop" ColumnName="cikkcsop" />
+                <ScalarProperty Name="datum2" ColumnName="datum2" />
+                <ScalarProperty Name="datum1" ColumnName="datum1" />
+                <ScalarProperty Name="fogyar2" ColumnName="fogyar2" />
+                <ScalarProperty Name="fogyar1" ColumnName="fogyar1" />
+                <ScalarProperty Name="arresjel" ColumnName="arresjel" />
+                <ScalarProperty Name="arres1" ColumnName="arres" />
+                <ScalarProperty Name="nagykerar2" ColumnName="nagykerar2" />
+                <ScalarProperty Name="nagykerar1" ColumnName="nagykerar1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="arvaltidoszakfej">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.arvaltidoszakfej">
+              <MappingFragment StoreEntitySet="arvaltidoszakfej">
+                <ScalarProperty Name="tdatum" ColumnName="tdatum" />
+                <ScalarProperty Name="storno" ColumnName="storno" />
+                <ScalarProperty Name="datum_ig" ColumnName="datum_ig" />
+                <ScalarProperty Name="datum_tol" ColumnName="datum_tol" />
+                <ScalarProperty Name="megn" ColumnName="megn" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="arvaltidoszaktet">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.arvaltidoszaktet">
+              <MappingFragment StoreEntitySet="arvaltidoszaktet">
+                <ScalarProperty Name="tdatum" ColumnName="tdatum" />
+                <ScalarProperty Name="storno" ColumnName="storno" />
+                <ScalarProperty Name="vissza_oraperc" ColumnName="vissza_oraperc" />
+                <ScalarProperty Name="arvalt_oraperc" ColumnName="arvalt_oraperc" />
+                <ScalarProperty Name="rfogyar" ColumnName="rfogyar" />
+                <ScalarProperty Name="bfogyar" ColumnName="bfogyar" />
+                <ScalarProperty Name="cikkszam" ColumnName="cikkszam" />
+                <ScalarProperty Name="arvaltkod" ColumnName="arvaltkod" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankTerminalForg">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.BankTerminalForg">
+              <MappingFragment StoreEntitySet="BankTerminalForg">
+                <ScalarProperty Name="SlipSzam" ColumnName="SlipSzam" />
+                <ScalarProperty Name="HibaUzenet" ColumnName="HibaUzenet" />
+                <ScalarProperty Name="Kartyaszam" ColumnName="Kartyaszam" />
+                <ScalarProperty Name="TranzakcioAzon" ColumnName="TranzakcioAzon" />
+                <ScalarProperty Name="Elfogadva" ColumnName="Elfogadva" />
+                <ScalarProperty Name="Feldolgozva" ColumnName="Feldolgozva" />
+                <ScalarProperty Name="FelhasznaloId" ColumnName="FelhasznaloId" />
+                <ScalarProperty Name="Gep" ColumnName="Gep" />
+                <ScalarProperty Name="Comport" ColumnName="Comport" />
+                <ScalarProperty Name="TerminalTipus" ColumnName="TerminalTipus" />
+                <ScalarProperty Name="Storno" ColumnName="Storno" />
+                <ScalarProperty Name="Fizetendo" ColumnName="Fizetendo" />
+                <ScalarProperty Name="Felvdat" ColumnName="Felvdat" />
+                <ScalarProperty Name="Inyugta" ColumnName="Inyugta" />
+                <ScalarProperty Name="BankTerminalForgID" ColumnName="BankTerminalForgID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bevettemp">
+            <EntityTypeMapping TypeName="QbPharmaSpecModel.bevettemp">
+              <MappingFragment StoreEntitySet="bevettemp">
+                <ScalarProperty Name="aruatvetellezarva" ColumnName="aruatvetellezarva" />
+                <ScalarProperty Name="keszletrevetel" ColumnName="keszletrevetel" />
+                <ScalarProperty Name="szamla_menny" ColumnName="szamla_menny" />
+                <ScalarProperty Name="atvett_menny" ColumnName="atvett_menny" />
+                <ScalarProperty Name="szamlafile" ColumnName="szamlafile" />
+                <ScalarProperty Name="sbeszar" ColumnName="sbeszar" />
+                <ScalarProperty Name="arres" ColumnName="arres" />
+                <ScalarProperty Name="arres_csop" ColumnName="arres_csop" />
+                <ScalarProperty Name="arkepz_elter" ColumnName="arkepz_elter" />
+                <ScalarProperty Name="arkepz_beszar" ColumnName="arkepz_beszar" />
+                <ScalarProperty Name="arkepz_bazis" ColumnName="arkepz_bazis" />
+                <ScalarProperty Name="bizom" ColumnName="bizom" />
+                <ScalarProperty Name="szfogyar" ColumnName="szfogyar" />
+                <ScalarProperty Name="btip" ColumnName="btip" />
+                <ScalarProperty Name="tbeszar" ColumnName="tbeszar" />
+                <ScalarProperty Name="gtv" ColumnName="gtv" />
+                <ScalarProperty Name="bevettempsz" ColumnName="bevettempsz" />
+                <ScalarProperty Name="kezelo" ColumnName="kezelo" />
+                <ScalarProperty Name="ebdatum" ColumnName="ebdatum" />
+                <ScalarProperty Name="enagykerar" ColumnName="enagykerar" />
+                <ScalarProperty Name="efogyar" ColumnName="efogyar" />
+                <ScalarProperty Name="bmennyiseg" ColumnName="bmennyiseg" />
+                <ScalarProperty Name="rendszam" ColumnName="rendszam" />
+                <ScalarProperty Name="vtsz" ColumnName="vtsz" />
+                <ScalarProperty Name="lejardat" ColumnName="lejardat" />
+                <ScalarProperty Name="gyartho" ColumnName="gyartho" />
+                <ScalarProperty Name="gyartev" ColumnName="gyartev" />
+                <ScalarProperty Name="gyartszam" ColumnName="gyartszam" />
+                <ScalarProperty Name="afakulcs" ColumnName="afakulcs" />
+                <ScalarProperty Name="fogyar" ColumnName="fogyar" />
+                <ScalarProperty Name="beszar" ColumnName="beszar" />
+                <ScalarProperty Name="arenge" ColumnName="arenge" />
+                <ScalarProperty Name="arengsz" ColumnName="arengsz" />
+                <ScalarProperty Name="nagykerar" ColumnName="nagykerar" />
+                <ScalarProperty Name="mennyiseg" ColumnName="mennyiseg" />
+                <ScalarProperty Name="cikkszam" ColumnName="cikkszam" />
+                <ScalarProperty Name="bevetdat" ColumnName="bevetdat" />
+                <ScalarProperty Name="szlaszam" ColumnName="szlaszam" />
+                <ScalarProperty Name="bevetszam" ColumnName="bevetszam" />
+                <ScalarProperty Name="pkod" ColumnName="pkod" />
+                <ScalarProperty Name="keszleten" ColumnName="keszleten" />
+                <ScalarProperty Name="tipus" ColumnName="tipus" />
+                <ScalarProperty Name="gep" ColumnName="gep" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2457,49 +4354,159 @@
         <EntityTypeShape EntityType="QbPharmaSpecModel.feladatok" Width="1.5" PointX="8.75" PointY="3.75" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="QbPharmaSpecModel.felhasznalo" Width="1.5" PointX="0.75" PointY="10.25" Height="5.2494108072916674" IsExpanded="true" />
         <AssociationConnector Association="QbPharmaSpecModel.FK_bevet_afakod" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="18.192047526041666" />
-          <ConnectorPoint PointX="3" PointY="18.192047526041666" />
+          <ConnectorPoint PointX="2.25" PointY="18.2881982421875" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="18.2881982421875" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="18.2881982421875" />
+          <ConnectorPoint PointX="3" PointY="18.2881982421875" />
         </AssociationConnector>
         <AssociationConnector Association="QbPharmaSpecModel.FK_cikk_afakod" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="19.759095052083332" />
-          <ConnectorPoint PointX="1.5" PointY="25.972636718750003" />
-          <ConnectorPoint PointX="6" PointY="25.972636718750003" />
+          <ConnectorPoint PointX="1.5" PointY="19.951396484375003" />
+          <ConnectorPoint PointX="1.5" PointY="27.547801106770834" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="27.547801106770834" />
+          <ConnectorPoint PointX="2.5833333333333335" PointY="27.547801106770834" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="27.547801106770834" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="27.547801106770834" />
+          <ConnectorPoint PointX="6" PointY="27.547801106770834" />
         </AssociationConnector>
         <AssociationConnector Association="QbPharmaSpecModel.FK_arazo_cikk" ManuallyRouted="false">
           <ConnectorPoint PointX="7.5" PointY="18.220896809895834" />
           <ConnectorPoint PointX="8.25" PointY="18.220896809895834" />
         </AssociationConnector>
         <AssociationConnector Association="QbPharmaSpecModel.FK_bankforg_bank" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="3.1439925130208337" />
-          <ConnectorPoint PointX="10.40625" PointY="3.1439925130208337" />
-          <ConnectorPoint PointX="10.40625" PointY="11" />
+          <ConnectorPoint PointX="7.5" PointY="5.2494921875" />
+          <ConnectorPoint PointX="7.5" PointY="6.25" />
+          <ConnectorPoint PointX="7.75" PointY="6.25" />
+          <ConnectorPoint PointX="7.75" PointY="11.944573195312499" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="11.944573195312497" />
+          <ConnectorPoint PointX="8.2083333333333339" PointY="11.944573195312499" />
+          <ConnectorPoint PointX="9" PointY="11.944573195312499" />
         </AssociationConnector>
         <AssociationConnector Association="QbPharmaSpecModel.FK_bankforg_felhasznalo" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="10.25" />
-          <ConnectorPoint PointX="1.5" PointY="10" />
-          <ConnectorPoint PointX="1.8541666666666667" PointY="10" />
-          <ConnectorPoint PointX="2.0208333333333335" PointY="10" />
+          <ConnectorPoint PointX="1.3124980000000002" PointY="10.25" />
+          <ConnectorPoint PointX="1.3124980000000002" PointY="10" />
+          <ConnectorPoint PointX="1.7916666666666667" PointY="10" />
+          <ConnectorPoint PointX="1.9583333333333333" PointY="10" />
+          <ConnectorPoint PointX="3.1666666666666665" PointY="10" />
+          <ConnectorPoint PointX="3.3333333333333335" PointY="10" />
           <ConnectorPoint PointX="3.5" PointY="10" />
           <ConnectorPoint PointX="3.5" PointY="6.5" />
-          <ConnectorPoint PointX="8.625" PointY="6.5" />
-          <ConnectorPoint PointX="8.625" PointY="12.951650390625" />
-          <ConnectorPoint PointX="9" PointY="12.951650390625" />
+          <ConnectorPoint PointX="3.5416666666666665" PointY="6.4999999999999991" />
+          <ConnectorPoint PointX="3.7083333333333335" PointY="6.5" />
+          <ConnectorPoint PointX="7.666666666666667" PointY="6.4999999999999991" />
+          <ConnectorPoint PointX="7.833333333333333" PointY="6.5" />
+          <ConnectorPoint PointX="8.125" PointY="6.5" />
+          <ConnectorPoint PointX="8.125" PointY="13.45518898828125" />
+          <ConnectorPoint PointX="9" PointY="13.45518898828125" />
         </AssociationConnector>
         <AssociationConnector Association="QbPharmaSpecModel.FK_felhasznalo_beosztas" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.9375" PointY="8.8552864583333317" />
-          <ConnectorPoint PointX="1.9375" PointY="10.25" />
+          <ConnectorPoint PointX="1.875" PointY="8.8552864583333317" />
+          <ConnectorPoint PointX="1.875" PointY="10.25" />
         </AssociationConnector>
         <AssociationConnector Association="QbPharmaSpecModel.FK_bevet_cikk" ManuallyRouted="false">
           <ConnectorPoint PointX="6" PointY="18.2208154296875" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="18.2208154296875" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="18.2208154296875" />
           <ConnectorPoint PointX="4.5" PointY="18.2208154296875" />
         </AssociationConnector>
         <AssociationConnector Association="QbPharmaSpecModel.FK_bevet_felhasznalo" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="14.874705403645834" />
-          <ConnectorPoint PointX="3" PointY="14.874705403645834" />
+          <ConnectorPoint PointX="2.25" PointY="15.067006835937498" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="15.067006835937498" />
+          <ConnectorPoint PointX="2.5833333333333335" PointY="15.067006835937498" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="15.067006835937498" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="15.067006835937498" />
+          <ConnectorPoint PointX="3" PointY="15.067006835937498" />
         </AssociationConnector>
         <AssociationConnector Association="QbPharmaSpecModel.FK_cikk_cikkcsop" ManuallyRouted="false">
-          <ConnectorPoint PointX="5.25" PointY="11.201650390625002" />
-          <ConnectorPoint PointX="6" PointY="11.201650390625002" />
+          <ConnectorPoint PointX="5.25" PointY="11.297801106770834" />
+          <ConnectorPoint PointX="5.666666666666667" PointY="11.297801106770834" />
+          <ConnectorPoint PointX="5.833333333333333" PointY="11.297801106770834" />
+          <ConnectorPoint PointX="6" PointY="11.297801106770834" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="QbPharmaSpecModel.agyujt_patikak" Width="1.5" PointX="3" PointY="28" Height="3.3263964843750031" />
+        <EntityTypeShape EntityType="QbPharmaSpecModel.agyujt_sanofi" Width="1.5" PointX="8.375" PointY="6.75" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="QbPharmaSpecModel.arajanlatfej" Width="1.5" PointX="9" PointY="25.25" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="QbPharmaSpecModel.arajanlattet" Width="1.5" PointX="11.25" PointY="16.5" Height="4.0956022135416674" />
+        <EntityTypeShape EntityType="QbPharmaSpecModel.archivalas" Width="1.5" PointX="10.375" PointY="6.75" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="QbPharmaSpecModel.arkepzcikk" Width="1.5" PointX="11.375" PointY="0.75" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="QbPharmaSpecModel.arkepzfogyar" Width="1.5" PointX="11.375" PointY="3.75" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="QbPharmaSpecModel.arres" Width="1.5" PointX="6" PointY="34.75" Height="3.1340950520833246" />
+        <EntityTypeShape EntityType="QbPharmaSpecModel.arvaltidoszakfej" Width="1.5" PointX="6" PointY="31.375" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="QbPharmaSpecModel.arvaltidoszaktet" Width="1.5" PointX="8.25" PointY="21" Height="3.1340950520833388" />
+        <EntityTypeShape EntityType="QbPharmaSpecModel.BankTerminalForg" Width="1.5" PointX="3" PointY="23" Height="4.0956022135416674" />
+        <EntityTypeShape EntityType="QbPharmaSpecModel.bevettemp" Width="1.5" PointX="14.25" PointY="11.625" Height="9.8646451822916674" />
+        <AssociationConnector Association="QbPharmaSpecModel.FK_arajanlattet_afakod">
+          <ConnectorPoint PointX="2.25" PointY="17.425347121093751" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="17.425347121093751" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="17.425347121093751" />
+          <ConnectorPoint PointX="2.75" PointY="17.425347121093751" />
+          <ConnectorPoint PointX="2.75" PointY="14" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="14" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="14" />
+          <ConnectorPoint PointX="5.75" PointY="14" />
+          <ConnectorPoint PointX="5.75" PointY="6.625" />
+          <ConnectorPoint PointX="7.666666666666667" PointY="6.6249999999999991" />
+          <ConnectorPoint PointX="7.833333333333333" PointY="6.625" />
+          <ConnectorPoint PointX="8" PointY="6.625" />
+          <ConnectorPoint PointX="8" PointY="16.25" />
+          <ConnectorPoint PointX="12" PointY="16.25" />
+          <ConnectorPoint PointX="12" PointY="16.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbPharmaSpecModel.FK_agyujt_patikak_agyujt">
+          <ConnectorPoint PointX="1.5" PointY="4.4609993489583326" />
+          <ConnectorPoint PointX="1.5" PointY="6.625" />
+          <ConnectorPoint PointX="3.25" PointY="6.625" />
+          <ConnectorPoint PointX="3.25" PointY="10.25" />
+          <ConnectorPoint PointX="2.5" PointY="10.25" />
+          <ConnectorPoint PointX="2.5" PointY="29.6631982421875" />
+          <ConnectorPoint PointX="3" PointY="29.6631982421875" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbPharmaSpecModel.FK_arajanlattet_arajanlatfej">
+          <ConnectorPoint PointX="10.15625" PointY="25.25" />
+          <ConnectorPoint PointX="10.15625" PointY="20.174947916666667" />
+          <ConnectorPoint PointX="11.25" PointY="20.174947916666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbPharmaSpecModel.FK_arajanlattet_cikk">
+          <ConnectorPoint PointX="7.5" PointY="19.902120768229167" />
+          <ConnectorPoint PointX="11.25" PointY="19.902120768229167" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbPharmaSpecModel.FK_arres_cikkcsop">
+          <ConnectorPoint PointX="4.90625" PointY="13.345602213541666" />
+          <ConnectorPoint PointX="4.90625" PointY="36.317047526041662" />
+          <ConnectorPoint PointX="6" PointY="36.317047526041662" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbPharmaSpecModel.FK_arvaltidoszaktet_arvaltidoszakfej">
+          <ConnectorPoint PointX="7.5" PointY="32.557444661458334" />
+          <ConnectorPoint PointX="8.59375" PointY="32.557444661458334" />
+          <ConnectorPoint PointX="8.59375" PointY="24.134095052083339" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbPharmaSpecModel.FK_arvaltidoszaktet_cikk">
+          <ConnectorPoint PointX="7.5" PointY="22.567047526041669" />
+          <ConnectorPoint PointX="8.25" PointY="22.567047526041669" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbPharmaSpecModel.FK_BankTerminalForg_felhasznalo">
+          <ConnectorPoint PointX="2.2500000000000018" PointY="15.884013671874998" />
+          <ConnectorPoint PointX="2.4410744349011213" PointY="16.075088106776118" />
+          <ConnectorPoint PointX="2.5589255650988791" PointY="16.192939236973874" />
+          <ConnectorPoint PointX="2.625" PointY="16.259013671874996" />
+          <ConnectorPoint PointX="2.625" PointY="25.047801106770834" />
+          <ConnectorPoint PointX="3" PointY="25.047801106770834" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbPharmaSpecModel.FK_bevettemp_cikk">
+          <ConnectorPoint PointX="7.5" PointY="15.545400390625" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="15.545400390625" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="15.545400390625" />
+          <ConnectorPoint PointX="14.25" PointY="15.545400390625" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbPharmaSpecModel.FK_bevettemp_felhasznalo">
+          <ConnectorPoint PointX="2.25" PointY="12.125000499999999" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="12.125000499999999" />
+          <ConnectorPoint PointX="2.5833333333333335" PointY="12.125000499999999" />
+          <ConnectorPoint PointX="3.625" PointY="12.125000499999999" />
+          <ConnectorPoint PointX="3.625" PointY="6.375" />
+          <ConnectorPoint PointX="7.666666666666667" PointY="6.3749999999999991" />
+          <ConnectorPoint PointX="7.833333333333333" PointY="6.375" />
+          <ConnectorPoint PointX="15" PointY="6.375" />
+          <ConnectorPoint PointX="15" PointY="11.625" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

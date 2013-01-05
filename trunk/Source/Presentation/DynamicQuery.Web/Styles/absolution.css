@@ -282,6 +282,7 @@ button.ui-state-success {
   background: -webkit-gradient(linear, left top, left bottom, from(#90a960), to(#6f8448));
   background: -o-linear-gradient(0% 100% 90deg, #6f8448, #90a960);
   background: -ms-linear-gradient(0% 100% 90deg, #6f8448, #90a960);
+  padding: 0.3em 0 0.3em 0;
 }
 /* line 102, ../development/_interaction.scss */
 .ui-state-success a, .ui-button.ui-state-success a, input.ui-state-success[type='button'] a,
@@ -362,6 +363,7 @@ button.ui-state-error {
   background: -webkit-gradient(linear, left top, left bottom, from(#d8717b), to(#cb414e));
   background: -o-linear-gradient(0% 100% 90deg, #cb414e, #d8717b);
   background: -ms-linear-gradient(0% 100% 90deg, #cb414e, #d8717b);
+  padding: 0.3em 0 0.3em 0;
 }
 /* line 132, ../development/_interaction.scss */
 .ui-state-error a, .ui-button.ui-state-error a, input.ui-state-error[type='button'] a,
@@ -376,7 +378,9 @@ button.ui-state-error a {
 .ui-state-error-text,
 .ui-widget-content .ui-state-error-text,
 .ui-widget-header .ui-state-error-text {
-  color: #363636;
+  /*color: #363636;*/
+    color: #FFFFFF;  
+    margin-left: 2px;
 }
 
 /* line 138, ../development/_interaction.scss */

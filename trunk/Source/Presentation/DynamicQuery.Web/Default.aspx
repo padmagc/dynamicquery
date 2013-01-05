@@ -2,6 +2,7 @@
     CodeBehind="Default.aspx.cs" Inherits="DynamicQuery.Web._Default" %>
 
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+    <script type="text/javascript" src="./Scripts/Pages/Default.js"></script>
    <h2>
         Üdvözöllek a <b>Quadro Byte</b> dinamikus lekérdezés varázslójában!
     </h2>
