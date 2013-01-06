@@ -16,8 +16,11 @@
     <script type="text/javascript" src="/Scripts/Core/LocalStorage.js"></script>
     <script type="text/javascript" src="/Scripts/Core/Utils.js"></script>
     
+    <script type="text/javascript" src="/Scripts/Control/QBGrid.js"></script>
+    
     <script type="text/javascript" src="/Scripts/Pages/Default.js"></script>
     <script type="text/javascript" src="/Scripts/Pages/Documentation.js"></script>
+    <script type="text/javascript" src="/Scripts/Pages/ColumnType.js"></script>
     
 
     <script type="text/javascript">
@@ -46,6 +49,9 @@
 		                </li> 
 		                <li class="ui-state-default ui-corner-top">
 		                    <a href="Documentation.aspx">Dokumentáció</a>
+		                </li>
+		                <li class="ui-state-default ui-corner-top">
+		                    <a href="ColumnType.aspx">Oszlop típus</a>
 		                </li>
 		            </ul> 
 		            <div id="main" class="ui-tabs-panel ui-widget-content ui-corner-bottom">

@@ -54,7 +54,9 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ColumnType.aspx" />
     <Content Include="Documentation.aspx" />
+    <Content Include="Scripts\Control\QBGrid.js" />
     <Content Include="Scripts\Core\Utils.js" />
     <Content Include="Scripts\jquery-1.7.2.js" />
     <Content Include="Scripts\jquery-ui.js" />
@@ -62,6 +64,7 @@
     <Content Include="Scripts\jquery.tmpl.js" />
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\Core\LocalStorage.js" />
+    <Content Include="Scripts\Pages\ColumnType.js" />
     <Content Include="Scripts\Pages\Default.js" />
     <Content Include="Scripts\Pages\Documentation.js" />
     <Content Include="Scripts\xFilter.js" />
@@ -92,6 +95,13 @@
   <ItemGroup>
     <Compile Include="..\..\DataAccess\Documentation\DynamicQuery.DocumentationDataAccess\Database.cs">
       <Link>Documentation\Database.cs</Link>
+    </Compile>
+    <Compile Include="ColumnType.aspx.cs">
+      <DependentUpon>ColumnType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ColumnType.aspx.designer.cs">
+      <DependentUpon>ColumnType.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -137,7 +147,6 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scripts\Control\" />
     <Folder Include="Scripts\Module\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
