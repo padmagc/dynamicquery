@@ -54,6 +54,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Column.aspx" />
     <Content Include="ColumnType.aspx" />
     <Content Include="Documentation.aspx" />
     <Content Include="Scripts\Control\QBDropDownModule.js" />
@@ -68,11 +69,14 @@
     <Content Include="Scripts\Core\LocalStorage.js" />
     <Content Include="Scripts\Module\ColumnTypeModule.js" />
     <Content Include="Scripts\Control\QBDialogWindowModule.js" />
+    <Content Include="Scripts\Module\TableAndColumnModule.js" />
+    <Content Include="Scripts\Pages\Column.js" />
     <Content Include="Scripts\Pages\ColumnType.js" />
     <Content Include="Scripts\Pages\Default.js" />
     <Content Include="Scripts\Pages\Documentation.js" />
     <Content Include="Scripts\xFilter.js" />
     <Content Include="Services\ColumnType.asmx" />
+    <Content Include="Services\TableAndColumn.asmx" />
     <Content Include="Styles\absolution.css" />
     <Content Include="Styles\absolution.mobile.css" />
     <Content Include="Styles\images\ajax-loader.gif" />
@@ -101,6 +105,13 @@
     <Compile Include="..\..\DataAccess\Documentation\DynamicQuery.DocumentationDataAccess\Database.cs">
       <Link>Documentation\Database.cs</Link>
     </Compile>
+    <Compile Include="Column.aspx.cs">
+      <DependentUpon>Column.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Column.aspx.designer.cs">
+      <DependentUpon>Column.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ColumnType.aspx.cs">
       <DependentUpon>ColumnType.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -128,6 +139,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ColumnType.asmx.cs">
       <DependentUpon>ColumnType.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\TableAndColumn.asmx.cs">
+      <DependentUpon>TableAndColumn.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Site.Master.cs">
