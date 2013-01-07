@@ -139,8 +139,10 @@ function gridColumnSubTypeFunctionCallback(functionname, data) {
 function dialogTypeCallback(functionname) {
     switch (functionname) {
         case 'save':
-            selectedtype["Name"] = $('#dialogTypeName').val();
-            datamodule_columntype.SaveType(selectedtype, CallBack_RefreshTypeGrid);
+            if ($('#dialogTypeName').val() != '') {
+                selectedtype["Name"] = $('#dialogTypeName').val();
+                datamodule_columntype.SaveType(selectedtype, CallBack_RefreshTypeGrid);
+            }
             break;
         case 'cancel':
             /* Nothing */
@@ -154,8 +156,10 @@ function dialogTypeCallback(functionname) {
 function dialogSubTypeCallback(functionname) {
     switch (functionname) {
         case 'save':
-            selectedsubtype["Name"] = $('#dialogSubTypeName').val();
-            datamodule_columntype.SaveSubType(selectedtype.Id, selectedsubtype, CallBack_RefreshSubTypeGrid);
+            if ($('#dialogSubTypeName').val() != '') {
+                selectedsubtype["Name"] = $('#dialogSubTypeName').val();
+                datamodule_columntype.SaveSubType(selectedtype.Id, selectedsubtype, CallBack_RefreshSubTypeGrid);
+            }
             break;
         case 'cancel':
             /* Nothing */
