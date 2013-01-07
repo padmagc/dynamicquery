@@ -56,9 +56,7 @@
   <ItemGroup>
     <Content Include="ColumnType.aspx" />
     <Content Include="Documentation.aspx" />
-    <Content Include="Scripts\Control\QBDropDown.js" />
     <Content Include="Scripts\Control\QBDropDownModule.js" />
-    <Content Include="Scripts\Control\QBGrid.js" />
     <Content Include="Scripts\Control\QBGridModule.js" />
     <Content Include="Scripts\Core\Constant.js" />
     <Content Include="Scripts\Core\Utils.js" />
