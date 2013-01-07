@@ -17,6 +17,7 @@ DQ.DropDown = function (controlid, keyField, valueField) {
                 output.push('<option value="' + eval("value." + keyField) + '">' + eval("value." + valueField) + '</option>');
             });
             $(id).html(output.join(''));
+            $(id).change();
         },
         onChange = function (onchange) {
             $(id).change(function () {

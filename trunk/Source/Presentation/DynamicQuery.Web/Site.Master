@@ -22,10 +22,12 @@
     <script type="text/javascript" src="/Scripts/Control/QBDialogWindowModule.js"></script>
     
     <script type="text/javascript" src="/Scripts/Module/ColumnTypeModule.js"></script>
+    <script type="text/javascript" src="/Scripts/Module/TableAndColumnModule.js"></script>
     
     <script type="text/javascript" src="/Scripts/Pages/Default.js"></script>
     <script type="text/javascript" src="/Scripts/Pages/Documentation.js"></script>
     <script type="text/javascript" src="/Scripts/Pages/ColumnType.js"></script>
+    <script type="text/javascript" src="/Scripts/Pages/Column.js"></script>
     
 
     <script type="text/javascript">

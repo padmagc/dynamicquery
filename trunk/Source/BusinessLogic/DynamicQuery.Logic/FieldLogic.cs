@@ -7,14 +7,14 @@ namespace DynamicQuery.Logic
 {
     public class FieldLogic
     {
-        public void DeleteField(int id)
+        public void SetStatus(int id)
         {
             using (var context = new QbDynamicQueryEntities())
             {
                 var t = context.DynamicQueryTableColumn.SingleOrDefault(w => w.Id == id);
                 if (t == null) throw new Exception("Ismeretlen mező");
 
-                t.Active = false;
+                t.Active = !t.Active;
                 context.ObjectStateManager.ChangeObjectState(t, EntityState.Modified);
                 context.SaveChanges();
             }
