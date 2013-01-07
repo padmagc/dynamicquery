@@ -15,8 +15,13 @@
     
     <script type="text/javascript" src="/Scripts/Core/LocalStorage.js"></script>
     <script type="text/javascript" src="/Scripts/Core/Utils.js"></script>
+    <script type="text/javascript" src="/Scripts/Core/Constant.js"></script>
     
-    <script type="text/javascript" src="/Scripts/Control/QBGrid.js"></script>
+    <script type="text/javascript" src="/Scripts/Control/QBDropDownModule.js"></script>
+    <script type="text/javascript" src="/Scripts/Control/QBGridModule.js"></script>
+    <script type="text/javascript" src="/Scripts/Control/QBDialogWindowModule.js"></script>
+    
+    <script type="text/javascript" src="/Scripts/Module/ColumnTypeModule.js"></script>
     
     <script type="text/javascript" src="/Scripts/Pages/Default.js"></script>
     <script type="text/javascript" src="/Scripts/Pages/Documentation.js"></script>
@@ -37,10 +42,15 @@
 <body>
     <div class="page">
         <div style="width: 960px; min-height: 620px; margin: 20px auto 0px auto;border: 1px solid #ABABAB;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" 
-            tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-dialog">
+            tabindex="-1">
             <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
                 <span class="ui-dialog-title" id="ui-dialog-title-dialog">QB Report Designer</span>
             </div>
+            
+            <div id="dialogwindow" title="" style="visibility: hidden">
+                <div id="dialogPlaceholder"></div>    
+    		</div>
+
             <div id="dialog" style="width: auto; min-height: 100%; height: auto;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
 			    <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all"> 
 		            <ul id="navigation" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"> 

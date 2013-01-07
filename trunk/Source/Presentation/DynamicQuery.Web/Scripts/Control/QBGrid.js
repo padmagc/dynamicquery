@@ -76,17 +76,17 @@
         return $('#' + opts.rowTemplateId);
     };
     //
-    // private function : return 'rowTemplate' object
+    // private function : grep datasource to pageing
     //
-    grepDatasource = function () {
+    function grepDatasource() {
         var data = [];
         if (opts.dataSource != null) {
-            data = jQuery.grep(opts.dataSource, function (d, index) {
+            data = jQuery.grep(opts.dataSource, function(d, index) {
                 return (index >= opts.actualPage * opts.recordCount && index < (opts.actualPage * opts.recordCount) + opts.recordCount);
             });
         }
         return data;
-    }
+    };
     //
     // plugin defaults
     //

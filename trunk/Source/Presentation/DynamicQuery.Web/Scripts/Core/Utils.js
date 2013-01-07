@@ -22,6 +22,12 @@
         $('#message').html('');
         $('#info').css("visibility", "hidden");
     };
+    // Log a console-ra
+    this.logToConsole = function(classname, message) {
+        if (CONST_DEBUGMODE) {
+            console.log(classname + '::' + message);
+        }
+    };
     jQuery.Utils = this;
 
 })(jQuery);

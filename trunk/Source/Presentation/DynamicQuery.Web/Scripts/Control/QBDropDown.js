@@ -19,8 +19,28 @@
     // set datasource
     //
     $.fn.QBDropDown.SetDatasource = function (datasource) {
-
+        opts.dataSource = datasource;
+        var output = [];
+        $.fn.QBDropDown.Clear();
+        if (opts.addChooseOption) {
+            if (opts.chooseOptionText != null) {
+                output.push('<option value="-1">' + opts.chooseOptionText + '</option>');
+            } else {
+                output.push('<option value="-1">Válassz...</option>');
+            }
+        }
+        $.each(opts.dataSource, function (key, value) {
+            output.push('<option value="' + eval("value." + opts.keyField) + '">' + eval("value." + opts.textField) + '</option>');
+        });
+        $(dropdownObject()).html(output.join(''));
+        if (opts.onChange != null) {
+            $(dropdownObject()).change(function () {
+                var d = grepDatasource($(dropdownObject()).val());
+                opts.onChange(d[0]);
+            });
+        }
     };
+    //
     //
     // GetValue
     //
@@ -64,12 +84,28 @@
         return $('#' + opts.dropdownId);
     };
     //
+    // private function : grep datasource
+    //
+    function grepDatasource(id) {
+        var data = [];
+        if (opts.dataSource != null) {
+            data = jQuery.grep(opts.dataSource, function (d, index) {
+                return (eval("d." + opts.keyField) == id);
+            });
+        }
+        return data;
+    };
+    //
     // plugin defaults
     //
     $.fn.QBDropDown.defaults = {
         dropdownId: null,
         dataSource: null,
-        dropDownFunctionCallback: null,
-        visible: true
+        keyField: 'Id',
+        textField: 'Name',
+        onChange: null,
+        visible: true,
+        addChooseOption: true,
+        chooseOptionText: null
     };
 })(jQuery);

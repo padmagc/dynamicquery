@@ -1,0 +1,56 @@
+﻿var DQ = DQ || {};
+
+DQ.DropDown = function (controlid, keyField, valueField) {
+    var 
+    /********** Variables **********/
+        id = controlid,
+        selectedId = 1,
+        selectedText = '',
+    /********** Functions **********/
+        init = function (source) {
+            var output = [];
+            // clear
+            clear();
+            // add first record
+            output.push('<option value="-1">Válassz...</option>');
+            $.each(source, function (key, value) {
+                output.push('<option value="' + eval("value." + keyField) + '">' + eval("value." + valueField) + '</option>');
+            });
+            $(id).html(output.join(''));
+        },
+        onChange = function (onchange) {
+            $(id).change(function () {
+                selectedId = $(id).val();
+                selectedText = $(id).text();
+                onchange(selectedId);
+            });
+        },
+        getValue = function () {
+            return $(id).val();
+        },
+        getText = function () {
+            return $(id.selector + " option:selected").html();
+        },
+        setIndex = function (index) {
+            $(id).val(index);
+            $(id).change();
+        },
+        setSelectedValue = function (value) {
+            $(id.selector + " > option").filter(function () {
+                return $(this).val() == value;
+            }).attr('selected', true);
+            $(id).change();
+        },
+        clear = function () {
+            $(id).html('');
+        };
+    return {
+        Clear: clear,
+        Init: init,
+        OnChange: onChange,
+        GetValue: getValue,
+        GetText: getText,
+        SetIndex: setIndex,
+        SetSelectedValue: setSelectedValue
+    };
+};

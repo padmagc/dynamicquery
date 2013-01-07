@@ -94,27 +94,27 @@ namespace DynamicQuery.Logic
             }
         }
 
-        public void DeleteType(FieldType type)
+        public void SetTypeStatus(FieldType type)
         {
             using (var context = new QbDynamicQueryEntities())
             {
                 var t = context.DynamicQueryTableType.SingleOrDefault(w => w.Id == type.Id);
                 if(t == null) throw new Exception("Ismeretlen típus");
 
-                t.Active = false;
+                t.Active = !t.Active;
                 context.ObjectStateManager.ChangeObjectState(t, EntityState.Modified);
                 context.SaveChanges();
             }
         }
 
-        public void DeleteSubType(FieldType subType)
+        public void SetSubTypeStatus(FieldType subType)
         {
             using (var context = new QbDynamicQueryEntities())
             {
                 var t = context.DynamicQueryTableSubType.SingleOrDefault(w => w.Id == subType.Id);
                 if (t == null) throw new Exception("Ismeretlen típus");
 
-                t.Active = false;
+                t.Active = !t.Active;
                 context.ObjectStateManager.ChangeObjectState(t, EntityState.Modified);
                 context.SaveChanges();
             }
