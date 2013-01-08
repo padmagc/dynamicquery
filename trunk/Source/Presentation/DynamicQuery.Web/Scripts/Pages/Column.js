@@ -56,12 +56,16 @@ function CallBack_GetTables(data) {
 */
 function CallBack_GetColumnTypes(data) {
     dropdown_type.Init(data);
+    dropdown_type.SetSelectedValue(selectedColumn.Type);
 }
 /*
 * Get column subtypes
 */
-function CallBack_GetSubType(typeId) {
+function CallBack_GetColumnSubType(typeId) {
     datamodule_columntype.GetColumSubType(typeId, CallBack_ShowColumSubType);
+    if(selectedColumn.SubType != -1) {
+        dropdown_subtype.SetSelectedValue(selectedColumn.SubType);
+    }
 }
 /*
 * Show subtypes
@@ -69,7 +73,13 @@ function CallBack_GetSubType(typeId) {
 function CallBack_ShowColumSubType(data) {
     dropdown_subtype.Init(data);
 }
-
+/*
+* Success column update
+*/
+function CallBack_SuccesUpdate(data) {
+    $.Utils.showSuccess('Sikeres mentés');
+    CallBack_GetColumns(null);
+}
 /*
 * Set default values of controls and variables
 */
@@ -81,6 +91,7 @@ function SetBaseToControls() {
 * Events from type grid
 */
 function gridColumnCallback(functionname, data) {
+    SetBaseToControls();
     switch (functionname) {
         case 'inactive':
             datamodule_tableandcolumn.SetStatus(data.Id, CallBack_GetColumns);
@@ -90,10 +101,10 @@ function gridColumnCallback(functionname, data) {
             break;
         case 'update':
             selectedColumn = data;
-            dialog_column.ShowDialog("Oszlop", data, "dialogTemplate", dialogCallback);
+            dialog_column.ShowDialog("Oszlop adatok módosítása", data, "dialogTemplate", dialogCallback);
             /* Init dialog controls */
             dropdown_type = new DQ.DropDown($('#dialogType'), "Id", "Name");
-            dropdown_type.OnChange(CallBack_GetSubType);
+            dropdown_type.OnChange(CallBack_GetColumnSubType);
 
             dropdown_subtype = new DQ.DropDown($('#dialogSubType'), "Id", "Name");
             
@@ -109,14 +120,48 @@ function gridColumnCallback(functionname, data) {
 function dialogCallback(functionname) {
     switch (functionname) {
         case 'save':
-            /*if ($('#dialogTypeName').val() != '') {
-                selectedtype["Name"] = $('#dialogTypeName').val();
-                datamodule_columntype.SaveType(selectedtype, CallBack_RefreshTypeGrid);
-            }*/
+            selectedColumn["Name"] = $('#dialogName').val();
+            selectedColumn["Description"] = $('#dialogDescription').val();
+            selectedColumn["Type"] = dropdown_type.GetValue();
+            selectedColumn["SubType"] = dropdown_subtype.GetValue();
+            datamodule_tableandcolumn.UpdateColumn(selectedColumn, CallBack_SuccesUpdate);
             break;
         case 'cancel':
+            SetBaseToControls();
             /* Nothing */
             break;
     }
-    SetBaseToControls();
+    //
+}
+/*
+* Validate values before save
+*/
+function Validate() {
+    var valid = true;
+    var errorMessage = '';
+
+    if ($('#dialogName').val() == '') {
+        valid = false;
+        errorMessage = 'Név nem lehet üres.';
+    }
+    if ($('#dialogDescription').val() == '') {
+        valid = false;
+        if(errorMessage.length > 0) {
+            errorMessage += '<br />';
+        }
+        errorMessage += 'Leírás nem lehet üres.';
+    }
+
+    if (dropdown_type.GetValue() == '-1') {
+        valid = false;
+        if (errorMessage.length > 0) {
+            errorMessage += '<br />';
+        }
+        errorMessage += 'Oszlop típus nem lehet üres.';
+    }
+
+    if(!valid) {
+        $.Utils.showError(errorMessage);
+    }
+    return valid;
 }

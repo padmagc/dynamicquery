@@ -21,6 +21,7 @@ DQ.DropDown = function (controlid, keyField, valueField) {
         },
         onChange = function (onchange) {
             $(id).change(function () {
+                $.Utils.hideInfo();
                 selectedId = $(id).val();
                 selectedText = $(id).text();
                 onchange(selectedId);

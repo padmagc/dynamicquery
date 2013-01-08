@@ -166,3 +166,6 @@ function dialogSubTypeCallback(functionname) {
             break;
     }
 }
+function Validate() {
+    return true;
+}
