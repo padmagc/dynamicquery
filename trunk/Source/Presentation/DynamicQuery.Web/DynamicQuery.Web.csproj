@@ -54,22 +54,28 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CalculatedColumn.aspx" />
     <Content Include="Column.aspx" />
     <Content Include="ColumnType.aspx" />
     <Content Include="Documentation.aspx" />
     <Content Include="Scripts\Control\QBDropDownModule.js" />
     <Content Include="Scripts\Control\QBGridModule.js" />
     <Content Include="Scripts\Core\Constant.js" />
+    <Content Include="Scripts\Core\SQLFunction.js" />
     <Content Include="Scripts\Core\Utils.js" />
     <Content Include="Scripts\jquery-1.7.2.js" />
+    <Content Include="Scripts\jquery-fieldselection.js" />
     <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-uniform.js" />
     <Content Include="Scripts\jquery.stepy.js" />
     <Content Include="Scripts\jquery.tmpl.js" />
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\Core\LocalStorage.js" />
+    <Content Include="Scripts\Module\CalculatedColumnModule.js" />
     <Content Include="Scripts\Module\ColumnTypeModule.js" />
     <Content Include="Scripts\Control\QBDialogWindowModule.js" />
     <Content Include="Scripts\Module\TableAndColumnModule.js" />
+    <Content Include="Scripts\Pages\CalculatedColumn.js" />
     <Content Include="Scripts\Pages\Column.js" />
     <Content Include="Scripts\Pages\ColumnType.js" />
     <Content Include="Scripts\Pages\Default.js" />
@@ -105,6 +111,13 @@
     <Compile Include="..\..\DataAccess\Documentation\DynamicQuery.DocumentationDataAccess\Database.cs">
       <Link>Documentation\Database.cs</Link>
     </Compile>
+    <Compile Include="CalculatedColumn.aspx.cs">
+      <DependentUpon>CalculatedColumn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CalculatedColumn.aspx.designer.cs">
+      <DependentUpon>CalculatedColumn.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Column.aspx.cs">
       <DependentUpon>Column.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -133,6 +146,8 @@
     <Compile Include="Documentation.aspx.designer.cs">
       <DependentUpon>Documentation.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Documentation\QueryBuilder.cs" />
+    <Compile Include="Documentation\TableRoute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

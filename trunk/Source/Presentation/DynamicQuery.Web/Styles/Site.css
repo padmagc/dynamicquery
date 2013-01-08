@@ -13,3 +13,8 @@ body {
     margin: 20px auto 0px auto;
     /*border: 1px solid #ABABAB;*/
 }
+
+form input { float: right; width: 70%; }
+form select { float: right; width: 74%; padding: 5px }
+form label { float: left; display: block; margin: 9px 0px 7px 0px; width: 15% }
+form .label-select { float: left; display: block; margin: 9px 0px 7px 0px; width: 15% }

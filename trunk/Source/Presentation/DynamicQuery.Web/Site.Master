@@ -12,10 +12,13 @@
     <script type="text/javascript" src="/Scripts/jquery-ui.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.stepy.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.tmpl.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-uniform.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-fieldselection.js"></script>
     
     <script type="text/javascript" src="/Scripts/Core/LocalStorage.js"></script>
     <script type="text/javascript" src="/Scripts/Core/Utils.js"></script>
     <script type="text/javascript" src="/Scripts/Core/Constant.js"></script>
+    <script type="text/javascript" src="/Scripts/Core/SQLFunction.js"></script>
     
     <script type="text/javascript" src="/Scripts/Control/QBDropDownModule.js"></script>
     <script type="text/javascript" src="/Scripts/Control/QBGridModule.js"></script>
@@ -23,11 +26,13 @@
     
     <script type="text/javascript" src="/Scripts/Module/ColumnTypeModule.js"></script>
     <script type="text/javascript" src="/Scripts/Module/TableAndColumnModule.js"></script>
+    <script type="text/javascript" src="/Scripts/Module/CalculatedColumnModule.js"></script>
     
     <script type="text/javascript" src="/Scripts/Pages/Default.js"></script>
     <script type="text/javascript" src="/Scripts/Pages/Documentation.js"></script>
     <script type="text/javascript" src="/Scripts/Pages/ColumnType.js"></script>
     <script type="text/javascript" src="/Scripts/Pages/Column.js"></script>
+    <script type="text/javascript" src="/Scripts/Pages/CalculatedColumn.js"></script>
     
 
     <script type="text/javascript">
@@ -64,6 +69,12 @@
 		                </li>
 		                <li class="ui-state-default ui-corner-top">
 		                    <a href="ColumnType.aspx">Oszlop típus</a>
+		                </li>
+		                <li class="ui-state-default ui-corner-top">
+		                    <a href="Column.aspx">Oszlop</a>
+		                </li>
+		                <li class="ui-state-default ui-corner-top">
+		                    <a href="CalculatedColumn.aspx">Összerakott oszlop</a>
 		                </li>
 		            </ul> 
 		            <div id="main" class="ui-tabs-panel ui-widget-content ui-corner-bottom">

@@ -11,6 +11,10 @@ namespace DynamicQuery.Entity.Documentation
         /// </summary>
         public string Name { get; set; }
         /// <summary>
+        /// 
+        /// </summary>
+        public string SqlFormat { get; set; }
+        /// <summary>
         /// Tábla mezők
         /// </summary>
         public List<DynamicQueryTableColumn> Columns { get; set; }
