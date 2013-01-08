@@ -68,6 +68,7 @@ DQ.Grid = function () {
             return data;
         },
         pageing = function () {
+            $.Utils.hideInfo();
             actualPage = $("#ddPaging").val();
             $.Utils.logToConsole("Pageing", actualPage);
             bindDatasource();

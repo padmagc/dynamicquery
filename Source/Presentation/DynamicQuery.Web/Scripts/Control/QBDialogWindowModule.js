@@ -4,7 +4,7 @@ DQ.DialogWindow = function () {
     var 
     /********** Variables **********/
     /********** GET field types **********/
-        showDialog = function (title, data, formTemplate, callback) {
+        showDialog = function (title, data, formTemplate, callback, validation) {
             $('#dialogwindow').attr("title", title);
             
             $($('#dialogPlaceholder')).empty();
@@ -15,8 +15,10 @@ DQ.DialogWindow = function () {
                 width: 400,
                 buttons: {
                     "Ment": function () {
-                        callback('save');
-                        $(this).dialog("close");
+                        if (Validate()) {
+                            callback('save');
+                            $(this).dialog("close");
+                        }
                     },
                     "Mégsem": function () {
                         callback('cancel');
