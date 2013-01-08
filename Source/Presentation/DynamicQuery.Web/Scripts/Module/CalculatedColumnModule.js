@@ -1,13 +1,14 @@
 ﻿var DQ = DQ || {};
 
-DQ.TableAndColumn = function () {
+DQ.CalculatedColumn = function () {
     var 
     /********** Variables **********/
-        className = 'DQ.Field',
+        className = 'DQ.CalculatedColumn',
         url = "Services/TableAndColumn.asmx/",
         columnConstans = CONST_Table,
     /********** GET field types **********/
-        getColumns = function (callback, tableId, typeId, subTypeId) {
+        getCalulcatedColumns = function (callback, tableId, typeId, subTypeId) {
+            var tables;
             if (!$.localStorage.getItem(columnConstans)) {
                 $.Utils.logToConsole(className, 'get table data from database');
                 $.ajax({
@@ -21,7 +22,7 @@ DQ.TableAndColumn = function () {
                         callback(collectData(data.d, tableId, typeId, subTypeId));
                     },
                     error: (function (response, status, error) {
-                        $.Utils.showError(className + "::" +response.statusText);
+                        $.Utils.showError(className, response.statusText);
                     })
                 });
             } else {
@@ -47,7 +48,7 @@ DQ.TableAndColumn = function () {
                         }
                     }
                 }),
-                /*CalculatedColumns: t.CalculatedColumns.filter(function (element) {
+                CalculatedColumns: t.CalculatedColumns.filter(function (element) {
                     if (typeId == -1) {
                         return true;
                     } else {
@@ -57,19 +58,16 @@ DQ.TableAndColumn = function () {
                             return element.Type == typeId;
                         }
                     }
-                })*/
+                })
             };
             return records;
         },
-        setStorageKey = function (key) {
-            columnConstans = key;
-        },
-        setStatus = function (id, callback) {
-            $.Utils.logToConsole(className, 'inactivate this column : ' + id);
-            var parameters = "{" + "columnId:" + id + "}";
+        setstatus = function (columnId, callback) {
+            $.Utils.logToConsole(className, 'set activate status on this column : ' + columnId);
+            var parameters = "{" + "fieldId:" + columnId + "}";
             $.ajax({
                 type: "POST",
-                url: url + 'SetColumnStatus',
+                url: url + 'SetStatus',
                 data: parameters,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -84,11 +82,29 @@ DQ.TableAndColumn = function () {
 
         },
         updateColumn = function (dto, callback) {
-            $.Utils.logToConsole(className, 'update this column : ' + dto.Id);
+            $.Utils.logToConsole(className, 'update this field : ' + dto.Id);
             var parameters = { 'column': dto };
             $.ajax({
                 type: "POST",
-                url: url + 'UpdateColumn',
+                url: url + 'UpdateCalculatedColumn',
+                data: JSON.stringify(parameters),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $.localStorage.removeItem(columnConstans);
+                    callback(true);
+                },
+                error: (function (response, status, error) {
+                    $.Utils.errorlog(className, response.statusText);
+                })
+            });
+        },
+        newColumn = function (dto, callback) {
+            Utils.logToConsole(className, 'new calculated column : ' + dto.Id);
+            var parameters = { 'column': dto };
+            $.ajax({
+                type: "POST",
+                url: url + 'NewCalculatedColumn',
                 data: JSON.stringify(parameters),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -102,7 +118,7 @@ DQ.TableAndColumn = function () {
             });
         },
         getTables = function (callback) {
-            if (!$.localStorage.getItem(columnConstans)) {
+            if (!$.localStorage.getItem(CONST_Table)) {
                 $.Utils.logToConsole(className, 'get data from database');
                 $.ajax({
                     type: "POST",
@@ -115,7 +131,7 @@ DQ.TableAndColumn = function () {
                         callback(data.d);
                     },
                     error: (function (response, status, error) {
-                        $.Utils.showError(className + "::" + response.responseText);
+                        $.Utils.errorlog(className, response.statusText);
                     })
                 });
             } else {
@@ -125,9 +141,9 @@ DQ.TableAndColumn = function () {
         };
     return {
         GetTables: getTables,
-        GetColumns: getColumns,
-        SetStatus: setStatus,
+        GetCalculatedColumns: getCalulcatedColumns,
+        NewColumn: newColumn,
         UpdateColumn: updateColumn,
-        SetStorageKey: setStorageKey
+        SetStatus: setstatus
     };
 };

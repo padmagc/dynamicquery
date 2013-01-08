@@ -35,6 +35,7 @@ namespace DynamicQuery.Entity.Documentation
         public bool CalculatedField { get; set; }
         public bool Active { get; set; }
         public int TableId { get; set; }
+        public string TableName { get; set; }
         #endregion
 
         #region Konstruktor

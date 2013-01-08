@@ -6,11 +6,11 @@ DQ.DialogWindow = function () {
     /********** GET field types **********/
         showDialog = function (title, data, formTemplate, callback, validation) {
             $('#dialogwindow').attr("title", title);
-            
+
             $($('#dialogPlaceholder')).empty();
-            
-            $($('#'+formTemplate)).tmpl(data).appendTo($('#dialogPlaceholder'));
-            
+
+            $($('#' + formTemplate)).tmpl(data).appendTo($('#dialogPlaceholder'));
+
             $('#dialogwindow').dialog({
                 width: 400,
                 buttons: {
