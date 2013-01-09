@@ -146,8 +146,6 @@
     <Compile Include="Documentation.aspx.designer.cs">
       <DependentUpon>Documentation.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Documentation\QueryBuilder.cs" />
-    <Compile Include="Documentation\TableRoute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
