@@ -104,9 +104,10 @@ function gridColumnCallback(functionname, data) {
             dialog_column.ShowDialog("Oszlop adatok módosítása", data, "dialogTemplate", dialogCallback);
             /* Init dialog controls */
             dropdown_type = new DQ.DropDown($('#dialogType'), "Id", "Name");
-            dropdown_type.OnChange(CallBack_GetColumnSubType);
+            dropdown_type.OnChange(CallBack_GetColumnType);
 
             dropdown_subtype = new DQ.DropDown($('#dialogSubType'), "Id", "Name");
+            dropdown_type.OnChange(CallBack_GetColumnSubType);
             
             datamodule_columntype.GetColumType(CallBack_GetColumnTypes);
             /* Init dialog controls */

@@ -121,22 +121,38 @@ namespace DynamicQuery.Logic.Mapping
             {
                 Id = column.Id,
                 Name = column.Name,
-                //ColumnType = column.,
                 Type = column.Type,
                 SubType = column.SubType,
-                //Length = column.Length.HasValue ? column.Length.Value : 0,
-                //DecimalLength = column.Precision.HasValue ? column.Precision.Value : 0,
                 Description = column.Description,
                 Sql = column.SQL,
+                SqlName = column.SQLName,
                 Active =  column.Active,
-                TableId = column.TableId
+                TableId = column.TableId,
+                GroupBy = column.GroupBy
             };
 
             foreach (var table in column.DynamicQueryCalculatedColumnTable)
             {
                 if(!table.DynamicQueryTableReference.IsLoaded)
                     table.DynamicQueryTableReference.Load();
-                c.Tables.Add(new DynamicQueryTable { Id = table.TableId, Name = table.DynamicQueryTable.Name });
+                if (!table.DynamicQueryTableColumnReference.IsLoaded)
+                    table.DynamicQueryTableColumnReference.Load();
+                if(!c.UsedTablesAndColumns.Exists(w => w.ColumnId == table.DynamicQueryTableColumn.Id && w.TableId == table.TableId))
+                {
+                    c.UsedTablesAndColumns.Add(new DynamicQueryCalculatedColumnTable
+                                                   {
+                                                       TableId = table.TableId,
+                                                       TableName = table.DynamicQueryTable.Name,
+                                                       ColumnId = table.DynamicQueryTableColumn.Id,
+                                                       ColumnName = table.DynamicQueryTableColumn.Name,
+                                                       Count = 1
+                                                   });
+                } 
+                else
+                {
+                    c.UsedTablesAndColumns.Find(
+                        w => w.ColumnId == table.DynamicQueryTableColumn.Id && w.TableId == table.TableId).Count++;
+                }
             }
             return c;
         }

@@ -20,18 +20,19 @@ using System.Xml.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryAssociation_DynamicQueryTable", "DynamicQueryTable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTable), "DynamicQueryAssociation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryAssociation), true)]
-[assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable", "DynamicQueryTable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTable), "DynamicQueryCalculatedColumnTable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumnTable), true)]
 [assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryColumn_DynamicQueryQuery", "DynamicQueryQuery", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryQuery), "DynamicQueryColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryColumn), true)]
 [assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryColumn_DynamicQueryTable", "DynamicQueryTable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTable), "DynamicQueryColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryColumn), true)]
 [assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryTableSubType_DynamicQueryTableType", "DynamicQueryTableType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableType), "DynamicQueryTableSubType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableSubType), true)]
-[assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTable", "DynamicQueryTable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTable), "DynamicQueryCalculatedColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumn), true)]
-[assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType", "DynamicQueryTableSubType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableSubType), "DynamicQueryCalculatedColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumn), true)]
-[assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTableType", "DynamicQueryTableType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableType), "DynamicQueryCalculatedColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumn), true)]
-[assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn", "DynamicQueryCalculatedColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumn), "DynamicQueryCalculatedColumnTable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumnTable), true)]
 [assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryColumn_DynamicQueryTableColumn", "DynamicQueryTableColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableColumn), "DynamicQueryColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryColumn), true)]
 [assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryTableColumn_DynamicQueryTable", "DynamicQueryTable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTable), "DynamicQueryTableColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableColumn), true)]
 [assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryTableColumn_DynamicQueryTableSubType", "DynamicQueryTableSubType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableSubType), "DynamicQueryTableColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableColumn), true)]
 [assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryTableColumn_DynamicQueryTableType", "DynamicQueryTableType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableType), "DynamicQueryTableColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableColumn), true)]
+[assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn", "DynamicQueryTableColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableColumn), "DynamicQueryCalculatedColumnTable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumnTable), true)]
+[assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable", "DynamicQueryTable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTable), "DynamicQueryCalculatedColumnTable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumnTable), true)]
+[assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTable", "DynamicQueryTable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTable), "DynamicQueryCalculatedColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumn), true)]
+[assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType", "DynamicQueryTableSubType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableSubType), "DynamicQueryCalculatedColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumn), true)]
+[assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTableType", "DynamicQueryTableType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryTableType), "DynamicQueryCalculatedColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumn), true)]
+[assembly: EdmRelationshipAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn", "DynamicQueryCalculatedColumn", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumn), "DynamicQueryCalculatedColumnTable", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DynaimcQuery.QueryBuilderDataAccess.DynamicQueryCalculatedColumnTable), true)]
 
 #endregion
 
@@ -98,22 +99,6 @@ namespace DynaimcQuery.QueryBuilderDataAccess
             }
         }
         private ObjectSet<DynamicQueryAssociation> _DynamicQueryAssociation;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<DynamicQueryCalculatedColumnTable> DynamicQueryCalculatedColumnTable
-        {
-            get
-            {
-                if ((_DynamicQueryCalculatedColumnTable == null))
-                {
-                    _DynamicQueryCalculatedColumnTable = base.CreateObjectSet<DynamicQueryCalculatedColumnTable>("DynamicQueryCalculatedColumnTable");
-                }
-                return _DynamicQueryCalculatedColumnTable;
-            }
-        }
-        private ObjectSet<DynamicQueryCalculatedColumnTable> _DynamicQueryCalculatedColumnTable;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -198,6 +183,38 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<DynamicQueryTableColumn> DynamicQueryTableColumn
+        {
+            get
+            {
+                if ((_DynamicQueryTableColumn == null))
+                {
+                    _DynamicQueryTableColumn = base.CreateObjectSet<DynamicQueryTableColumn>("DynamicQueryTableColumn");
+                }
+                return _DynamicQueryTableColumn;
+            }
+        }
+        private ObjectSet<DynamicQueryTableColumn> _DynamicQueryTableColumn;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<DynamicQueryCalculatedColumnTable> DynamicQueryCalculatedColumnTable
+        {
+            get
+            {
+                if ((_DynamicQueryCalculatedColumnTable == null))
+                {
+                    _DynamicQueryCalculatedColumnTable = base.CreateObjectSet<DynamicQueryCalculatedColumnTable>("DynamicQueryCalculatedColumnTable");
+                }
+                return _DynamicQueryCalculatedColumnTable;
+            }
+        }
+        private ObjectSet<DynamicQueryCalculatedColumnTable> _DynamicQueryCalculatedColumnTable;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<DynamicQueryCalculatedColumn> DynamicQueryCalculatedColumn
         {
             get
@@ -214,18 +231,18 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<DynamicQueryTableColumn> DynamicQueryTableColumn
+        public ObjectSet<sysdiagrams> sysdiagrams
         {
             get
             {
-                if ((_DynamicQueryTableColumn == null))
+                if ((_sysdiagrams == null))
                 {
-                    _DynamicQueryTableColumn = base.CreateObjectSet<DynamicQueryTableColumn>("DynamicQueryTableColumn");
+                    _sysdiagrams = base.CreateObjectSet<sysdiagrams>("sysdiagrams");
                 }
-                return _DynamicQueryTableColumn;
+                return _sysdiagrams;
             }
         }
-        private ObjectSet<DynamicQueryTableColumn> _DynamicQueryTableColumn;
+        private ObjectSet<sysdiagrams> _sysdiagrams;
 
         #endregion
 
@@ -237,14 +254,6 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         public void AddToDynamicQueryAssociation(DynamicQueryAssociation dynamicQueryAssociation)
         {
             base.AddObject("DynamicQueryAssociation", dynamicQueryAssociation);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the DynamicQueryCalculatedColumnTable EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToDynamicQueryCalculatedColumnTable(DynamicQueryCalculatedColumnTable dynamicQueryCalculatedColumnTable)
-        {
-            base.AddObject("DynamicQueryCalculatedColumnTable", dynamicQueryCalculatedColumnTable);
         }
     
         /// <summary>
@@ -288,6 +297,22 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the DynamicQueryTableColumn EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDynamicQueryTableColumn(DynamicQueryTableColumn dynamicQueryTableColumn)
+        {
+            base.AddObject("DynamicQueryTableColumn", dynamicQueryTableColumn);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the DynamicQueryCalculatedColumnTable EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDynamicQueryCalculatedColumnTable(DynamicQueryCalculatedColumnTable dynamicQueryCalculatedColumnTable)
+        {
+            base.AddObject("DynamicQueryCalculatedColumnTable", dynamicQueryCalculatedColumnTable);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the DynamicQueryCalculatedColumn EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToDynamicQueryCalculatedColumn(DynamicQueryCalculatedColumn dynamicQueryCalculatedColumn)
@@ -296,11 +321,11 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the DynamicQueryTableColumn EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToDynamicQueryTableColumn(DynamicQueryTableColumn dynamicQueryTableColumn)
+        public void AddTosysdiagrams(sysdiagrams sysdiagrams)
         {
-            base.AddObject("DynamicQueryTableColumn", dynamicQueryTableColumn);
+            base.AddObject("sysdiagrams", sysdiagrams);
         }
 
         #endregion
@@ -658,11 +683,12 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         /// <param name="description">Initial value of the Description property.</param>
         /// <param name="tableId">Initial value of the TableId property.</param>
         /// <param name="sQL">Initial value of the SQL property.</param>
+        /// <param name="sQLName">Initial value of the SQLName property.</param>
         /// <param name="type">Initial value of the Type property.</param>
         /// <param name="groupBy">Initial value of the GroupBy property.</param>
         /// <param name="lastChangeDate">Initial value of the LastChangeDate property.</param>
         /// <param name="active">Initial value of the Active property.</param>
-        public static DynamicQueryCalculatedColumn CreateDynamicQueryCalculatedColumn(global::System.Int32 id, global::System.String name, global::System.String description, global::System.Int32 tableId, global::System.String sQL, global::System.Int32 type, global::System.Boolean groupBy, global::System.DateTime lastChangeDate, global::System.Boolean active)
+        public static DynamicQueryCalculatedColumn CreateDynamicQueryCalculatedColumn(global::System.Int32 id, global::System.String name, global::System.String description, global::System.Int32 tableId, global::System.String sQL, global::System.String sQLName, global::System.Int32 type, global::System.Boolean groupBy, global::System.DateTime lastChangeDate, global::System.Boolean active)
         {
             DynamicQueryCalculatedColumn dynamicQueryCalculatedColumn = new DynamicQueryCalculatedColumn();
             dynamicQueryCalculatedColumn.Id = id;
@@ -670,6 +696,7 @@ namespace DynaimcQuery.QueryBuilderDataAccess
             dynamicQueryCalculatedColumn.Description = description;
             dynamicQueryCalculatedColumn.TableId = tableId;
             dynamicQueryCalculatedColumn.SQL = sQL;
+            dynamicQueryCalculatedColumn.SQLName = sQLName;
             dynamicQueryCalculatedColumn.Type = type;
             dynamicQueryCalculatedColumn.GroupBy = groupBy;
             dynamicQueryCalculatedColumn.LastChangeDate = lastChangeDate;
@@ -803,6 +830,30 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         private global::System.String _SQL;
         partial void OnSQLChanging(global::System.String value);
         partial void OnSQLChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String SQLName
+        {
+            get
+            {
+                return _SQLName;
+            }
+            set
+            {
+                OnSQLNameChanging(value);
+                ReportPropertyChanging("SQLName");
+                _SQLName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("SQLName");
+                OnSQLNameChanged();
+            }
+        }
+        private global::System.String _SQLName;
+        partial void OnSQLNameChanging(global::System.String value);
+        partial void OnSQLNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1109,12 +1160,14 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="calculatedColumnId">Initial value of the CalculatedColumnId property.</param>
         /// <param name="tableId">Initial value of the TableId property.</param>
-        public static DynamicQueryCalculatedColumnTable CreateDynamicQueryCalculatedColumnTable(global::System.Int32 id, global::System.Int32 calculatedColumnId, global::System.Int32 tableId)
+        /// <param name="columnId">Initial value of the ColumnId property.</param>
+        public static DynamicQueryCalculatedColumnTable CreateDynamicQueryCalculatedColumnTable(global::System.Int32 id, global::System.Int32 calculatedColumnId, global::System.Int32 tableId, global::System.Int32 columnId)
         {
             DynamicQueryCalculatedColumnTable dynamicQueryCalculatedColumnTable = new DynamicQueryCalculatedColumnTable();
             dynamicQueryCalculatedColumnTable.Id = id;
             dynamicQueryCalculatedColumnTable.CalculatedColumnId = calculatedColumnId;
             dynamicQueryCalculatedColumnTable.TableId = tableId;
+            dynamicQueryCalculatedColumnTable.ColumnId = columnId;
             return dynamicQueryCalculatedColumnTable;
         }
 
@@ -1196,11 +1249,73 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         private global::System.Int32 _TableId;
         partial void OnTableIdChanging(global::System.Int32 value);
         partial void OnTableIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ColumnId
+        {
+            get
+            {
+                return _ColumnId;
+            }
+            set
+            {
+                OnColumnIdChanging(value);
+                ReportPropertyChanging("ColumnId");
+                _ColumnId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ColumnId");
+                OnColumnIdChanged();
+            }
+        }
+        private global::System.Int32 _ColumnId;
+        partial void OnColumnIdChanging(global::System.Int32 value);
+        partial void OnColumnIdChanged();
 
         #endregion
 
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn", "DynamicQueryTableColumn")]
+        public DynamicQueryTableColumn DynamicQueryTableColumn
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DynamicQueryTableColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn", "DynamicQueryTableColumn").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DynamicQueryTableColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn", "DynamicQueryTableColumn").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<DynamicQueryTableColumn> DynamicQueryTableColumnReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DynamicQueryTableColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn", "DynamicQueryTableColumn");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DynamicQueryTableColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn", "DynamicQueryTableColumn", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2259,28 +2374,6 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable", "DynamicQueryCalculatedColumnTable")]
-        public EntityCollection<DynamicQueryCalculatedColumnTable> DynamicQueryCalculatedColumnTable
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DynamicQueryCalculatedColumnTable>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable", "DynamicQueryCalculatedColumnTable");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DynamicQueryCalculatedColumnTable>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable", "DynamicQueryCalculatedColumnTable", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryColumn_DynamicQueryTable", "DynamicQueryColumn")]
         public EntityCollection<DynamicQueryColumn> DynamicQueryColumn
         {
@@ -2303,28 +2396,6 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTable", "DynamicQueryCalculatedColumn")]
-        public EntityCollection<DynamicQueryCalculatedColumn> DynamicQueryCalculatedColumn
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable", "DynamicQueryCalculatedColumn");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable", "DynamicQueryCalculatedColumn", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryTableColumn_DynamicQueryTable", "DynamicQueryTableColumn")]
         public EntityCollection<DynamicQueryTableColumn> DynamicQueryTableColumn
         {
@@ -2337,6 +2408,50 @@ namespace DynaimcQuery.QueryBuilderDataAccess
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DynamicQueryTableColumn>("QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTable", "DynamicQueryTableColumn", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable", "DynamicQueryCalculatedColumnTable")]
+        public EntityCollection<DynamicQueryCalculatedColumnTable> DynamicQueryCalculatedColumnTable
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DynamicQueryCalculatedColumnTable>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable", "DynamicQueryCalculatedColumnTable");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DynamicQueryCalculatedColumnTable>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable", "DynamicQueryCalculatedColumnTable", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTable", "DynamicQueryCalculatedColumn")]
+        public EntityCollection<DynamicQueryCalculatedColumn> DynamicQueryCalculatedColumn
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable", "DynamicQueryCalculatedColumn");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable", "DynamicQueryCalculatedColumn", value);
                 }
             }
         }
@@ -2811,6 +2926,28 @@ namespace DynaimcQuery.QueryBuilderDataAccess
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn", "DynamicQueryCalculatedColumnTable")]
+        public EntityCollection<DynamicQueryCalculatedColumnTable> DynamicQueryCalculatedColumnTable
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DynamicQueryCalculatedColumnTable>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn", "DynamicQueryCalculatedColumnTable");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DynamicQueryCalculatedColumnTable>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn", "DynamicQueryCalculatedColumnTable", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -2995,28 +3132,6 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType", "DynamicQueryCalculatedColumn")]
-        public EntityCollection<DynamicQueryCalculatedColumn> DynamicQueryCalculatedColumn
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType", "DynamicQueryCalculatedColumn");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType", "DynamicQueryCalculatedColumn", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryTableColumn_DynamicQueryTableSubType", "DynamicQueryTableColumn")]
         public EntityCollection<DynamicQueryTableColumn> DynamicQueryTableColumn
         {
@@ -3029,6 +3144,28 @@ namespace DynaimcQuery.QueryBuilderDataAccess
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DynamicQueryTableColumn>("QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTableSubType", "DynamicQueryTableColumn", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType", "DynamicQueryCalculatedColumn")]
+        public EntityCollection<DynamicQueryCalculatedColumn> DynamicQueryCalculatedColumn
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType", "DynamicQueryCalculatedColumn");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType", "DynamicQueryCalculatedColumn", value);
                 }
             }
         }
@@ -3174,28 +3311,6 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTableType", "DynamicQueryCalculatedColumn")]
-        public EntityCollection<DynamicQueryCalculatedColumn> DynamicQueryCalculatedColumn
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType", "DynamicQueryCalculatedColumn");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType", "DynamicQueryCalculatedColumn", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryTableColumn_DynamicQueryTableType", "DynamicQueryTableColumn")]
         public EntityCollection<DynamicQueryTableColumn> DynamicQueryTableColumn
         {
@@ -3211,9 +3326,188 @@ namespace DynaimcQuery.QueryBuilderDataAccess
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QbDynamicQueryModel", "FK_DynamicQueryCalculatedColumn_DynamicQueryTableType", "DynamicQueryCalculatedColumn")]
+        public EntityCollection<DynamicQueryCalculatedColumn> DynamicQueryCalculatedColumn
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType", "DynamicQueryCalculatedColumn");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DynamicQueryCalculatedColumn>("QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType", "DynamicQueryCalculatedColumn", value);
+                }
+            }
+        }
 
         #endregion
 
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="QbDynamicQueryModel", Name="sysdiagrams")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class sysdiagrams : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new sysdiagrams object.
+        /// </summary>
+        /// <param name="name">Initial value of the name property.</param>
+        /// <param name="principal_id">Initial value of the principal_id property.</param>
+        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
+        public static sysdiagrams Createsysdiagrams(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
+        {
+            sysdiagrams sysdiagrams = new sysdiagrams();
+            sysdiagrams.name = name;
+            sysdiagrams.principal_id = principal_id;
+            sysdiagrams.diagram_id = diagram_id;
+            return sysdiagrams;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 principal_id
+        {
+            get
+            {
+                return _principal_id;
+            }
+            set
+            {
+                Onprincipal_idChanging(value);
+                ReportPropertyChanging("principal_id");
+                _principal_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("principal_id");
+                Onprincipal_idChanged();
+            }
+        }
+        private global::System.Int32 _principal_id;
+        partial void Onprincipal_idChanging(global::System.Int32 value);
+        partial void Onprincipal_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 diagram_id
+        {
+            get
+            {
+                return _diagram_id;
+            }
+            set
+            {
+                if (_diagram_id != value)
+                {
+                    Ondiagram_idChanging(value);
+                    ReportPropertyChanging("diagram_id");
+                    _diagram_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("diagram_id");
+                    Ondiagram_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _diagram_id;
+        partial void Ondiagram_idChanging(global::System.Int32 value);
+        partial void Ondiagram_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> version
+        {
+            get
+            {
+                return _version;
+            }
+            set
+            {
+                OnversionChanging(value);
+                ReportPropertyChanging("version");
+                _version = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("version");
+                OnversionChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _version;
+        partial void OnversionChanging(Nullable<global::System.Int32> value);
+        partial void OnversionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] definition
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_definition);
+            }
+            set
+            {
+                OndefinitionChanging(value);
+                ReportPropertyChanging("definition");
+                _definition = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("definition");
+                OndefinitionChanged();
+            }
+        }
+        private global::System.Byte[] _definition;
+        partial void OndefinitionChanging(global::System.Byte[] value);
+        partial void OndefinitionChanged();
+
+        #endregion
+
+    
     }
 
     #endregion

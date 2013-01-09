@@ -28,19 +28,21 @@ namespace DynamicQuery.Logic
                                               Description = column.Description,
                                               Active = true,
                                               Name = column.Name,
-                                              GroupBy = false,
+                                              GroupBy = column.GroupBy,
                                               SQL = column.Sql,
                                               Type = column.Type.HasValue ? column.Type.Value : 0,
                                               SubType = column.SubType.HasValue && column.SubType.Value != -1 ? column.SubType.Value : (int?)null,
                                               LastChangeDate = DateTime.Now,
-                                              TableId = column.TableId
+                                              TableId = column.TableId,
+                                              SQLName = column.SqlName
                                           };
 
-                foreach (var table in column.Tables)
+                foreach (var tc in column.UsedTablesAndColumns)
                 {
                     calculatedField.DynamicQueryCalculatedColumnTable.Add(new DynamicQueryCalculatedColumnTable
                                                                               {
-                                                                                  TableId = table.Id
+                                                                                  TableId = tc.TableId,
+                                                                                  ColumnId = tc.ColumnId
                                                                               });
                 }
                 
@@ -64,19 +66,21 @@ namespace DynamicQuery.Logic
                     context.DynamicQueryCalculatedColumnTable.DeleteObject(o);
                 }
 
-                foreach (var table in column.Tables)
+                foreach (var tc in column.UsedTablesAndColumns)
                 {
-                    calculatedField.DynamicQueryCalculatedColumnTable.Add( new DynamicQueryCalculatedColumnTable
-                                                                               {
-                                                                                   TableId = table.Id
-                                                                               } );
+                    calculatedField.DynamicQueryCalculatedColumnTable.Add(new DynamicQueryCalculatedColumnTable
+                    {
+                        TableId = tc.TableId,
+                        ColumnId = tc.ColumnId
+                    });
                 }
 
                 calculatedField.Description = column.Description;
                 calculatedField.Active = true;
                 calculatedField.Name = column.Name;
-                calculatedField.GroupBy = false;
+                calculatedField.GroupBy = column.GroupBy;
                 calculatedField.SQL = column.Sql;
+                calculatedField.SQLName = column.SqlName;
                 calculatedField.TableId = column.TableId;
                 calculatedField.Type = column.Type.HasValue ? column.Type.Value : 0;
                 calculatedField.SubType = column.SubType.HasValue && column.SubType.Value != -1

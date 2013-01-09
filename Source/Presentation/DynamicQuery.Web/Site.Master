@@ -27,6 +27,7 @@
     <script type="text/javascript" src="/Scripts/Module/ColumnTypeModule.js"></script>
     <script type="text/javascript" src="/Scripts/Module/TableAndColumnModule.js"></script>
     <script type="text/javascript" src="/Scripts/Module/CalculatedColumnModule.js"></script>
+    <script type="text/javascript" src="/Scripts/Module/QueryBuilderModule.js"></script>
     
     <script type="text/javascript" src="/Scripts/Pages/Default.js"></script>
     <script type="text/javascript" src="/Scripts/Pages/Documentation.js"></script>

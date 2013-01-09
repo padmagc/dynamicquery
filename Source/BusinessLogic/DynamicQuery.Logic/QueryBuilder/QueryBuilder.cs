@@ -154,9 +154,28 @@ namespace DynamicQuery.Logic.QueryBuilder
             return NewWhereClause;
         }*/
 
+        public List<string> HasConnectionBetweenTables(List<string> tables)
+        {
+            var result = new List<string>();
+            if (tables.Count > 1)
+            {
+                var routes = CalculateRoute(tables[0]);
+                for(int i = 1; i < tables.Count; i++)
+                {
+                    TableRoute route = routes.SingleOrDefault(w => w.Table == tables[i]);
+                    if (route == null || route.Depth == int.MaxValue)
+                    {
+                        if (!result.Contains(String.Format("{0} - {1}", tables[0], tables[i])))
+                        {
+                            result.Add(String.Format("{0} - {1}", tables[0], tables[i]));
+                        }
+                    }
+                }
+            }
+            return result;
+        }
 
-
-        public List<TableRoute> CalculateRoute(string tableName)
+        private List<TableRoute> CalculateRoute(string tableName)
         {
             var handledRoute = new List<TableRoute>();
 
