@@ -10,7 +10,7 @@
         {{/if}}
             <td style="padding-left: 5px;">${Name}</td>
             <td style="padding-left: 5px;">${Description}</td>
-            <td style="padding-left: 5px;">${Sql} {{if GroupBy }} (GroupBy) {{/if}} </td>
+            <td style="padding-left: 5px;">${Sql} AS ${SqlName} {{if GroupBy }} (GroupBy) {{/if}} </td>
             <td style="text-align: center !important; padding-left: 5px;">
             {{if Active == true}}
                 <a href="javascript:void(0);" class="inactive">Inaktivál</a>
@@ -34,11 +34,12 @@
 					</div>
 					<h3><a href="#">SQL</a></h3>
 					<div>
-						<label class="label-select">Tábla:</label><select id="builderTable"></select>
-						<label class="label-select">Mező:</label><select id="builderColumn"></select>
-                        <label>SQL operátor:</label><select id="builderSQLOperator"></select>
-					    <label>Mező neve:</label><input type="text" id="builderSQLName"/>
-					    <label>SQL:</label><input type="text"  id="builderSQL" />
+						<label>Tábla:</label><select id="builderTable"></select>
+						<label>Mező:</label><select id="builderColumn"></select>
+                        <label>Operátor:</label><select id="builderSQLOperator"></select>
+					    <label>Név:</label><input type="text" id="builderSQLName"/>
+					    <label>Sql:</label><textarea  id="builderSQL" rows="3" ></textarea>
+                        <span id="warning"></span>
 					</div>
 				</form>
 			</div>

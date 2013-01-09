@@ -7,55 +7,64 @@ DQ.Sql = function () {
                 Name: 'ADD',
                 Description: 'Beszúr',
                 ReplaceText: '{0}',
-                WorkWithSelection: false
+                WorkWithSelection: false,
+                GroupBy: false
             });
             sqlFunctions.push({
                 Name: 'REMOVE',
                 Description: 'Töröl',
                 ReplaceText: '{0}',
-                WorkWithSelection: true
+                WorkWithSelection: true,
+                GroupBy: false
             });
             sqlFunctions.push({
                 Name: '+',
                 Description: '+ (Összeadás)',
                 ReplaceText: '+ {0}',
-                WorkWithSelection: false
+                WorkWithSelection: false,
+                GroupBy: false
             });
             sqlFunctions.push({
                 Name: '*',
                 Description: '* (Szorzás)',
                 ReplaceText: '* {0}',
-                WorkWithSelection: false
+                WorkWithSelection: false,
+                GroupBy: false
             });
             sqlFunctions.push({
                 Name: '-',
                 Description: '- (Kivonás)',
                 ReplaceText: '- {0}',
-                WorkWithSelection: false
+                WorkWithSelection: false,
+                GroupBy: false
             });
             sqlFunctions.push({
                 Name: '/',
                 Description: '/ (Osztás)',
                 ReplaceText: '/ {0}',
-                WorkWithSelection: false
+                WorkWithSelection: false,
+                GroupBy: false
             });
             sqlFunctions.push({
                 Name: 'COUNT',
                 Description: 'COUNT (Megszámol)',
                 ReplaceText: 'COUNT({0})',
-                WorkWithSelection: true
+                WorkWithSelection: true,
+                GroupBy: true
             });
             sqlFunctions.push({
                 Name: 'SUM',
                 Description: 'SUM (Összesen)',
                 ReplaceText: 'SUM({0})',
-                WorkWithSelection: true
+                WorkWithSelection: true,
+                GroupBy: true
             });
             sqlFunctions.push({
                 Name: 'AVG',
                 Description: 'AVG (Átlag)',
                 ReplaceText: 'AVG({0})',
-                WorkWithSelection: true
+                WorkWithSelection: true,
+                GroupBy: true
             });
         },
         getSqlFunction = function (value) {
@@ -66,12 +75,18 @@ DQ.Sql = function () {
             }
             return null;
         },
+        getSqlFunctionToGroupBy = function () {
+            return sqlFunctions.filter(function (element) {
+                return element.GroupBy == true;
+            });
+        },
         getSqlFunctions = function () {
             return sqlFunctions;
         };
     return {
         Init: init,
         GetSQLFunctions: getSqlFunctions,
-        GetSQLFunction: getSqlFunction
+        GetSQLFunction: getSqlFunction,
+        GetSqlFunctionToGroupBy: getSqlFunctionToGroupBy
     };
 };

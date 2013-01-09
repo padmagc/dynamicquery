@@ -15,6 +15,7 @@
           <EntitySet Name="DynamicQueryTableColumn" EntityType="QbDynamicQueryModel.Store.DynamicQueryTableColumn" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="DynamicQueryTableSubType" EntityType="QbDynamicQueryModel.Store.DynamicQueryTableSubType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="DynamicQueryTableType" EntityType="QbDynamicQueryModel.Store.DynamicQueryTableType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="QbDynamicQueryModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_DynamicQueryAssociation_DynamicQueryTable" Association="QbDynamicQueryModel.Store.FK_DynamicQueryAssociation_DynamicQueryTable">
             <End Role="DynamicQueryTable" EntitySet="DynamicQueryTable" />
             <End Role="DynamicQueryAssociation" EntitySet="DynamicQueryAssociation" />
@@ -33,6 +34,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn" Association="QbDynamicQueryModel.Store.FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn">
             <End Role="DynamicQueryCalculatedColumn" EntitySet="DynamicQueryCalculatedColumn" />
+            <End Role="DynamicQueryCalculatedColumnTable" EntitySet="DynamicQueryCalculatedColumnTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn" Association="QbDynamicQueryModel.Store.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn">
+            <End Role="DynamicQueryTableColumn" EntitySet="DynamicQueryTableColumn" />
             <End Role="DynamicQueryCalculatedColumnTable" EntitySet="DynamicQueryCalculatedColumnTable" />
           </AssociationSet>
           <AssociationSet Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable" Association="QbDynamicQueryModel.Store.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable">
@@ -92,6 +97,7 @@
           <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
           <Property Name="TableId" Type="int" Nullable="false" />
           <Property Name="SQL" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="SQLName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="SubType" Type="int" />
           <Property Name="GroupBy" Type="bit" Nullable="false" />
@@ -106,6 +112,7 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CalculatedColumnId" Type="int" Nullable="false" />
           <Property Name="TableId" Type="int" Nullable="false" />
+          <Property Name="ColumnId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DynamicQueryColumn">
           <Key>
@@ -184,6 +191,16 @@
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <Association Name="FK_DynamicQueryAssociation_DynamicQueryTable">
           <End Role="DynamicQueryTable" Type="QbDynamicQueryModel.Store.DynamicQueryTable" Multiplicity="1" />
           <End Role="DynamicQueryAssociation" Type="QbDynamicQueryModel.Store.DynamicQueryAssociation" Multiplicity="*" />
@@ -241,6 +258,18 @@
             </Principal>
             <Dependent Role="DynamicQueryCalculatedColumnTable">
               <PropertyRef Name="CalculatedColumnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn">
+          <End Role="DynamicQueryTableColumn" Type="QbDynamicQueryModel.Store.DynamicQueryTableColumn" Multiplicity="1" />
+          <End Role="DynamicQueryCalculatedColumnTable" Type="QbDynamicQueryModel.Store.DynamicQueryCalculatedColumnTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicQueryTableColumn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DynamicQueryCalculatedColumnTable">
+              <PropertyRef Name="ColumnId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -346,7 +375,6 @@
       <Schema Namespace="QbDynamicQueryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="QbDynamicQueryEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DynamicQueryAssociation" EntityType="QbDynamicQueryModel.DynamicQueryAssociation" />
-          <EntitySet Name="DynamicQueryCalculatedColumnTable" EntityType="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable" />
           <EntitySet Name="DynamicQueryColumn" EntityType="QbDynamicQueryModel.DynamicQueryColumn" />
           <EntitySet Name="DynamicQueryQuery" EntityType="QbDynamicQueryModel.DynamicQueryQuery" />
           <EntitySet Name="DynamicQueryTable" EntityType="QbDynamicQueryModel.DynamicQueryTable" />
@@ -355,10 +383,6 @@
           <AssociationSet Name="FK_DynamicQueryAssociation_DynamicQueryTable" Association="QbDynamicQueryModel.FK_DynamicQueryAssociation_DynamicQueryTable">
             <End Role="DynamicQueryTable" EntitySet="DynamicQueryTable" />
             <End Role="DynamicQueryAssociation" EntitySet="DynamicQueryAssociation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable" Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable">
-            <End Role="DynamicQueryTable" EntitySet="DynamicQueryTable" />
-            <End Role="DynamicQueryCalculatedColumnTable" EntitySet="DynamicQueryCalculatedColumnTable" />
           </AssociationSet>
           <AssociationSet Name="FK_DynamicQueryColumn_DynamicQueryQuery" Association="QbDynamicQueryModel.FK_DynamicQueryColumn_DynamicQueryQuery">
             <End Role="DynamicQueryQuery" EntitySet="DynamicQueryQuery" />
@@ -371,23 +395,6 @@
           <AssociationSet Name="FK_DynamicQueryTableSubType_DynamicQueryTableType" Association="QbDynamicQueryModel.FK_DynamicQueryTableSubType_DynamicQueryTableType">
             <End Role="DynamicQueryTableType" EntitySet="DynamicQueryTableType" />
             <End Role="DynamicQueryTableSubType" EntitySet="DynamicQueryTableSubType" />
-          </AssociationSet>
-          <EntitySet Name="DynamicQueryCalculatedColumn" EntityType="QbDynamicQueryModel.DynamicQueryCalculatedColumn" />
-          <AssociationSet Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTable" Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable">
-            <End Role="DynamicQueryTable" EntitySet="DynamicQueryTable" />
-            <End Role="DynamicQueryCalculatedColumn" EntitySet="DynamicQueryCalculatedColumn" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType" Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType">
-            <End Role="DynamicQueryTableSubType" EntitySet="DynamicQueryTableSubType" />
-            <End Role="DynamicQueryCalculatedColumn" EntitySet="DynamicQueryCalculatedColumn" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTableType" Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType">
-            <End Role="DynamicQueryTableType" EntitySet="DynamicQueryTableType" />
-            <End Role="DynamicQueryCalculatedColumn" EntitySet="DynamicQueryCalculatedColumn" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn" Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn">
-            <End Role="DynamicQueryCalculatedColumn" EntitySet="DynamicQueryCalculatedColumn" />
-            <End Role="DynamicQueryCalculatedColumnTable" EntitySet="DynamicQueryCalculatedColumnTable" />
           </AssociationSet>
           <EntitySet Name="DynamicQueryTableColumn" EntityType="QbDynamicQueryModel.DynamicQueryTableColumn" />
           <AssociationSet Name="FK_DynamicQueryColumn_DynamicQueryTableColumn" Association="QbDynamicQueryModel.FK_DynamicQueryColumn_DynamicQueryTableColumn">
@@ -406,6 +413,33 @@
             <End Role="DynamicQueryTableType" EntitySet="DynamicQueryTableType" />
             <End Role="DynamicQueryTableColumn" EntitySet="DynamicQueryTableColumn" />
           </AssociationSet>
+          <EntitySet Name="DynamicQueryCalculatedColumnTable" EntityType="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable" />
+          <AssociationSet Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn" Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn">
+            <End Role="DynamicQueryTableColumn" EntitySet="DynamicQueryTableColumn" />
+            <End Role="DynamicQueryCalculatedColumnTable" EntitySet="DynamicQueryCalculatedColumnTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable" Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable">
+            <End Role="DynamicQueryTable" EntitySet="DynamicQueryTable" />
+            <End Role="DynamicQueryCalculatedColumnTable" EntitySet="DynamicQueryCalculatedColumnTable" />
+          </AssociationSet>
+          <EntitySet Name="DynamicQueryCalculatedColumn" EntityType="QbDynamicQueryModel.DynamicQueryCalculatedColumn" />
+          <EntitySet Name="sysdiagrams" EntityType="QbDynamicQueryModel.sysdiagrams" />
+          <AssociationSet Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTable" Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable">
+            <End Role="DynamicQueryTable" EntitySet="DynamicQueryTable" />
+            <End Role="DynamicQueryCalculatedColumn" EntitySet="DynamicQueryCalculatedColumn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType" Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType">
+            <End Role="DynamicQueryTableSubType" EntitySet="DynamicQueryTableSubType" />
+            <End Role="DynamicQueryCalculatedColumn" EntitySet="DynamicQueryCalculatedColumn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTableType" Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType">
+            <End Role="DynamicQueryTableType" EntitySet="DynamicQueryTableType" />
+            <End Role="DynamicQueryCalculatedColumn" EntitySet="DynamicQueryCalculatedColumn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn" Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn">
+            <End Role="DynamicQueryCalculatedColumn" EntitySet="DynamicQueryCalculatedColumn" />
+            <End Role="DynamicQueryCalculatedColumnTable" EntitySet="DynamicQueryCalculatedColumnTable" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="DynamicQueryAssociation">
           <Key>
@@ -422,16 +456,6 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="DynamicQueryTable" Relationship="QbDynamicQueryModel.FK_DynamicQueryAssociation_DynamicQueryTable" FromRole="DynamicQueryAssociation" ToRole="DynamicQueryTable" />
-        </EntityType>
-        <EntityType Name="DynamicQueryCalculatedColumnTable">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CalculatedColumnId" Type="Int32" Nullable="false" />
-          <Property Name="TableId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DynamicQueryTable" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable" FromRole="DynamicQueryCalculatedColumnTable" ToRole="DynamicQueryTable" />
-          <NavigationProperty Name="DynamicQueryCalculatedColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn" FromRole="DynamicQueryCalculatedColumnTable" ToRole="DynamicQueryCalculatedColumn" />
         </EntityType>
         <EntityType Name="DynamicQueryColumn">
           <Key>
@@ -480,10 +504,10 @@
           <Property Name="UserName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DynamicQueryAssociation" Relationship="QbDynamicQueryModel.FK_DynamicQueryAssociation_DynamicQueryTable" FromRole="DynamicQueryTable" ToRole="DynamicQueryAssociation" />
-          <NavigationProperty Name="DynamicQueryCalculatedColumnTable" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable" FromRole="DynamicQueryTable" ToRole="DynamicQueryCalculatedColumnTable" />
           <NavigationProperty Name="DynamicQueryColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryColumn_DynamicQueryTable" FromRole="DynamicQueryTable" ToRole="DynamicQueryColumn" />
-          <NavigationProperty Name="DynamicQueryCalculatedColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable" FromRole="DynamicQueryTable" ToRole="DynamicQueryCalculatedColumn" />
           <NavigationProperty Name="DynamicQueryTableColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTable" FromRole="DynamicQueryTable" ToRole="DynamicQueryTableColumn" />
+          <NavigationProperty Name="DynamicQueryCalculatedColumnTable" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable" FromRole="DynamicQueryTable" ToRole="DynamicQueryCalculatedColumnTable" />
+          <NavigationProperty Name="DynamicQueryCalculatedColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable" FromRole="DynamicQueryTable" ToRole="DynamicQueryCalculatedColumn" />
         </EntityType>
         <EntityType Name="DynamicQueryTableSubType">
           <Key>
@@ -494,8 +518,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DynamicQueryTableType" Relationship="QbDynamicQueryModel.FK_DynamicQueryTableSubType_DynamicQueryTableType" FromRole="DynamicQueryTableSubType" ToRole="DynamicQueryTableType" />
-          <NavigationProperty Name="DynamicQueryCalculatedColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType" FromRole="DynamicQueryTableSubType" ToRole="DynamicQueryCalculatedColumn" />
           <NavigationProperty Name="DynamicQueryTableColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTableSubType" FromRole="DynamicQueryTableSubType" ToRole="DynamicQueryTableColumn" />
+          <NavigationProperty Name="DynamicQueryCalculatedColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType" FromRole="DynamicQueryTableSubType" ToRole="DynamicQueryCalculatedColumn" />
         </EntityType>
         <EntityType Name="DynamicQueryTableType">
           <Key>
@@ -505,8 +529,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DynamicQueryTableSubType" Relationship="QbDynamicQueryModel.FK_DynamicQueryTableSubType_DynamicQueryTableType" FromRole="DynamicQueryTableType" ToRole="DynamicQueryTableSubType" />
-          <NavigationProperty Name="DynamicQueryCalculatedColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType" FromRole="DynamicQueryTableType" ToRole="DynamicQueryCalculatedColumn" />
           <NavigationProperty Name="DynamicQueryTableColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTableType" FromRole="DynamicQueryTableType" ToRole="DynamicQueryTableColumn" />
+          <NavigationProperty Name="DynamicQueryCalculatedColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType" FromRole="DynamicQueryTableType" ToRole="DynamicQueryCalculatedColumn" />
           </EntityType>
         <Association Name="FK_DynamicQueryAssociation_DynamicQueryTable">
           <End Role="DynamicQueryTable" Type="QbDynamicQueryModel.DynamicQueryTable" Multiplicity="1" />
@@ -517,18 +541,6 @@
             </Principal>
             <Dependent Role="DynamicQueryAssociation">
               <PropertyRef Name="PrimaryKeyTableId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable">
-          <End Role="DynamicQueryTable" Type="QbDynamicQueryModel.DynamicQueryTable" Multiplicity="1" />
-          <End Role="DynamicQueryCalculatedColumnTable" Type="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DynamicQueryTable">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DynamicQueryCalculatedColumnTable">
-              <PropertyRef Name="TableId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -568,74 +580,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="DynamicQueryCalculatedColumn">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="TableId" Nullable="false" />
-          <Property Type="String" Name="SQL" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="Type" Nullable="false" />
-          <Property Type="Int32" Name="SubType" />
-          <Property Type="Boolean" Name="GroupBy" Nullable="false" />
-          <Property Type="DateTime" Name="LastChangeDate" Nullable="false" />
-          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="Active" Nullable="false" />
-          <NavigationProperty Name="DynamicQueryTable" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable" FromRole="DynamicQueryCalculatedColumn" ToRole="DynamicQueryTable" />
-          <NavigationProperty Name="DynamicQueryTableSubType" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType" FromRole="DynamicQueryCalculatedColumn" ToRole="DynamicQueryTableSubType" />
-          <NavigationProperty Name="DynamicQueryTableType" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType" FromRole="DynamicQueryCalculatedColumn" ToRole="DynamicQueryTableType" />
-          <NavigationProperty Name="DynamicQueryCalculatedColumnTable" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn" FromRole="DynamicQueryCalculatedColumn" ToRole="DynamicQueryCalculatedColumnTable" />
-        </EntityType>
-        <Association Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTable">
-          <End Type="QbDynamicQueryModel.DynamicQueryTable" Role="DynamicQueryTable" Multiplicity="1" />
-          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumn" Role="DynamicQueryCalculatedColumn" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DynamicQueryTable">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DynamicQueryCalculatedColumn">
-              <PropertyRef Name="TableId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType">
-          <End Type="QbDynamicQueryModel.DynamicQueryTableSubType" Role="DynamicQueryTableSubType" Multiplicity="0..1" />
-          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumn" Role="DynamicQueryCalculatedColumn" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DynamicQueryTableSubType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DynamicQueryCalculatedColumn">
-              <PropertyRef Name="SubType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTableType">
-          <End Type="QbDynamicQueryModel.DynamicQueryTableType" Role="DynamicQueryTableType" Multiplicity="1" />
-          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumn" Role="DynamicQueryCalculatedColumn" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DynamicQueryTableType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DynamicQueryCalculatedColumn">
-              <PropertyRef Name="Type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn">
-          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumn" Role="DynamicQueryCalculatedColumn" Multiplicity="1" />
-          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable" Role="DynamicQueryCalculatedColumnTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DynamicQueryCalculatedColumn">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DynamicQueryCalculatedColumnTable">
-              <PropertyRef Name="CalculatedColumnId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="DynamicQueryTableColumn">
           <Key>
             <PropertyRef Name="Id" />
@@ -656,6 +600,7 @@
           <NavigationProperty Name="DynamicQueryTable" Relationship="QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTable" FromRole="DynamicQueryTableColumn" ToRole="DynamicQueryTable" />
           <NavigationProperty Name="DynamicQueryTableSubType" Relationship="QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTableSubType" FromRole="DynamicQueryTableColumn" ToRole="DynamicQueryTableSubType" />
           <NavigationProperty Name="DynamicQueryTableType" Relationship="QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTableType" FromRole="DynamicQueryTableColumn" ToRole="DynamicQueryTableType" />
+          <NavigationProperty Name="DynamicQueryCalculatedColumnTable" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn" FromRole="DynamicQueryTableColumn" ToRole="DynamicQueryCalculatedColumnTable" />
         </EntityType>
         <Association Name="FK_DynamicQueryColumn_DynamicQueryTableColumn">
           <End Type="QbDynamicQueryModel.DynamicQueryTableColumn" Role="DynamicQueryTableColumn" Multiplicity="1" />
@@ -705,6 +650,121 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DynamicQueryCalculatedColumnTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CalculatedColumnId" Nullable="false" />
+          <Property Type="Int32" Name="TableId" Nullable="false" />
+          <Property Type="Int32" Name="ColumnId" Nullable="false" />
+          <NavigationProperty Name="DynamicQueryTableColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn" FromRole="DynamicQueryCalculatedColumnTable" ToRole="DynamicQueryTableColumn" />
+          <NavigationProperty Name="DynamicQueryTable" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable" FromRole="DynamicQueryCalculatedColumnTable" ToRole="DynamicQueryTable" />
+          <NavigationProperty Name="DynamicQueryCalculatedColumn" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn" FromRole="DynamicQueryCalculatedColumnTable" ToRole="DynamicQueryCalculatedColumn" />
+        </EntityType>
+        <Association Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn">
+          <End Type="QbDynamicQueryModel.DynamicQueryTableColumn" Role="DynamicQueryTableColumn" Multiplicity="1" />
+          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable" Role="DynamicQueryCalculatedColumnTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicQueryTableColumn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DynamicQueryCalculatedColumnTable">
+              <PropertyRef Name="ColumnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable">
+          <End Type="QbDynamicQueryModel.DynamicQueryTable" Role="DynamicQueryTable" Multiplicity="1" />
+          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable" Role="DynamicQueryCalculatedColumnTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicQueryTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DynamicQueryCalculatedColumnTable">
+              <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DynamicQueryCalculatedColumn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TableId" Nullable="false" />
+          <Property Type="String" Name="SQL" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SQLName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="Int32" Name="SubType" />
+          <Property Type="Boolean" Name="GroupBy" Nullable="false" />
+          <Property Type="DateTime" Name="LastChangeDate" Nullable="false" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <NavigationProperty Name="DynamicQueryTable" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable" FromRole="DynamicQueryCalculatedColumn" ToRole="DynamicQueryTable" />
+          <NavigationProperty Name="DynamicQueryTableSubType" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType" FromRole="DynamicQueryCalculatedColumn" ToRole="DynamicQueryTableSubType" />
+          <NavigationProperty Name="DynamicQueryTableType" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType" FromRole="DynamicQueryCalculatedColumn" ToRole="DynamicQueryTableType" />
+          <NavigationProperty Name="DynamicQueryCalculatedColumnTable" Relationship="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn" FromRole="DynamicQueryCalculatedColumn" ToRole="DynamicQueryCalculatedColumnTable" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTable">
+          <End Type="QbDynamicQueryModel.DynamicQueryTable" Role="DynamicQueryTable" Multiplicity="1" />
+          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumn" Role="DynamicQueryCalculatedColumn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicQueryTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DynamicQueryCalculatedColumn">
+              <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType">
+          <End Type="QbDynamicQueryModel.DynamicQueryTableSubType" Role="DynamicQueryTableSubType" Multiplicity="0..1" />
+          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumn" Role="DynamicQueryCalculatedColumn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicQueryTableSubType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DynamicQueryCalculatedColumn">
+              <PropertyRef Name="SubType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicQueryCalculatedColumn_DynamicQueryTableType">
+          <End Type="QbDynamicQueryModel.DynamicQueryTableType" Role="DynamicQueryTableType" Multiplicity="1" />
+          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumn" Role="DynamicQueryCalculatedColumn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicQueryTableType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DynamicQueryCalculatedColumn">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn">
+          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumn" Role="DynamicQueryCalculatedColumn" Multiplicity="1" />
+          <End Type="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable" Role="DynamicQueryCalculatedColumnTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DynamicQueryCalculatedColumn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DynamicQueryCalculatedColumnTable">
+              <PropertyRef Name="CalculatedColumnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -724,15 +784,6 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DynamicQueryCalculatedColumnTable">
-            <EntityTypeMapping TypeName="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable">
-              <MappingFragment StoreEntitySet="DynamicQueryCalculatedColumnTable">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CalculatedColumnId" ColumnName="CalculatedColumnId" />
-                <ScalarProperty Name="TableId" ColumnName="TableId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -801,23 +852,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DynamicQueryCalculatedColumn">
-            <EntityTypeMapping TypeName="QbDynamicQueryModel.DynamicQueryCalculatedColumn">
-              <MappingFragment StoreEntitySet="DynamicQueryCalculatedColumn">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="LastChangeDate" ColumnName="LastChangeDate" />
-                <ScalarProperty Name="GroupBy" ColumnName="GroupBy" />
-                <ScalarProperty Name="SubType" ColumnName="SubType" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="SQL" ColumnName="SQL" />
-                <ScalarProperty Name="TableId" ColumnName="TableId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DynamicQueryTableColumn">
             <EntityTypeMapping TypeName="QbDynamicQueryModel.DynamicQueryTableColumn">
               <MappingFragment StoreEntitySet="DynamicQueryTableColumn">
@@ -833,6 +867,45 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TableId" ColumnName="TableId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DynamicQueryCalculatedColumnTable">
+            <EntityTypeMapping TypeName="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable">
+              <MappingFragment StoreEntitySet="DynamicQueryCalculatedColumnTable">
+                <ScalarProperty Name="ColumnId" ColumnName="ColumnId" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="CalculatedColumnId" ColumnName="CalculatedColumnId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DynamicQueryCalculatedColumn">
+            <EntityTypeMapping TypeName="QbDynamicQueryModel.DynamicQueryCalculatedColumn">
+              <MappingFragment StoreEntitySet="DynamicQueryCalculatedColumn">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LastChangeDate" ColumnName="LastChangeDate" />
+                <ScalarProperty Name="GroupBy" ColumnName="GroupBy" />
+                <ScalarProperty Name="SubType" ColumnName="SubType" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SQLName" ColumnName="SQLName" />
+                <ScalarProperty Name="SQL" ColumnName="SQL" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QbDynamicQueryModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -858,7 +931,6 @@
     <Diagrams>
       <Diagram Name="QueryBuilderModel">
         <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryAssociation" Width="2.75" PointX="5.375" PointY="10.375" Height="3.1340950520833317" IsExpanded="true" />
-        <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable" Width="2.875" PointX="0.5" PointY="8.125" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryColumn" Width="3.125" PointX="8.5" PointY="1.125" Height="4.8648079427083344" IsExpanded="true" />
         <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryQuery" Width="2.625" PointX="12.125" PointY="1.125" Height="2.1725878906250014" IsExpanded="true" />
         <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryTable" Width="3.375" PointX="4.875" PointY="6.5" Height="2.9417936197916674" IsExpanded="true" />
@@ -868,73 +940,84 @@
           <ConnectorPoint PointX="6.75" PointY="9.6340950520833335" />
           <ConnectorPoint PointX="6.75" PointY="10.375" />
         </AssociationConnector>
-        <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.875" PointY="8.8795475260416659" />
-          <ConnectorPoint PointX="3.375" PointY="8.8795475260416659" />
-        </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryColumn_DynamicQueryQuery" ManuallyRouted="false">
           <ConnectorPoint PointX="12.125" PointY="2.2112939453125007" />
           <ConnectorPoint PointX="11.625" PointY="2.2112939453125007" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryColumn_DynamicQueryTable" ManuallyRouted="false">
           <ConnectorPoint PointX="7.65625" PointY="6.5" />
-          <ConnectorPoint PointX="7.65625" PointY="5.636455078125004" />
-          <ConnectorPoint PointX="8.5" PointY="5.636455078125004" />
+          <ConnectorPoint PointX="7.65625" PointY="5.7326057942708335" />
+          <ConnectorPoint PointX="8.5" PointY="5.7326057942708335" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryTableSubType_DynamicQueryTableType" ManuallyRouted="false">
           <ConnectorPoint PointX="1.5625" PointY="3.297587890625" />
           <ConnectorPoint PointX="1.5625" PointY="5" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryCalculatedColumn" Width="2.75" PointX="9" PointY="7.375" Height="3.9033007812500031" />
-        <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable" >
-          <ConnectorPoint PointX="8.25" PointY="8.5045475260416659" />
-          <ConnectorPoint PointX="9" PointY="8.5045475260416659" />
-        </AssociationConnector>
-        <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType" >
-          <ConnectorPoint PointX="3.5" PointY="6.1749072265625" />
-          <ConnectorPoint PointX="5.854166666666667" PointY="6.1749072265624987" />
-          <ConnectorPoint PointX="6.020833333333333" PointY="6.1749072265625" />
-          <ConnectorPoint PointX="7.572916666666667" PointY="6.1749072265624987" />
-          <ConnectorPoint PointX="7.739583333333333" PointY="6.1749072265625" />
-          <ConnectorPoint PointX="11.71875" PointY="6.1749072265625" />
-          <ConnectorPoint PointX="11.71875" PointY="7.375" />
-        </AssociationConnector>
-        <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType" >
-          <ConnectorPoint PointX="2.625" PointY="2.2112939453125" />
-          <ConnectorPoint PointX="4.625" PointY="2.2112939453125" />
-          <ConnectorPoint PointX="4.625" PointY="6.2398079427083335" />
-          <ConnectorPoint PointX="5.854166666666667" PointY="6.2398079427083326" />
-          <ConnectorPoint PointX="6.020833333333333" PointY="6.2398079427083335" />
-          <ConnectorPoint PointX="7.572916666666667" PointY="6.2398079427083326" />
-          <ConnectorPoint PointX="7.739583333333333" PointY="6.2398079427083335" />
-          <ConnectorPoint PointX="10.328123" PointY="6.2398079427083335" />
-          <ConnectorPoint PointX="10.328123" PointY="7.375" />
-        </AssociationConnector>
-        <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn" >
-          <ConnectorPoint PointX="9" PointY="9.8047900390625" />
-          <ConnectorPoint PointX="6.833333333333333" PointY="9.8047900390625" />
-          <ConnectorPoint PointX="6.666666666666667" PointY="9.8047900390625" />
-          <ConnectorPoint PointX="3.375" PointY="9.8047900390625" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryTableColumn" Width="2.125" PointX="4.875" PointY="1.125" Height="4.0956022135416745" />
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryColumn_DynamicQueryTableColumn" >
-          <ConnectorPoint PointX="7" PointY="3.1728011067708373" />
-          <ConnectorPoint PointX="8.5" PointY="3.1728011067708373" />
+          <ConnectorPoint PointX="7" PointY="3.2689518229166663" />
+          <ConnectorPoint PointX="8.5" PointY="3.2689518229166663" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTable" >
           <ConnectorPoint PointX="5.9375" PointY="6.5" />
-          <ConnectorPoint PointX="5.9375" PointY="5.2206022135416745" />
+          <ConnectorPoint PointX="5.9375" PointY="5.4129036458333326" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTableSubType" >
           <ConnectorPoint PointX="3.09375" PointY="5" />
-          <ConnectorPoint PointX="3.09375" PointY="4.148791445312499" />
-          <ConnectorPoint PointX="4.541666666666667" PointY="4.1487914453124981" />
-          <ConnectorPoint PointX="4.708333333333333" PointY="4.148791445312499" />
-          <ConnectorPoint PointX="4.875" PointY="4.148791445312499" />
+          <ConnectorPoint PointX="3.09375" PointY="3.8474058811442049" />
+          <ConnectorPoint PointX="4.541666666666667" PointY="3.8474058811442045" />
+          <ConnectorPoint PointX="4.708333333333333" PointY="3.8474058811442049" />
+          <ConnectorPoint PointX="4.875" PointY="3.8474058811442049" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTableType" >
-          <ConnectorPoint PointX="2.625" PointY="1.60564697265625" />
-          <ConnectorPoint PointX="4.875" PointY="1.60564697265625" />
+          <ConnectorPoint PointX="2.625" PointY="2.2112939453125" />
+          <ConnectorPoint PointX="4.875" PointY="2.2112939453125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable" Width="3.125" PointX="0.5" PointY="8.125" Height="2.3648893229166674" />
+        <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn" >
+          <ConnectorPoint PointX="4.875" PointY="4.4237054405721032" />
+          <ConnectorPoint PointX="4.708333333333333" PointY="4.4237054405721024" />
+          <ConnectorPoint PointX="4.541666666666667" PointY="4.4237054405721032" />
+          <ConnectorPoint PointX="3.59375" PointY="4.4237054405721032" />
+          <ConnectorPoint PointX="3.59375" PointY="8.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable" >
+          <ConnectorPoint PointX="4.875" PointY="8.8795475260416659" />
+          <ConnectorPoint PointX="3.625" PointY="8.8795475260416659" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryCalculatedColumn" Width="2.5" PointX="9.375" PointY="7.375" Height="4.095602213541671" />
+        <EntityTypeShape EntityType="QbDynamicQueryModel.sysdiagrams" Width="2.5" PointX="0.75" PointY="11.75" Height="1.9802864583333353" />
+        <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable" >
+          <ConnectorPoint PointX="8.25" PointY="8.5045475260416659" />
+          <ConnectorPoint PointX="9.375" PointY="8.5045475260416659" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType" >
+          <ConnectorPoint PointX="3.5" PointY="6.3074039713541667" />
+          <ConnectorPoint PointX="3.5104166666666665" PointY="6.3074039713541659" />
+          <ConnectorPoint PointX="3.6770833333333335" PointY="6.3074039713541667" />
+          <ConnectorPoint PointX="5.854166666666667" PointY="6.3074039713541659" />
+          <ConnectorPoint PointX="6.020833333333333" PointY="6.3074039713541667" />
+          <ConnectorPoint PointX="7.572916666666667" PointY="6.3074039713541659" />
+          <ConnectorPoint PointX="7.739583333333333" PointY="6.3074039713541667" />
+          <ConnectorPoint PointX="11.78125" PointY="6.3074039713541667" />
+          <ConnectorPoint PointX="11.78125" PointY="7.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType" >
+          <ConnectorPoint PointX="2.625" PointY="2.7856929179687504" />
+          <ConnectorPoint PointX="4.625" PointY="2.7856929179687504" />
+          <ConnectorPoint PointX="4.625" PointY="6.2398079427083344" />
+          <ConnectorPoint PointX="5.854166666666667" PointY="6.2398079427083335" />
+          <ConnectorPoint PointX="6.020833333333333" PointY="6.2398079427083344" />
+          <ConnectorPoint PointX="7.572916666666667" PointY="6.2398079427083335" />
+          <ConnectorPoint PointX="7.739583333333333" PointY="6.2398079427083344" />
+          <ConnectorPoint PointX="10.546873" PointY="6.2398079427083344" />
+          <ConnectorPoint PointX="10.546873" PointY="7.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn" >
+          <ConnectorPoint PointX="9.375" PointY="10.004547526041666" />
+          <ConnectorPoint PointX="6.833333333333333" PointY="10.004547526041666" />
+          <ConnectorPoint PointX="6.666666666666667" PointY="10.004547526041666" />
+          <ConnectorPoint PointX="3.625" PointY="10.004547526041666" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

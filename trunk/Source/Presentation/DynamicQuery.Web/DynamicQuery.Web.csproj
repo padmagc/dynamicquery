@@ -74,6 +74,7 @@
     <Content Include="Scripts\Module\CalculatedColumnModule.js" />
     <Content Include="Scripts\Module\ColumnTypeModule.js" />
     <Content Include="Scripts\Control\QBDialogWindowModule.js" />
+    <Content Include="Scripts\Module\QueryBuilderModule.js" />
     <Content Include="Scripts\Module\TableAndColumnModule.js" />
     <Content Include="Scripts\Pages\CalculatedColumn.js" />
     <Content Include="Scripts\Pages\Column.js" />

@@ -100,5 +100,19 @@ namespace DynamicQuery.Web.Services
                 throw;
             }
         }
+        [WebMethod(true)]
+        public List<string> HasConnectionBetweenTables(List<string> tables)
+        {
+            try
+            {
+                var q = new DynamicQuery.Logic.QueryBuilder.QueryBuilder();
+                return q.HasConnectionBetweenTables(tables);
+            }
+            catch (Exception exception)
+            {
+                ErrorLog.Log(exception);
+                throw;
+            }
+        }
     }
 }

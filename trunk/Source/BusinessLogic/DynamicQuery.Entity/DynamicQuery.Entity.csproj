@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Documentation\DynamicQueryCalculatedColumn.cs" />
+    <Compile Include="Documentation\DynamicQueryCalculatedColumnTable.cs" />
     <Compile Include="Documentation\DynamicQueryDatabase.cs" />
     <Compile Include="Documentation\DynamicQueryTable.cs" />
     <Compile Include="Documentation\DynamicQueryTableAssociation.cs" />

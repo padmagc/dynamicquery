@@ -3,6 +3,7 @@ var grid_column = '';
 var datamodule_columntype = '';
 var datamodule_tableandcolumn = '';
 var datamodule_dialogtableandcolumn = '';
+var datamodule_querybuilder = '';
 var datamodule_sql = '';
 var dropdown_table = '';
 var dropdown_dialogtable = '';
@@ -11,7 +12,6 @@ var dropdown_type = '';
 var dropdown_subtype = '';
 var dropdown_sql = '';
 var dialog_column = '';
-var calculatedSQLTables = [];
 var usedTablesAndColumns = [];
 /*
 * Konstruktor
@@ -37,6 +37,8 @@ function InitForm() {
     dropdown_sql.Init(datamodule_sql.GetSQLFunctions());
     dropdown_sql.OnChange(Event_ChangeSQLOperator);
 
+    datamodule_querybuilder = new DQ.QueryBuilder();
+
     /**/
     grid_column = new DQ.Grid();
     grid_column.Init($('#placeholderColumn'), $("#rowPlaceholder"), $("#rowTemplate"), gridColumnCallback);
@@ -48,20 +50,27 @@ function InitForm() {
         NewCalculatedColumn();
     });
     $('#dialogColumnData').click(function () {
-        $('#dialogSQL').val($('#builderSQL').val() + ' AS ' + $('#builderSQLName').val());
+        $('#dialogSQL').val($('#builderSQL').val() + ' AS ' + setSql());
     });
 }
 /*
 * Init dialog
 */
 function InitDialog() {
-    // Dialog			
+    // Dialog
     $('#ccdialog').dialog({
         autoOpen: false,
         width: 400,
         buttons: {
             "Ment": function () {
-                $(this).dialog("close");
+                RefreshCalculatedColumn(null);
+                if (Validate()) {
+                    if (selectedColumn.Id == -1) {
+                        datamodule_tableandcolumn.NewColumn(selectedColumn, Callback_SuccessSave);
+                    } else {
+                        datamodule_tableandcolumn.UpdateColumn(selectedColumn, Callback_SuccessSave);
+                    }
+                }
             },
             "Mégsem": function () {
                 $(this).dialog("close");
@@ -81,6 +90,8 @@ function InitDialog() {
 * New calculated column
 */
 function NewCalculatedColumn() {
+    $.Utils.hideInfo();
+    SetBaseToControls();
     selectedColumn = {
         Id: -1,
         Name: '',
@@ -88,13 +99,53 @@ function NewCalculatedColumn() {
         Type: -1,
         SubType: -1,
         CalculatedField: true,
-        Tables: [],
+        UsedTablesAndColumns: [],
         Active: true,
         TableId: -1,
         Sql: '',
+        SqlName: '',
         GroupBy: false
     };
     $('#ccdialog').dialog('open');
+}
+/*
+* Refresh dto
+*/
+function RefreshCalculatedColumn(data) {
+    // Check that should to groupby because of expression
+    var sname = setSql();
+    var g = false;
+    var s = $('#builderSQL').val();
+    //var u = [];
+    var f = datamodule_sql.GetSqlFunctionToGroupBy();
+    if (data == null) {
+        /*$.each(calculatedSQLTables, function(key, element) {
+            u.push({
+                Table: element.Table,
+                Column: element.Column,
+                TableId: element.TableId,
+                ColumnId: element.ColumnId
+            });
+        });*/
+        if (s != '') {
+            for (var i = 0; i < f.length; i++) {
+                if (s.split(f[i].Name).length - 1 > 0)
+                    g = true;
+                break;
+            }
+        }
+        selectedColumn["Name"] = $('#dialogName').val();
+        selectedColumn["Description"] = $('#dialogDescription').val();
+        selectedColumn["Type"] = dropdown_type.GetValue();
+        selectedColumn["SubType"] = dropdown_subtype.GetValue();
+        selectedColumn["CalculatedField"] = true;
+        //selectedColumn["UsedTablesAndColumns"] = u;
+        selectedColumn["Active"] = true;
+        selectedColumn["TableId"] = dropdown_table.GetValue();
+        selectedColumn["Sql"] = s;
+        selectedColumn["SqlName"] = sname;
+        selectedColumn["GroupBy"] = g;
+    }
 }
 /*
 * Get tables
@@ -154,6 +205,9 @@ function Event_ChangeColumnType(data) {
 */
 function CallBack_GetColumnSubType(data) {
     dropdown_subtype.Init(data);
+    if (selectedColumn != null && selectedColumn != '' && selectedColumn.SubType != -1) {
+        dropdown_subtype.SetSelectedValue(selectedColumn.SubType);
+    }
 }
 /*
 * Change table dropdown on dialog
@@ -170,26 +224,54 @@ function CallBack_ShowDialogColumns(data) {
     }
 }
 /*
+*
+*/
+function Callback_SuccessSave(data) {
+    $.Utils.showSuccess('Sikeres mentés');
+    $('#ccdialog').dialog('close');
+    CallBack_GetColumns(null);
+}
+/*
 * Set default values of controls and variables
 */
 function SetBaseToControls() {
-    $.Utils.hideInfo();
     selectedColumn = {};
+    $('#dialogName').val('');
+    $('#dialogDescription').val('');
+    $('#dialogSQL').val('');
+    if(dropdown_type != '') dropdown_type.SetIndex(-1);
+    if (dropdown_subtype != '') dropdown_subtype.SetIndex(-1);
+    if (dropdown_dialogtable != '') dropdown_dialogtable.SetIndex(-1);
+    if (dropdown_dialogcolumn != '') dropdown_dialogcolumn.SetIndex(-1);
+    if (dropdown_sql != '') dropdown_sql.SetIndex(-1);
+    $('#builderSQLName').val('');
+    $('#builderSQL').val('');
+    $('#warning').html('');
 }
 /*
 * Events from type grid
 */
 function gridColumnCallback(functionname, data) {
     SetBaseToControls();
+    $.Utils.hideInfo();
     switch (functionname) {
         case 'inactive':
-            //datamodule_tableandcolumn.SetStatus(data.Id, CallBack_GetColumns);
+            datamodule_tableandcolumn.SetStatus(data.Id, CallBack_GetColumns);
             break;
         case 'active':
-            //datamodule_tableandcolumn.SetStatus(data.Id, CallBack_GetColumns);
+            datamodule_tableandcolumn.SetStatus(data.Id, CallBack_GetColumns);
             break;
         case 'update':
-            //selectedColumn = data;
+            selectedColumn = data;
+            //calculatedSQLTables = data.UsedTablesAndColumns;
+            $('#dialogName').val(selectedColumn.Name);
+            $('#dialogDescription').val(selectedColumn.Description);
+            $('#dialogSQL').val(selectedColumn.Sql + ' AS ' + selectedColumn.SqlName);
+            dropdown_type.SetSelectedValue(selectedColumn.Type);
+
+            $('#builderSQL').val(selectedColumn.Sql);
+            $('#builderSQLName').val(selectedColumn.SqlName);
+            $('#ccdialog').dialog('open');
             //dialog_column.ShowDialog("Oszlop adatok módosítása", data, "dialogTemplate", dialogCallback);
             /* Init dialog controls */
             /*dropdown_type = new DQ.DropDown($('#dialogType'), "Id", "Name");
@@ -202,27 +284,6 @@ function gridColumnCallback(functionname, data) {
             break;
         default:
     }
-}
-/*
-* Events from dialog
-*/
-function dialogCallback(functionname) {
-    switch (functionname) {
-        case 'save':
-            selectedColumn["Name"] = $('#dialogName').val();
-            selectedColumn["Description"] = $('#dialogDescription').val();
-            selectedColumn["Sql"] = $('#dialogDescription').val();
-            selectedColumn["Type"] = dropdown_type.GetValue();
-            selectedColumn["SubType"] = dropdown_subtype.GetValue();
-            selectedColumn["TableId"] = dropdown_table.GetValue();
-            datamodule_tableandcolumn.UpdateColumn(selectedColumn, CallBack_SuccesUpdate);
-            break;
-        case 'cancel':
-            SetBaseToControls();
-            /* Nothing */
-            break;
-    }
-    //
 }
 /*
 * Validate values before save
@@ -266,10 +327,40 @@ function Validate() {
 
     return valid;
 }
+
+function setSql() {
+    var sqlname = '';
+    if ($('#builderSQLName').val() != '') {
+        sqlname = $('#builderSQLName').val();
+    } else {
+        $.each(selectedColumn.UsedTablesAndColumns, function (key, element) {
+            sqlname += element.Table + element.Column;
+        });
+    }
+    return sqlname;
+}
+/*
+* Querybuilder callback
+*/
+function Callback_QueryBuilder(data) {
+    var warning = '';
+    if(data == null || data.length == 0) {
+        $('#warning').html('');
+    } else {
+        $('#warning').html('');
+        warning = 'A következő tábla(k) között nincs kapcsolat: ';
+        $.each(data, function (key, element) {
+            warning += element + '<br />';
+        });
+        $('#warning').html(warning);
+    }
+}
 /*
 * Change event 'builderSQLOperator' dropdown on dialog
 */
 function Event_ChangeSQLOperator(data) {
+    $('#builderInfo').html('');
+    $('#builderSQL').val($('#builderSQL').val().trim());
     var range = $('#builderSQL').getSelection();
     var text = '';
     var found = false;
@@ -286,36 +377,53 @@ function Event_ChangeSQLOperator(data) {
             var selectedSqlFunction = datamodule_sql.GetSQLFunction(dropdown_sql.GetValue());
             if (selectedSqlFunction != null) {
                 if (range.length == 0) {
-                    text = [actualText.slice(0, range.start), ' ' + selectedSqlFunction.ReplaceText.replace('{0}', dropdown_dialogtable.GetText() + '.' + dropdown_dialogcolumn.GetText()), actualText.slice(range.start)].join('');
+                    text = [actualText.slice(0, range.start), selectedSqlFunction.ReplaceText.replace('{0}', dropdown_dialogtable.GetText() + '.' + dropdown_dialogcolumn.GetText()), actualText.slice(range.start)].join('');
                 } else {
-                    text = [actualText.slice(0, range.start), ' ' + selectedSqlFunction.ReplaceText.replace('{0}', actualText.substring(range.start, range.end)), actualText.slice(range.end)].join('');
+                    text = [actualText.slice(0, range.start), selectedSqlFunction.ReplaceText.replace('{0}', actualText.substring(range.start, range.end)), actualText.slice(range.end)].join('');
                 }
                 
                 if(dropdown_dialogcolumn.GetValue() != -1) {
                     var count = 1;
-                    for (i = 0; i < calculatedSQLTables.length; i++) {
-                        if(calculatedSQLTables[i].Table == dropdown_dialogtable.GetText()
+                    found = false;
+                    for (i = 0; i < selectedColumn.UsedTablesAndColumns.length; i++) {
+                        if(selectedColumn.UsedTablesAndColumns[i].TableName == dropdown_dialogtable.GetText()
                             &&
-                           calculatedSQLTables[i].Column == dropdown_dialogcolumn.GetText()) {
+                           selectedColumn.UsedTablesAndColumns[i].ColumnName == dropdown_dialogcolumn.GetText()) {
                             count++;
+                            found = true;
                         }
                     }
-                    calculatedSQLTables.push({ Table: dropdown_dialogtable.GetText(), Column: dropdown_dialogcolumn.GetText(), Count: count });
+                    if (!found) {
+                        selectedColumn.UsedTablesAndColumns.push({
+                            TableName: dropdown_dialogtable.GetText(),
+                            ColumnName: dropdown_dialogcolumn.GetText(),
+                            TableId: dropdown_dialogtable.GetValue(),
+                            ColumnId: dropdown_dialogcolumn.GetValue(),
+                            Count: count
+                        });
+                    }
                 }
             }
         } else {
             text = [actualText.slice(0, range.start), '', actualText.slice(range.end)].join('');
 
-            for (i = 0; i < calculatedSQLTables.length; i++) {
-                calculatedSQLTables[0].Count = text.split(calculatedSQLTables[0].Table + "." + calculatedSQLTables[0].Column).length - 1;
+            for (i = 0; i < selectedColumn.UsedTablesAndColumns.length; i++) {
+                selectedColumn.UsedTablesAndColumns[0].Count = text.split(selectedColumn.UsedTablesAndColumns[0].TableName + "." + selectedColumn.UsedTablesAndColumns[0].ColumnName).length - 1;
             }
-            calculatedSQLTables = calculatedSQLTables.filter(function (element) {
+            selectedColumn.UsedTablesAndColumns = selectedColumn.UsedTablesAndColumns.filter(function (element) {
                 return element.Count > 0;
             });
-            
-            if(calculatedSQLTables.length == 0) {
-                // Warning
-            }
+        }
+
+        if (selectedColumn.UsedTablesAndColumns.length == 0) {
+            $('#warning').html('');
+            $('#warning').html('Nem szerepel mező a kifejezésben.');
+        } else if (selectedColumn.UsedTablesAndColumns.length > 1) {
+            var t = [];
+            $.each(selectedColumn.UsedTablesAndColumns, function (key, element) {
+                t.push(element.TableName);
+            });
+            datamodule_querybuilder.HasConnectionBetweenTables(t, Callback_QueryBuilder);
         }
         $('#builderSQL').val(text);
         dropdown_dialogcolumn.SetIndex(-1);

@@ -64,10 +64,10 @@ DQ.CalculatedColumn = function () {
         },
         setstatus = function (columnId, callback) {
             $.Utils.logToConsole(className, 'set activate status on this column : ' + columnId);
-            var parameters = "{" + "fieldId:" + columnId + "}";
+            var parameters = "{" + "columnId:" + columnId + "}";
             $.ajax({
                 type: "POST",
-                url: url + 'SetStatus',
+                url: url + 'SetCalculateColumnStatus',
                 data: parameters,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -76,7 +76,7 @@ DQ.CalculatedColumn = function () {
                     callback(true);
                 },
                 error: (function (response, status, error) {
-                    $.Utils.errorlog(className, response.statusText);
+                    $.Utils.showError(className, response.statusText);
                 })
             });
 
@@ -95,12 +95,12 @@ DQ.CalculatedColumn = function () {
                     callback(true);
                 },
                 error: (function (response, status, error) {
-                    $.Utils.errorlog(className, response.statusText);
+                    $.Utils.showError(className + "-" + response.responseText);
                 })
             });
         },
         newColumn = function (dto, callback) {
-            Utils.logToConsole(className, 'new calculated column : ' + dto.Id);
+            $.Utils.logToConsole(className, 'new calculated column : ' + dto.Id);
             var parameters = { 'column': dto };
             $.ajax({
                 type: "POST",
@@ -113,7 +113,7 @@ DQ.CalculatedColumn = function () {
                     callback(true);
                 },
                 error: (function (response, status, error) {
-                    $.Utils.errorlog(className, response.statusText);
+                    $.Utils.showError(className + "-" + response.responseText);
                 })
             });
         },
@@ -131,7 +131,7 @@ DQ.CalculatedColumn = function () {
                         callback(data.d);
                     },
                     error: (function (response, status, error) {
-                        $.Utils.errorlog(className, response.statusText);
+                        $.Utils.showError(className + "-" + response.responseText);
                     })
                 });
             } else {

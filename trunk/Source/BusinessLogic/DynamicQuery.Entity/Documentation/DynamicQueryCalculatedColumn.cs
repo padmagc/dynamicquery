@@ -21,18 +21,23 @@ namespace DynamicQuery.Entity.Documentation
         /// </summary>
         public string Sql { get; set; }
         /// <summary>
+        /// SQL
+        /// </summary>
+        public string SqlName { get; set; }
+        /// <summary>
         /// Mező típus
         /// </summary>
         public int? Type { get; set; }
         public int? SubType { get; set; }
         public bool CalculatedField { get; set; }
-        public List<DynamicQueryTable> Tables { get; set; }
+        public List<DynamicQueryCalculatedColumnTable> UsedTablesAndColumns { get; set; }
         public bool Active { get; set; }
         public int TableId { get; set; }
+        public bool GroupBy { get; set; }
 
         public DynamicQueryCalculatedColumn()
         {
-            Tables = new List<DynamicQueryTable>();
+            UsedTablesAndColumns = new List<DynamicQueryCalculatedColumnTable>();
         }
 
         #region Methods
