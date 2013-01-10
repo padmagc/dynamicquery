@@ -3152,7 +3152,7 @@ button::-moz-focus-inner {
 .ui-tabs .ui-tabs-panel {
   display: block;
   border-width: 0px;
-  padding: 1em 1.4em;
+  padding: 0em 1.4em;
   border-radius: 0px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
