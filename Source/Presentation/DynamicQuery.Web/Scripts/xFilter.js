@@ -28,13 +28,14 @@
 }
 */
 
-xFilter = function(container, opts) {
-    this.opts = opts || { };
+xFilter = function (container, opts) {
+    this.opts = opts || {};
 
     this.filter = this.opts.filter;
     this.columns = this.opts.columns;
     this.domContainer = container;
     this.onchange = this.opts.onchange;
+    this.selectedColumns = [];
 
     this.ops = [
         { "name": "eq", "description": "==" },
@@ -97,7 +98,7 @@ xFilter.prototype.createTableForGroup = function (group, parentgroup) {
 
     // this table will hold all the group (tables) and rules (rows)
     var table = document.createElement("table");
-    table.setAttribute("class", "group");
+    table.setAttribute("class", "group xFilter");
 
     var tr = document.createElement("tr");
     table.appendChild(tr);
@@ -165,7 +166,7 @@ xFilter.prototype.createTableForGroup = function (group, parentgroup) {
 
         group.rules.push({
             // TODO
-            field: that.columns[0].name,
+            field: "Válassz...",
             op: that.ops[0].name,
             data: ""
         }); // adding a new rule
@@ -253,8 +254,11 @@ xFilter.prototype.createTableRowForRule = function (rule, group) {
     ruleFieldSelect.onchange = function () {
         rule.field = ruleFieldSelect.options[ruleFieldSelect.selectedIndex].text;
         rule.fieldId = ruleFieldSelect.options[ruleFieldSelect.selectedIndex].value;
+        rule.column = that.columns.filter(function (e) { return "[" + e.table + "].[" + e.name + "]" == rule.field; })[0].name;
+        rule.table = that.columns.filter(function (e) { return "[" + e.table + "].[" + e.name + "]" == rule.field; })[0].table;
+        rule.tableId = that.columns.filter(function (e) { return "[" + e.table + "].[" + e.name + "]" == rule.field; })[0].tableId;
         // REMOVE 2013.01.03 Ricsi
-        //that.onchange();  // signals that the filter has changed
+        //that.onchange(rule); // signals that the filter has changed
     }
 
     // populate drop down with user provided column definitions
@@ -262,10 +266,29 @@ xFilter.prototype.createTableRowForRule = function (rule, group) {
         var o = document.createElement("option");
         o.setAttribute("value", this.columns[i].index);
 
-        if (rule.field == this.columns[i].name)
+        if (rule.field == "[" + this.columns[i].table + "].[" + this.columns[i].name + "]") {
             o.setAttribute("selected", "selected");
+            /*var tempsc = this.selectedColumns.filter(function (element) {
+            return element.name == rule.field;
+            });
+            if (tempsc == null) {
+            this.selectedColumns.push({
+            name: rule.field,
+            index: rule.fieldId,
+            table: this.columns[i].table,
+            tableId: this.columns[i].tableId,
+            counter: 1
+            });
+            } else {
+            tempsc[0].counter++;
+            }*/
+        }
 
-        o.appendChild(document.createTextNode("[" + this.columns[i].table + "].["  + this.columns[i].name + "]"));
+        if (this.columns[i].index == -1) {
+            o.appendChild(document.createTextNode(this.columns[i].name));
+        } else {
+            o.appendChild(document.createTextNode("[" + this.columns[i].table + "].[" + this.columns[i].name + "]"));
+        }
         ruleFieldSelect.appendChild(o);
     }
 
@@ -394,6 +417,7 @@ xFilter.prototype.toString = function () {
     return getStringForGroup(this.filter);
 }
 xFilter.prototype.toUserFriendlyString = function () {
+    this.selectedColumns = [];
     return this.getUserFriendlyStringForGroup(this.filter);
 }
 xFilter.prototype.getUserFriendlyStringForGroup = function (group) {
@@ -412,6 +436,24 @@ xFilter.prototype.getUserFriendlyStringForGroup = function (group) {
     if (group.rules != undefined) {
         try {
             for (var index = 0; index < group.rules.length; index++) {
+
+                if (group.rules[index].field != 'Válassz...') {
+                    var tempsc = this.selectedColumns.filter(function(element) {
+                        return element.name == group.rules[index].column && element.table == group.rules[index].table;
+                    });
+
+                    if (tempsc.length == 0) {
+                        this.selectedColumns.push({
+                            name: group.rules[index].column,
+                            index: group.rules[index].fieldId,
+                            table: group.rules[index].table,
+                            tableId: group.rules[index].tableId,
+                            counter: 1
+                        });
+                    } else {
+                        tempsc[0].counter++;
+                    }
+                }
                 if (s.length > 1)
                     s += " " + group.groupOp + " ";
                 s += this.getUserFriendlyStringForRule(group.rules[index]);

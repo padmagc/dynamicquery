@@ -67,6 +67,15 @@ DQ.Grid = function () {
             });
             return data;
         },
+        getDatasource = function () {
+            return dataSource;
+        },
+        getRecord = function (id) {
+            var data = jQuery.grep(dataSource, function (d, index) {
+                return (d.Id == id);
+            });
+            return data;
+        },
         pageing = function () {
             $.Utils.hideInfo();
             actualPage = $("#ddPaging").val();
@@ -83,7 +92,9 @@ DQ.Grid = function () {
         };
     return {
         Init: init,
-        SetDatasource: setDatasource
+        SetDatasource: setDatasource,
+        GetDatasource: getDatasource,
+        GetRecord: getRecord
     };
     
 };

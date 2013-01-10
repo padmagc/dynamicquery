@@ -29,7 +29,7 @@ DQ.TableAndColumn = function () {
                 /* Search colums */
                 callback(collectData($.localStorage.getItem(columnConstans), tableId, typeId, subTypeId));
             }
-        },
+        }
         getAllColumns = function (callback, tableId, typeId, subTypeId) {
             if (!$.localStorage.getItem(columnConstans)) {
                 $.Utils.logToConsole(className, 'get table data from database');

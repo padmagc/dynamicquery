@@ -50,7 +50,9 @@ namespace DynamicQuery.Logic
                                     Name = query.Name,
                                     Description = query.Description,
                                     Active = true,
-                                    LastChangeDate = now
+                                    LastChangeDate = now,
+                                    WhereStatement = query.WhereStatement,
+                                    SelectStatement = query.SelectStatement
                                 };
 
                 foreach (var column in query.Columns)
@@ -87,6 +89,9 @@ namespace DynamicQuery.Logic
                 q.Description = query.Description;
                 q.Active = true;
                 q.LastChangeDate = now;
+                q.WhereStatement = query.WhereStatement;
+                q.SelectStatement = query.SelectStatement;
+
 
                 var deleteColumQuery = context.DynamicQueryColumn.Where(w => w.DynamicQueryId == query.Id).ToList();
                 foreach (var o in deleteColumQuery)

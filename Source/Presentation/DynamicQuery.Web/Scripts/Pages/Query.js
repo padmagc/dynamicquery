@@ -11,6 +11,7 @@ var gridColumns = '';
 var selectedColumn = '';
 /**/
 var actualQuery = { };
+var sqlfilter = {};
 /*
 * Konstruktor
 */
@@ -18,7 +19,7 @@ function InitForm() {
     $('#wizard').smartWizard({
         transitionEffect: 'slideleft',
         onLeaveStep: LeaveAStepCallback,
-        //onFinish: onFinishCallback,
+        onShowStep: OnShowStepCallback,
         enableFinishButton: false
     });
     $('#btnNewQuery').click(function (e) {
@@ -39,10 +40,11 @@ function InitForm() {
     $('#dialogOrderBy').dialog({
         autoOpen: false,
         width: 400,
+        position: 'center',
         buttons: {
             "Ment": function () {
                 var oc = actualQuery.Columns.filter(function (element) { return element.ColumnId == selectedColumn.Id; });
-                if (oc != null) {
+                if (oc.length > 0) {
                     oc[0].IsOrderBy = true;
                     oc[0].Direction = $('#OrderByDirection').val();
                     oc[0].Position = null;
@@ -66,8 +68,60 @@ function InitForm() {
                 $(this).dialog("close");
             }
         }
+    });
+    $('#dialogWhere').dialog({
+        autoOpen: false,
+        minWidth: 700,
+        minHeight: 400,
+        buttons: {
+            "Ment": function () {
+                sqlfilter.toUserFriendlyString();
+                if(sqlfilter.selectedColumns.length > 0) {
+                    
+                    // 1. Ahol IsWhere = 'true' átállítani 'false' - ra 
+                    $.each(actualQuery.Columns, function(index, element) {
+                        if(element.IsWhere) {
+                            element.IsWhere = false;
+                        }
+                    });
+                    // 2. Újra beállítani a megmaradt feltételeken a flaget
+                    $.each(sqlfilter.selectedColumns, function(index, element) {
+                        var ac = actualQuery.Columns.filter(function (e) { return e.ColumnName == element.name && e.TableName == element.table; });
+                        if (ac.length > 0) {
+                            ac[0].IsWhere = true;
+                        } else {
+                            actualQuery.Columns.push({
+                                TableId: ddlTable.GetValue(),
+                                TableName: ddlTable.GetText(),
+                                ColumnId: element.index,
+                                ColumnName: element.name,
+                                Calculated: false,
+                                IsSelected: false,
+                                IsOrderBy: false,
+                                IsWhere: true,
+                                Direction: null,
+                                Position: null
+                            });
+                        }
+
+                    });
+                }
+                actualQuery.WhereStatement = JSON.stringify(sqlfilter.filter);
+                $(this).dialog("close");
+            },
+            "Mégsem": function () {
+                $(this).dialog("close");
+            }
+        }
     });    
     /***/
+    sqlfilter = new xFilter(
+        document.getElementById("filters"),
+        {
+             filter: null,
+             columns: []
+        });
+
     gridSavedQueries = new DQ.Grid();
     gridSavedQueries.Init($('#placeholderQuery'), $("#queryRowPlaceholder"), $("#queryRowTemplate"), gridSavedQueriesGridFunction);
 
@@ -88,14 +142,58 @@ function InitForm() {
     datamoduleType = new DQ.ColumnType();
     datamoduleType.GetColumType(Callback_QueryGetType);
 }
-
 /*
 * Event from wizard control when step to next or previous page
 */
 function LeaveAStepCallback(obj) {
     $.Utils.hideInfo();
     var stepNum = obj.attr('rel');
+    if(stepNum == 4) {
+        
+    }
     return ValidateSteps(stepNum);
+}
+/*
+* Event from wizard control
+*/
+function OnShowStepCallback(obj) {
+    var stepNum = obj.attr('rel');
+    if(stepNum == 5) {
+    var html = '<b>Lekérdezés neve :</b> {0}<br />' +
+                    '<b>Lekérdezés leírása :</b> {1}<br />' +
+                    '<br />' +
+                    '<br />' +
+                    '<b>Lekérdezés :</b>' +
+                    '<br />' +
+                    '{2}'
+                    ;        
+        $('#queryDataResult').html('');
+        $('#queryDataResult').html('Lekérdezés adatainak generálása...');
+        $.ajax({
+            type: "POST",
+            url: "Services/Query.asmx/GenerateQuery",
+            data: JSON.stringify({ 'query': actualQuery }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: (function (data, status) {
+                $('#queryDataResult').html(
+                html.toString()
+                    .replace('{0}', $('#QueryName').val())
+                    .replace('{1}', $('#QueryDescription').val())
+                    .replace('{2}', data.d));
+            }),
+            error: (function (response, status, error) {
+                $.Utils.showError(response.statusText);
+            })
+        });
+
+        /*$('#queryDataResult').append(
+            html.toString()
+                .replace('{0}', $('#QueryName').val())
+                .replace('{1}', $('#QueryDescription').val())
+                .replace('{2}', '...')
+        );*/              
+    }
 }
 /*
 * Validate wizard steps
@@ -158,7 +256,7 @@ function Callback_QueryGetQueries(data) {
 */
 function Callback_LoadSelectedQuery(data) {
     SetControlsToBase(data);
-    //$('#m').stepy('step', 2);
+    $(".buttonNext").click();
 }
 /*
 * Get tables
@@ -213,15 +311,25 @@ function SetControlsToBase(data) {
             Id: -1,
             Name: '',
             Description: '',
+            WhereStatement: '',
+            SelectStatement: '',
             Columns: []
         };
+        sqlfilter.filter = null;
     } else {
         actualQuery = {
             Id: data.Id,
             Name: data.Name,
+            WhereStatement: data.WhereStatement,
+            SelectStatement: data.SelectStatement,
             Description: data.Description,
             Columns: data.Columns
         };
+        if(data.WhereStatement != '' && data.WhereStatement != null) 
+        {
+            sqlfilter.filter = jQuery.parseJSON(data.WhereStatement);
+            sqlfilter.toUserFriendlyString();
+        }
     }
 
     $('#QueryName').val(actualQuery.Name);
@@ -240,7 +348,7 @@ function gridColumnsFunction(functionname, data) {
     switch (functionname) {
         case 'addcolumn':
             var ac = actualQuery.Columns.filter(function (element) { return element.ColumnId == selectedColumn.Id; });
-            if (ac != null) {
+            if (ac.length > 0) {
                 ac[0].IsSelected = true;
             } else {
                 actualQuery.Columns.push({
@@ -251,6 +359,8 @@ function gridColumnsFunction(functionname, data) {
                     Calculated: data.Calculated,
                     IsSelected: true,
                     IsOrderBy: false,
+                    IsWhere: false,
+                    WhereCounter: 0,
                     Direction: null,
                     Position: null
                 });
@@ -259,7 +369,7 @@ function gridColumnsFunction(functionname, data) {
             break;
         case 'removecolumn':
             var ac = actualQuery.Columns.filter(function (element) { return element.ColumnId == selectedColumn.Id; });
-            if (ac != null) {
+            if (ac.length > 0) {
                 ac[0].IsSelected = false;
             }
             datamoduleTable.GetColumns(Callback_ShowColumns, ddlTable.GetValue(), ddlColumnType.GetValue(), ddlColumnSubType.GetValue());
@@ -275,20 +385,36 @@ function gridColumnsFunction(functionname, data) {
             datamoduleTable.GetColumns(Callback_ShowColumns, ddlTable.GetValue(), ddlColumnType.GetValue(), ddlColumnSubType.GetValue());
             break;
         case 'where':
-            /*sqlfilter.columns.push({
-                "name": data.Name,
-                "index": data.Id,
-                "table": ddlTable.GetText()
+            sqlfilter.columns = [];
+            
+            sqlfilter.columns.push({
+                "name": 'Válassz...',
+                "index": -1,
+                "table": ddlTable.GetText(),
+                "tableId": ddlTable.GetValue()
+            });
+            if(sqlfilter.selectedColumns.length > 0) {
+                $.each(sqlfilter.selectedColumns, function(index, element) {
+                    sqlfilter.columns.push({
+                        "name": element.name,
+                        "index": element.id,
+                        "table": element.table,
+                        "tableId": element.tableId
+                    });
+                });
+            }
+            $.each(gridColumns.GetDatasource(), function(index, element) {
+                if(!element.Calculated) {
+                    sqlfilter.columns.push({
+                        "name": element.Name,
+                        "index": element.Id,
+                        "table": ddlTable.GetText(),
+                        "tableId": ddlTable.GetValue()
+                    });
+                }
             });
             sqlfilter.reDraw();
-            $("#dialogFilter").dialog({
-                buttons:
-                {
-                    "Bezár": function () {
-                        $(this).dialog("close");
-                    }
-                }
-            });*/
+            $('#dialogWhere').dialog('open');
             break;
         default:
             $.Utils.logToConsole('Warning', 'Unknown function called');
@@ -373,6 +499,11 @@ function RefreshDTO() {
     actualQuery.Name = $('#QueryName').val();
     actualQuery.Description = $('#QueryDescription').val();
     actualQuery.Columns = actualQuery.Columns.filter(function (element) {
-        return element.IsSelected == true || element.IsOrderBy == true; /*|| element.IsWhere == true;*/
+        return element.IsSelected == true || element.IsOrderBy == true || element.IsWhere == true;
     });
+    if(sqlfilter.selectedColumns.length > 0) {
+        actualQuery.WhereStatement = JSON.stringify(sqlfilter.filter);
+    } else {
+        actualQuery.WhereStatement = null;
+    }
 }

@@ -82,7 +82,7 @@ namespace DynamicQuery.Logic.Mapping
                             Direction = column.Direction,
                             Position = column.Position,
                             IsWhere = column.IsWhere,
-                            WhereCounter = column.IsWhere ? Regex.Matches(query.WhereStatement, String.Format("[{0}].[{1}]", column.TableName, column.ColumnName)).Count :0
+                            //WhereCounter = column.IsWhere ? Regex.Matches(query.WhereStatement, String.Format("[{0}].[{1}]", column.TableName, column.ColumnName)).Count :0
                         }
                     );
                 }

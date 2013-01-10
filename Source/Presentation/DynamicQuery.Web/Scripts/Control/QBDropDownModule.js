@@ -6,11 +6,13 @@ DQ.DropDown = function (controlid, keyField, valueField) {
         id = controlid,
         selectedId = 1,
         selectedText = '',
+        dataSource = {},
     /********** Functions **********/
         init = function (source) {
             var output = [];
             // clear
             clear();
+            dataSource = source;
             // add first record
             output.push('<option value="-1">Válassz...</option>');
             $.each(source, function (key, value) {
@@ -29,6 +31,9 @@ DQ.DropDown = function (controlid, keyField, valueField) {
         },
         getValue = function () {
             return $(id).val();
+        },
+        getDataSource = function () {
+            return dataSource;
         },
         getText = function () {
             return $(id.selector + " option:selected").html();
@@ -53,6 +58,7 @@ DQ.DropDown = function (controlid, keyField, valueField) {
         GetValue: getValue,
         GetText: getText,
         SetIndex: setIndex,
+        GetDataSource : getDataSource,
         SetSelectedValue: setSelectedValue
     };
 };

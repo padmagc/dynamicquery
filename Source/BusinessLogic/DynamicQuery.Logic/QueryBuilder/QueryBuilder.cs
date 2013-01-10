@@ -47,38 +47,34 @@ namespace DynamicQuery.Logic.QueryBuilder
         #endregion
 
         #region Function
-        public void AddColumn(string pTableName, string pColumn)
+        public void AddColumn(DynamicQueryTableColumn column)
         {
-            if (Columns.SingleOrDefault(w => w.TableName == pTableName && w.Name == pColumn) == null)
+            var t = DatabaseTables.SingleOrDefault(w => w.Name == column.TableName);
+            if(t != null)
             {
-                // ReSharper disable RedundantArgumentName
-                Columns.Add(new DynamicQueryTableColumn
-                                {
-                                    Name = pColumn,
-                                    TableName = pTableName
-                                });
-            }
-
-            if (Tables.SingleOrDefault(w => w.Name == pTableName) == null)
-            {
-                Tables.Add(new DynamicQueryTable { Name = pTableName });
-                if (Tables.Count > 1)
+                if (!column.CalculatedField)
                 {
-                    AddTableWithAssociation(Tables[0].Name, pTableName);
-                }
-
-
-                /*if(Tables.Count == 0)
-                {
-                    Tables.Add(table.Name, false);
+                    var c = t.Columns.SingleOrDefault(w => w.Name == column.Name);
+                    column.Description = c.Description;
                 }
                 else
                 {
-                    AddTableWithAssociation(Tables.First().Key, table.Name);
-                }*/
+                    var c = t.CalculatedColumns.SingleOrDefault(w => w.Name == column.Name);
+                    column.Description = c.Sql;
+                }
+                Columns.Add(column);
+
+                if (Tables.SingleOrDefault(w => w.Name == column.TableName) == null)
+                {
+                    Tables.Add(new DynamicQueryTable {Name = column.TableName});
+                }
+
+                if (Tables.Count > 1)
+                {
+                    AddTableWithAssociation(Tables[0].Name, column.TableName);
+                }
             }
         }
-
         private void AddTableWithAssociation(string mainTable, string joinedTable)
         {
             var sql = new StringBuilder();
@@ -99,6 +95,27 @@ namespace DynamicQuery.Logic.QueryBuilder
                 }
             }
             Tables.Single(w => w.Name == joinedTable).SqlFormat = sql.ToString();
+        }
+
+        public override string ToString()
+        {
+            var result = new StringBuilder();
+            foreach (var column in Columns)
+            {
+                if(result.Length > 0)
+                {
+                    result.Append(", ");
+                }
+                result.Append(String.Format("[{0}].[{1}] AS '{2}'", column.TableName, column.Name, column.Description));
+            }
+            result.Insert(0, "SELECT ");
+            result.Append(" FROM ");
+            foreach (var table in Tables)
+            {
+                result.Append(!String.IsNullOrEmpty(table.SqlFormat) ? table.SqlFormat : table.Name);
+            }
+
+            return result.ToString();
         }
 
         /*public void AddOrderBy(string field, Sorting sortOrder)

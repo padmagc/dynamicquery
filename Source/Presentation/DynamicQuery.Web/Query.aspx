@@ -64,6 +64,13 @@
             </div>
         </form>
     </div>
+    <div id="dialogWhere" title="Feltétel">
+        <form action="">
+            <div>
+                <div id="filters" style="width:100%; height: 100%"></div>
+            </div>
+        </form>
+    </div>
     <!-- Dialog -->
     <div id="wizard" class="swMain">
         <ul>
