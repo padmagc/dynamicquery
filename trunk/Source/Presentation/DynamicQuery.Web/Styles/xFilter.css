@@ -1,0 +1,7 @@
+﻿.xFilter input { float: left; width: auto !important; padding: 0px; }
+.xFilter select { float: left; width: auto! important; padding: 0px; }
+.xFilter input[type=button] { float: left; margin: 3px 0px 0px 2px; width: 25px !important}
+.xFilter table.group { border: solid 1px #e0e0e0; background-color: #f7f7f7; }
+.xFilter table.group th { text-align: left; }
+.xFilter td { vertical-align: top; }	
+.xFilter td.first { width: 20px; }

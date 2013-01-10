@@ -40,7 +40,7 @@ DQ.Query = function () {
                     callback(true);
                 },
                 error: (function (response, status, error) {
-                    $.Utils.errorlog(className, response.statusText);
+                    $.Utils.showError(className, response.statusText);
                 })
             });
         },
@@ -58,7 +58,7 @@ DQ.Query = function () {
                     callback(true);
                 },
                 error: (function (response, status, error) {
-                    $.Utils.errorlog(className, response.statusText);
+                    $.Utils.showError(className, response.statusText);
                 })
             });
         },
@@ -76,7 +76,7 @@ DQ.Query = function () {
                         callback(get(data.d, id));
                     },
                     error: (function (response, status, error) {
-                        $.Utils.errorlog(className, response.statusText);
+                        $.Utils.showError(className, response.statusText);
                     })
                 });
             } else {
@@ -108,7 +108,7 @@ DQ.Query = function () {
                         callback(data.d);
                     },
                     error: (function (response, status, error) {
-                        $.Utils.errorlog(className, response.statusText);
+                        $.Utils.showError(className, response.statusText);
                     })
                 });
             } else {

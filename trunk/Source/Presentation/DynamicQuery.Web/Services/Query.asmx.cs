@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Services;
 using DynamicQuery.Core;
+using DynamicQuery.Entity.Documentation;
 using DynamicQuery.Logic;
+using DynamicQuery.Logic.QueryBuilder;
 
 namespace DynamicQuery.Web.Services
 {
@@ -16,7 +16,7 @@ namespace DynamicQuery.Web.Services
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
-    public class Query : System.Web.Services.WebService
+    public class Query : WebService
     {
 
         [WebMethod(true)]
@@ -68,6 +68,32 @@ namespace DynamicQuery.Web.Services
             {
                 var q = new QueryLogic();
                 q.NewQuery(query);
+            }
+            catch (Exception exception)
+            {
+                ErrorLog.Log(exception);
+                throw;
+            }
+        }
+        [WebMethod(true)]
+        public string GenerateQuery(Entity.QueryBuilder.DynamicQueryQuery query)
+        {
+            try
+            {
+                var builder = new QueryBuilder();
+                foreach (var column in query.Columns)
+                {
+                    if(column.IsSelected)
+                    {
+                        builder.AddColumn(new DynamicQueryTableColumn
+                                              {
+                                                  CalculatedField = column.Calculated,
+                                                  Name = column.ColumnName,
+                                                  TableName = column.TableName
+                                              });
+                    }
+                }
+                return builder.ToString();
             }
             catch (Exception exception)
             {
