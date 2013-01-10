@@ -49,7 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryBuilder\DynamicQueryColumn.cs" />
     <Compile Include="QueryBuilder\DynamicQueryQuery.cs" />
-    <Compile Include="QueryBuilder\DynamicQueryWhere.cs" />
     <Compile Include="QueryBuilder\FieldType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

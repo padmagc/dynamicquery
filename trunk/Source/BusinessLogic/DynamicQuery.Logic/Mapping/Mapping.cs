@@ -1,4 +1,6 @@
-﻿using DynamicQuery.Entity.Documentation;
+﻿using System;
+using System.Text.RegularExpressions;
+using DynamicQuery.Entity.Documentation;
 using DynamicQuery.Entity.QueryBuilder;
 
 namespace DynamicQuery.Logic.Mapping
@@ -57,6 +59,8 @@ namespace DynamicQuery.Logic.Mapping
                                  Name = query.Name,
                                  Description = query.Description,
                                  Active = query.Active,
+                                 WhereStatement = query.WhereStatement,
+                                 SelectStatement = query.SelectStatement,
                                  Id = query.Id
                              };
 
@@ -76,32 +80,11 @@ namespace DynamicQuery.Logic.Mapping
                             IsSelected = column.IsSelected,
                             IsOrderBy = column.IsOrderBy,
                             Direction = column.Direction,
-                            Position = column.Position
+                            Position = column.Position,
+                            IsWhere = column.IsWhere,
+                            WhereCounter = column.IsWhere ? Regex.Matches(query.WhereStatement, String.Format("[{0}].[{1}]", column.TableName, column.ColumnName)).Count :0
                         }
                     );
-                }
-            }
-
-            if(!query.DynamicQueryWhere.IsLoaded)
-            {
-                query.DynamicQueryWhere.Load();
-            }
-
-            if(query.DynamicQueryWhere != null)
-            {
-                foreach (var whereStatement in query.DynamicQueryWhere)
-                {
-                    entity.Where.Add(new DynamicQueryWhere
-                                         {
-                                             Operator = whereStatement.Operator,
-                                             Data = whereStatement.Data,
-                                             GroupLevel = whereStatement.GroupLevel,
-                                             GroupOperator = whereStatement.GroupOperator,
-                                             ColumnId = whereStatement.ColumnId,
-                                             ColumnName = whereStatement.ColumnName,
-                                             TableName = whereStatement.TableName,
-                                             TableId = whereStatement.TableId
-                                         });
                 }
             }
 

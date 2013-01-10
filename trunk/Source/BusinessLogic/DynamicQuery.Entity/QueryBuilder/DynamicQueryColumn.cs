@@ -15,6 +15,8 @@ namespace DynamicQuery.Entity.QueryBuilder
         public bool Calculated { get; set; }
         public bool IsSelected { get; set; }
         public bool IsOrderBy { get; set; }
+        public bool IsWhere { get; set; }
+        public int WhereCounter { get; set; }
         public string Direction { get; set; }
         public int? Position { get; set; }
     }

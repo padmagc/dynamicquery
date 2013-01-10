@@ -17,7 +17,6 @@ namespace DynamicQuery.Logic
                 var q = context.DynamicQueryQuery
                     /* Includes */
                     .Include("DynamicQueryColumn")
-                    .Include("DynamicQueryWhere")
                     /* Includes */
                     ;
     
@@ -65,25 +64,11 @@ namespace DynamicQuery.Logic
                                                      Calculated = column.Calculated,
                                                      IsSelected = column.IsSelected,
                                                      IsOrderBy = column.IsOrderBy,
+                                                     IsWhere = column.IsWhere,
                                                      Direction = column.Direction,
                                                      Position = column.Position,
                                                      LastChangeDate = now
                                                  });
-                }
-
-                foreach (var whereStatement in query.Where)
-                {
-                    q.DynamicQueryWhere.Add(new DynamicQueryWhere
-                                                {
-                                                    Operator = whereStatement.Operator,
-                                                    Data = whereStatement.Data,
-                                                    GroupLevel = whereStatement.GroupLevel,
-                                                    GroupOperator = whereStatement.GroupOperator,
-                                                    ColumnId = whereStatement.ColumnId,
-                                                    ColumnName = whereStatement.ColumnName,
-                                                    TableName = whereStatement.TableName,
-                                                    TableId = whereStatement.TableId
-                                                });
                 }
 
                 context.DynamicQueryQuery.AddObject(q);
@@ -120,33 +105,12 @@ namespace DynamicQuery.Logic
                         Calculated = column.Calculated,
                         IsSelected = column.IsSelected,
                         IsOrderBy = column.IsOrderBy,
+                        IsWhere = column.IsWhere,
                         Direction = column.Direction,
                         Position = column.Position,
                         LastChangeDate = now
                     });
                 }
-
-                var deleteWhereQuery = context.DynamicQueryWhere.Where(w => w.QueryId == query.Id).ToList();
-                foreach (var o in deleteWhereQuery)
-                {
-                    context.DynamicQueryWhere.DeleteObject(o);
-                }
-
-                foreach (var whereStatement in query.Where)
-                {
-                    q.DynamicQueryWhere.Add(new DynamicQueryWhere
-                    {
-                        Operator = whereStatement.Operator,
-                        Data = whereStatement.Data,
-                        GroupLevel = whereStatement.GroupLevel,
-                        GroupOperator = whereStatement.GroupOperator,
-                        ColumnId = whereStatement.ColumnId,
-                        ColumnName = whereStatement.ColumnName,
-                        TableName = whereStatement.TableName,
-                        TableId = whereStatement.TableId
-                    });
-                }
-
                 context.SaveChanges();
             }
         }
