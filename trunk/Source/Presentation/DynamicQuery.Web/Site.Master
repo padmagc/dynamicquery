@@ -86,7 +86,7 @@
 		                </li>
 		            </ul> 
 		            <div id="main" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-		                <div id="info" style="visibility: hidden">
+		                <div id="info" style="visibility: hidden; margin-top: 5px;">
                             <span class="ui-state-error-text" id="message">&nbsp;</span>
 		                </div>
                         <asp:ContentPlaceHolder ID="MainContent" runat="server"/>

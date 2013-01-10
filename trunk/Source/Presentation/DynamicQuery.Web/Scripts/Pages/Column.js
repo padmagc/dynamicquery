@@ -58,11 +58,14 @@ function CallBack_GetColumnTypes(data) {
     dropdown_type.Init(data);
     dropdown_type.SetSelectedValue(selectedColumn.Type);
 }
+function CallBack_ChangeColumnType(id) {
+    datamodule_columntype.GetColumSubType(id, CallBack_GetColumnSubType);
+}
 /*
 * Get column subtypes
 */
-function CallBack_GetColumnSubType(typeId) {
-    datamodule_columntype.GetColumSubType(typeId, CallBack_ShowColumSubType);
+function CallBack_GetColumnSubType(data) {
+    dropdown_subtype.Init(data);
     if(selectedColumn.SubType != -1) {
         dropdown_subtype.SetSelectedValue(selectedColumn.SubType);
     }
@@ -104,10 +107,10 @@ function gridColumnCallback(functionname, data) {
             dialog_column.ShowDialog("Oszlop adatok módosítása", data, "dialogTemplate", dialogCallback);
             /* Init dialog controls */
             dropdown_type = new DQ.DropDown($('#dialogType'), "Id", "Name");
-            dropdown_type.OnChange(CallBack_GetColumnType);
+            dropdown_type.OnChange(CallBack_ChangeColumnType);
 
             dropdown_subtype = new DQ.DropDown($('#dialogSubType'), "Id", "Name");
-            dropdown_type.OnChange(CallBack_GetColumnSubType);
+            //dropdown_type.OnChange(CallBack_GetColumnSubType);
             
             datamodule_columntype.GetColumType(CallBack_GetColumnTypes);
             /* Init dialog controls */

@@ -22,34 +22,38 @@
         </tr>
     </script>
     <script id="dialogTemplate" type="text/x-jquery-tmpl">
+        <form>
 	    <label>Név:</label><input type="text" id="dialogName" value="${Name}" style="width: 80%; margin-left: 5px;">
         <label>Leírás:</label><input type="text" id="dialogDescription" value="${Description}" style="width: 80%; margin-left: 5px;">
         <label>Típus:</label><select id="dialogType"></select>
         <label>Altípus:</label><select id="dialogSubType"></select>
+        </form>
     </script>
     <!-- Templates -->
     <h2>
         Oszlopok
     </h2>
     <p>
+        <form class="simple">
         <label>Tábla :</label>
         <select id="Table"></select>
+        </form>
     </p>
     <p>
-        <div id="placeholderColumn" style="margin-top: 10px; margin-bottom: 10px">
-        <table cellspacing="1" style="width: 99%" >
+        <div id="placeholderColumn" style="margin-top: 30px; margin-bottom: 10px">
+        <table cellspacing="1" class="qbtable" style="width: 99%" >
             <thead>
                 <tr>
-                    <th style="text-align:left !important;  width: 20% !important; padding-left: 5px;">
+                    <th class="ui-state-default" style="text-align:left !important;  width: 20% !important; padding-left: 5px;">
                         Név
                     </th>
-                    <th style="text-align:left !important; width: 50% !important; padding-left: 5px;">
+                    <th class="ui-state-default"  style="text-align:left !important; width: 50% !important; padding-left: 5px;">
                         Leírás
                     </th>
-                    <th style="text-align:left !important; width: 10% !important; padding-left: 5px;">
+                    <th class="ui-state-default"  style="text-align:left !important; width: 10% !important; padding-left: 5px;">
                         Típus / hossz
                     </th>
-                    <th colspan="2" style="text-align:center !important; width: 40% !important; padding-left: 5px;">
+                    <th class="ui-state-default"  colspan="2" style="text-align:center !important; width: 40% !important; padding-left: 5px;">
                         Funkciók
                     </th>
                 </tr>
