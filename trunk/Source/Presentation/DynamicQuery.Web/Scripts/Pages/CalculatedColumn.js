@@ -50,7 +50,9 @@ function InitForm() {
         NewCalculatedColumn();
     });
     $('#dialogColumnData').click(function () {
-        $('#dialogSQL').val($('#builderSQL').val() + ' AS ' + setSql());
+        if ($('#builderSQL').val() != '' && setSql() != '') {
+            $('#dialogSQL').val($('#builderSQL').val() + ' AS ' + setSql());
+        }
     });
 }
 /*
@@ -334,7 +336,7 @@ function setSql() {
         sqlname = $('#builderSQLName').val();
     } else {
         $.each(selectedColumn.UsedTablesAndColumns, function (key, element) {
-            sqlname += element.Table + element.Column;
+            sqlname += element.TableName + element.ColumnName;
         });
     }
     return sqlname;
