@@ -76,7 +76,7 @@ namespace DynamicQuery.Web.Services
             }
         }
         [WebMethod(true)]
-        public string GenerateQuery(Entity.QueryBuilder.DynamicQueryQuery query)
+        public string GenerateQuery(Entity.QueryBuilder.DynamicQueryQuery query, string whereStatement)
         {
             try
             {
@@ -92,7 +92,19 @@ namespace DynamicQuery.Web.Services
                                                   TableName = column.TableName
                                               });
                     }
+                    
+                    if(!column.IsSelected && column.IsWhere)
+                    {
+                        builder.AddWhereTable(column.TableName);
+                    }
+                    if(column.IsOrderBy)
+                    {
+                        builder.AddOrderByTable(column.TableName);
+                        builder.AddOrderBy(column.ColumnName, column.TableName,
+                                           column.Direction == "Csökkenő" ? "ASC" : "DESC");
+                    }
                 }
+                builder.WhereStatement = whereStatement;
                 return builder.ToString();
             }
             catch (Exception exception)
