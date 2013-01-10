@@ -17,9 +17,11 @@ function InitForm() {
     grid_columnsubtypes.Init($('#placeholderColumnSubType'), $("#placeholderColumnSubTypeRows"), $("#rowTemplateSubType"), gridColumnSubTypeFunctionCallback);
 
     $('#btnNewColumnType').click(function () {
+        $.Utils.hideInfo();
         NewType();
     });
     $('#btnNewColumnSubType').click(function () {
+        $.Utils.hideInfo();
         NewSubType();
     });
     /**/
@@ -96,6 +98,7 @@ function ShowSubType() {
 * Events from type grid
 */
 function gridColumnTypeFunctionCallback(functionname, data) {
+    $.Utils.hideInfo();
     switch (functionname) {
         case 'selecttype':
             selectedtype = data;
@@ -118,10 +121,11 @@ function gridColumnTypeFunctionCallback(functionname, data) {
 * Events from subtype grid
 */
 function gridColumnSubTypeFunctionCallback(functionname, data) {
+    $.Utils.hideInfo();
     switch (functionname) {
         case 'updatesubtype':
-            selectedtype = data;
-            dialog_type.ShowDialog("Oszlop altípus", selectedtype, "dialogSubTypeTemplate", dialogSubTypeCallback);
+            selectedsubtype = data;
+            dialog_type.ShowDialog("Oszlop altípus", selectedsubtype, "dialogSubTypeTemplate", dialogSubTypeCallback);
             break;
         case 'inactivesubtype':
             datamodule_columntype.SetSubTypeStatus(data.Id, CallBack_RefreshSubTypeGrid);

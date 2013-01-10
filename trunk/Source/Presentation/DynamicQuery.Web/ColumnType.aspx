@@ -33,11 +33,11 @@
             <td style="padding-left: 5px;">${Id}</td>
             <td style="padding-left: 5px;">${Name}</td>
             <td style="text-align: center !important; padding-left: 5px;">
-            <a href="javascript:void(0);" class="updatetype" >Módosít</a>
+            <a href="javascript:void(0);" class="updatesubtype" >Módosít</a>
             {{if Active == true}}
-                <a href="javascript:void(0);" class="inactivetype">Inaktivál</a>
+                <a href="javascript:void(0);" class="inactivesubtype">Inaktivál</a>
             {{else}}
-                <a href="javascript:void(0);" class="activetype" >Aktivál</a>
+                <a href="javascript:void(0);" class="activesubtype" >Aktivál</a>
             {{/if}}
             </td>
         </tr>
@@ -51,7 +51,7 @@
     <!-- Templates -->
     <p>
         <div id="placeholderColumnType" style="margin-top: 10px; margin-bottom: 10px">
-            <table cellspacing="1" style="width: 95%" >
+            <table cellspacing="1" class="qbtable" style="width: 95%" >
                 <thead>
                     <tr>
                         <th class="ui-state-default" style="text-align:left !important;  width: 10% !important">
@@ -71,14 +71,14 @@
         </div>
     </p>
     <p>
-        <button type="button" id="btnNewColumnType" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
-            <span class="ui-button-text">Új típus</span>
+        <button type="button" id="btnNewColumnType" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only biggerbutton" role="button" aria-disabled="false">
+            <span class="ui-button-text biggertext">Új típus</span>
         </button>
     </p>
     <div id="divColumnSubType" style="visibility: hidden">
         <p>
             <div id="placeholderColumnSubType" style="margin-top: 10px; margin-bottom: 10px">
-                <table cellspacing="1" style="width: 95%" >
+                <table cellspacing="1" class="qbtable"  style="width: 95%" >
                     <thead>
                         <tr>
                             <th class="ui-state-default" style="text-align:left !important;  width: 10% !important">
@@ -98,8 +98,8 @@
             </div>
         </p>
         <p>
-            <button type="button" id="btnNewColumnSubType" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
-                <span class="ui-button-text">Új altípus</span>
+            <button type="button" id="btnNewColumnSubType" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only biggerbutton" role="button" aria-disabled="false">
+                <span class="ui-button-text biggertext">Új altípus</span>
             </button>
         </p>
     </div>
