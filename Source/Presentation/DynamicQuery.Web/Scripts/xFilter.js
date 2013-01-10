@@ -38,7 +38,7 @@ xFilter = function (container, opts) {
     this.selectedColumns = [];
 
     this.ops = [
-        { "name": "eq", "description": "==" },
+        { "name": "eq", "description": "=" },
         { "name": "ne", "description": "!=" },
         { "name": "bw", "description": "begins with" },
         { "name": "nb", "description": "does not begin with" },
@@ -476,7 +476,7 @@ xFilter.prototype.getUserFriendlyStringForRule = function (rule) {
             break;
         }
     }
-    return rule.field + " " + opUF + " \"" + rule.data + "\"";
+    return rule.field + " " + opUF + " \'" + rule.data + "\'";
 }
 xFilter.prototype.Apply = function (jsonObj) {
     // filters the JSON based on the current filter

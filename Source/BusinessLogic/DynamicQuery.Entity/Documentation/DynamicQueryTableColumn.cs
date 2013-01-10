@@ -36,6 +36,10 @@ namespace DynamicQuery.Entity.Documentation
         public bool Active { get; set; }
         public int TableId { get; set; }
         public string TableName { get; set; }
+        /**/
+        public string Other { get; set; }
+        public bool GroupBy { get; set; }
+        /**/
         #endregion
 
         #region Konstruktor

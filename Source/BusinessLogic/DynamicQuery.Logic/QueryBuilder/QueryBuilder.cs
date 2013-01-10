@@ -19,6 +19,8 @@ namespace DynamicQuery.Logic.QueryBuilder
         public List<DynamicQueryTable> Tables { get; set; }
         public List<string> Association { get; set; }
         public List<string> Warnings { get; set; }
+        public string WhereStatement { get; set; }
+        public StringBuilder OrderByStatement { get; set; }
         //public List<QueryBuilderOrderByClause> OrderByClauses { get; set; }
         //protected WhereStatement WhereStatement { get; set; }
 
@@ -31,6 +33,7 @@ namespace DynamicQuery.Logic.QueryBuilder
             Columns = new List<DynamicQueryTableColumn>();
             Tables = new List<DynamicQueryTable>();
             Warnings = new List<string>();
+            OrderByStatement = new StringBuilder();
             DatabaseAssociations = new List<DynamicQueryTableAssociation>();
             //OrderByClauses = new List<QueryBuilderOrderByClause>();
             //WhereStatement = new WhereStatement();
@@ -55,24 +58,47 @@ namespace DynamicQuery.Logic.QueryBuilder
                 if (!column.CalculatedField)
                 {
                     var c = t.Columns.SingleOrDefault(w => w.Name == column.Name);
-                    column.Description = c.Description;
+                    if (c != null) column.Description = c.Description;
+                    if (Tables.SingleOrDefault(w => w.Name == column.TableName) == null)
+                    {
+                        Tables.Add(new DynamicQueryTable { Name = column.TableName });
+                    }
+
+                    if (Tables.Count > 1)
+                    {
+                        AddTableWithAssociation(Tables[0].Name, column.TableName);
+                    }
                 }
                 else
                 {
-                    var c = t.CalculatedColumns.SingleOrDefault(w => w.Name == column.Name);
-                    column.Description = c.Sql;
+                    var c = t.CalculatedColumns.SingleOrDefault(w => w.Sql == column.Name);
+                    if (c != null)
+                    {
+                        column.Description = c.SqlName;
+                        column.GroupBy = c.GroupBy;
+                        foreach (var table in c.UsedTablesAndColumns)
+                        {
+                            if(!c.GroupBy)
+                            {
+                                if(column.Other.Length > 0)
+                                {
+                                    column.Other += ", ";
+                                }
+                                column.Other += String.Format("[{0}].[{1}]", table.TableName, table.ColumnName);
+                            }
+                            if (Tables.SingleOrDefault(w => w.Name == table.TableName) == null)
+                            {
+                                Tables.Add(new DynamicQueryTable {Name = column.TableName});
+                            }
+                            if (Tables.Count > 1)
+                            {
+                                AddTableWithAssociation(Tables[0].Name, column.TableName);
+                            }
+                        }
+                        
+                    }
                 }
                 Columns.Add(column);
-
-                if (Tables.SingleOrDefault(w => w.Name == column.TableName) == null)
-                {
-                    Tables.Add(new DynamicQueryTable {Name = column.TableName});
-                }
-
-                if (Tables.Count > 1)
-                {
-                    AddTableWithAssociation(Tables[0].Name, column.TableName);
-                }
             }
         }
         private void AddTableWithAssociation(string mainTable, string joinedTable)
@@ -100,13 +126,38 @@ namespace DynamicQuery.Logic.QueryBuilder
         public override string ToString()
         {
             var result = new StringBuilder();
+            var groupBycolumns = new StringBuilder();
+            var orderBycolumns = new StringBuilder();
+            var hasGroupBy = false;
             foreach (var column in Columns)
             {
-                if(result.Length > 0)
+                if(result.Length > 0) result.Append(", ");
+                
+                if (!column.CalculatedField)
                 {
-                    result.Append(", ");
+                    result.Append(String.Format("[{0}].[{1}] AS '{2}'", column.TableName, column.Name,
+                                                column.Description));
+                    if (groupBycolumns.Length > 0) groupBycolumns.Append(", ");
+                    groupBycolumns.Append(String.Format("[{0}].[{1}]", column.TableName, column.Name));
+                    if(!String.IsNullOrEmpty(column.Other))
+                    {
+                        if (orderBycolumns.Length > 0) orderBycolumns.Append(", ");
+                        orderBycolumns.Append(column.Other);
+                    }
+                } 
+                else
+                {
+                    result.Append(String.Format("{0} AS '{1}'", column.Name, column.Description));
+                    if (column.GroupBy)
+                    {
+                        hasGroupBy = true;
+                    }
+                    else
+                    {
+                        if (groupBycolumns.Length > 0) groupBycolumns.Append(", ");
+                        groupBycolumns.Append(column.Other);
+                    }
                 }
-                result.Append(String.Format("[{0}].[{1}] AS '{2}'", column.TableName, column.Name, column.Description));
             }
             result.Insert(0, "SELECT ");
             result.Append(" FROM ");
@@ -114,10 +165,40 @@ namespace DynamicQuery.Logic.QueryBuilder
             {
                 result.Append(!String.IsNullOrEmpty(table.SqlFormat) ? table.SqlFormat : table.Name);
             }
+            if(!String.IsNullOrEmpty(WhereStatement))
+            {
+                result.Append(String.Format(" WHERE {0} ", WhereStatement));
+            }
+            if(hasGroupBy)
+            {
+                result.Append(String.Format(" GROUP BY {0}", groupBycolumns.ToString()));
+            }
+            if(OrderByStatement.Length > 0)
+            {
+                result.Append(String.Format(" ORDER BY {0}", OrderByStatement.ToString()));
+            }
 
             return result.ToString();
         }
-
+        public void AddWhereTable(string tableName)
+        {
+            if (Tables.Count > 1)
+            {
+                AddTableWithAssociation(Tables[0].Name, tableName);
+            }
+        }
+        public void AddOrderByTable(string tableName)
+        {
+            if (Tables.Count > 1)
+            {
+                AddTableWithAssociation(Tables[0].Name, tableName);
+            }
+        }
+        public void AddOrderBy(string columnName, string tableName, string direction)
+        {
+            if (OrderByStatement.Length > 0) OrderByStatement.Append(", ");
+            OrderByStatement.Append(String.Format("[{0}].[{1}] {2}", tableName, columnName, direction));
+        }
         /*public void AddOrderBy(string field, Sorting sortOrder)
         {
             if (OrderByClauses.SingleOrDefault(w => w.FieldName == field) == null)

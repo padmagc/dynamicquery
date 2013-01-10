@@ -169,10 +169,14 @@ function OnShowStepCallback(obj) {
                     ;        
         $('#queryDataResult').html('');
         $('#queryDataResult').html('Lekérdezés adatainak generálása...');
+        var w = '';
+        if(sqlfilter.selectedColumns.length > 0) {
+            w = sqlfilter.toUserFriendlyString();
+        }
         $.ajax({
             type: "POST",
             url: "Services/Query.asmx/GenerateQuery",
-            data: JSON.stringify({ 'query': actualQuery }),
+            data: JSON.stringify({ 'query': actualQuery, 'whereStatement': w }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: (function (data, status) {
@@ -347,23 +351,40 @@ function gridColumnsFunction(functionname, data) {
     $.Utils.logToConsole("Call " + functionname + " method", data.Id);
     switch (functionname) {
         case 'addcolumn':
-            var ac = actualQuery.Columns.filter(function (element) { return element.ColumnId == selectedColumn.Id; });
+            var calculated = data.Calculated;
+            var ac = actualQuery.Columns.filter(function (element) { return element.ColumnId == selectedColumn.Id && element.Calculated == calculated; });
             if (ac.length > 0) {
                 ac[0].IsSelected = true;
             } else {
-                actualQuery.Columns.push({
-                    TableId: ddlTable.GetValue(),
-                    TableName: ddlTable.GetText(),
-                    ColumnId: data.Id,
-                    ColumnName: data.Name,
-                    Calculated: data.Calculated,
-                    IsSelected: true,
-                    IsOrderBy: false,
-                    IsWhere: false,
-                    WhereCounter: 0,
-                    Direction: null,
-                    Position: null
-                });
+                if(calculated) {
+                    actualQuery.Columns.push({
+                        TableId: ddlTable.GetValue(),
+                        TableName: ddlTable.GetText(),
+                        ColumnId: data.Id,
+                        ColumnName: data.Sql,
+                        Calculated: data.Calculated,
+                        IsSelected: true,
+                        IsOrderBy: false,
+                        IsWhere: false,
+                        WhereCounter: 0,
+                        Direction: null,
+                        Position: null
+                    });
+                } else {
+                    actualQuery.Columns.push({
+                        TableId: ddlTable.GetValue(),
+                        TableName: ddlTable.GetText(),
+                        ColumnId: data.Id,
+                        ColumnName: data.Name,
+                        Calculated: data.Calculated,
+                        IsSelected: true,
+                        IsOrderBy: false,
+                        IsWhere: false,
+                        WhereCounter: 0,
+                        Direction: null,
+                        Position: null
+                    });
+                }
             }
             datamoduleTable.GetColumns(Callback_ShowColumns, ddlTable.GetValue(), ddlColumnType.GetValue(), ddlColumnSubType.GetValue());
             break;
