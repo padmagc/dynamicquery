@@ -5,17 +5,16 @@ using System.Text;
 
 namespace DynamicQuery.Entity.QueryBuilder
 {
-    public class DynamicQueryColumn
+    public class DynamicQueryWhere
     {
         public int Id { get; set; }
         public int TableId { get; set; }
         public string TableName { get; set; }
         public int ColumnId { get; set; }
         public string ColumnName { get; set; }
-        public bool Calculated { get; set; }
-        public bool IsSelected { get; set; }
-        public bool IsOrderBy { get; set; }
-        public string Direction { get; set; }
-        public int? Position { get; set; }
+        public string Operator { get; set; }
+        public string Data { get; set; }
+        public int GroupLevel { get; set; }
+        public string GroupOperator { get; set; }
     }
 }

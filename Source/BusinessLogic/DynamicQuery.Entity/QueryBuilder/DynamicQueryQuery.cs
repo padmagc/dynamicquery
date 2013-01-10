@@ -13,12 +13,14 @@ namespace DynamicQuery.Entity.QueryBuilder
         public string Description { get; set; }
         public bool Active { get; set; }
         public List<DynamicQueryColumn> Columns { get; set; }
+        public List<DynamicQueryWhere> Where { get; set; }
         #endregion
 
         #region Konstruktor
         public DynamicQueryQuery()
         {
             Columns = new List<DynamicQueryColumn>();
+            Where = new List<DynamicQueryWhere>();
         }
         #endregion
     }
