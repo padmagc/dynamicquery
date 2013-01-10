@@ -74,16 +74,34 @@ namespace DynamicQuery.Logic.Mapping
                             ColumnName = column.ColumnName,
                             Calculated = column.Calculated,
                             IsSelected = column.IsSelected,
-                            IsWhere = column.IsWhere,
-                            Operator = column.Operator,
-                            Data = column.Data,
-                            GroupLevel = column.GroupLevel,
-                            GroupOperator = column.GroupOperator,
                             IsOrderBy = column.IsOrderBy,
                             Direction = column.Direction,
                             Position = column.Position
                         }
                     );
+                }
+            }
+
+            if(!query.DynamicQueryWhere.IsLoaded)
+            {
+                query.DynamicQueryWhere.Load();
+            }
+
+            if(query.DynamicQueryWhere != null)
+            {
+                foreach (var whereStatement in query.DynamicQueryWhere)
+                {
+                    entity.Where.Add(new DynamicQueryWhere
+                                         {
+                                             Operator = whereStatement.Operator,
+                                             Data = whereStatement.Data,
+                                             GroupLevel = whereStatement.GroupLevel,
+                                             GroupOperator = whereStatement.GroupOperator,
+                                             ColumnId = whereStatement.ColumnId,
+                                             ColumnName = whereStatement.ColumnName,
+                                             TableName = whereStatement.TableName,
+                                             TableId = whereStatement.TableId
+                                         });
                 }
             }
 
