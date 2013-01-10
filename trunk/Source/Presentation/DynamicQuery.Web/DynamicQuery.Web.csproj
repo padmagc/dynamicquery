@@ -58,6 +58,7 @@
     <Content Include="Column.aspx" />
     <Content Include="ColumnType.aspx" />
     <Content Include="Documentation.aspx" />
+    <Content Include="Documentation\QBDatabaseDocumentation.xml" />
     <Content Include="Query.aspx" />
     <Content Include="Scripts\Control\QBDropDownModule.js" />
     <Content Include="Scripts\Control\QBGridModule.js" />

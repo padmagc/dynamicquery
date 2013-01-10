@@ -81,6 +81,9 @@
 		                <li class="ui-state-default ui-corner-top">
 		                    <a href="CalculatedColumn.aspx">Összerakott oszlop</a>
 		                </li>
+		                <li class="ui-state-default ui-corner-top">
+		                    <a href="Query.aspx">Lekérdezés varázsló</a>
+		                </li>
 		            </ul> 
 		            <div id="main" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
 		                <div id="info" style="visibility: hidden">
