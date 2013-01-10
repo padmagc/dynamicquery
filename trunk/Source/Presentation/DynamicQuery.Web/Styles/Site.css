@@ -19,3 +19,16 @@ form select { float: right; width: 74%; padding: 5px }
 form label { float: left; display: block; margin: 9px 0px 7px 0px; width: 15% }
 form .label-select { float: left; display: block; margin: 9px 0px 7px 0px; width: 15% }
 form textarea { width: 100%; height: 70px; /*margin-left: 80px;*/ float: right; }
+
+
+table.qbtable { border: solid 1px #e0e0e0; background-color: #f7f7f7; border-collapse:collapse}
+table.qbtable th { text-align: left; }
+table.qbtable td { vertical-align: top; border: 1px solid #e0e0e0 }	
+table.qbtable td.first { width: 20px; }
+
+.biggerbutton {
+    width: 20%
+}
+.biggertext {
+    font-weight: bold
+}

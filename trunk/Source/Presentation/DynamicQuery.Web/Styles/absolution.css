@@ -1904,6 +1904,7 @@ button {
   background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#d7d7d7));
   background: -o-linear-gradient(0% 100% 90deg, #d7d7d7, #f6f6f6);
   background: -ms-linear-gradient(0% 100% 90deg, #d7d7d7, #f6f6f6);
+
 }
 /* line 5, ../development/_interaction.scss */
 .ui-button:hover, input[type='button']:hover,
@@ -2770,6 +2771,7 @@ button::-moz-focus-inner {
 /* line 92, ../development/jquery/_dialog.scss */
 .ui-dialog .ui-dialog-titlebar a .ui-icon {
   background-image: url(images/ui-icons_ffffff_256x240.png);
+  background-position: -96px -128px;
 }
 /* line 5, ../development/_interaction.scss */
 .ui-dialog .ui-dialog-titlebar a:hover, .ui-dialog .ui-dialog-titlebar a.ui-state-hover {

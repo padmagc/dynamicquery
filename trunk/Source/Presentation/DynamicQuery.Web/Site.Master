@@ -6,7 +6,7 @@
     <title>QB Report Designer</title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/absolution.css" rel="stylesheet" type="text/css" />
-    <link href="~/Styles/absolution.mobile.css" rel="stylesheet" type="text/css" />
+    
     <link href="~/Styles/smart_wizard.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/xFilter.css" rel="stylesheet" type="text/css" />
     
