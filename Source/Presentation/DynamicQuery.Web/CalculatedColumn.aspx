@@ -21,7 +21,7 @@
             </td>
         </tr>
     </script>
-    <div id="ccdialog" title="User Registration">
+    <div id="ccdialog" title="Összerakott mező">
 			<div id="accordion">
 				<form action="">
 					<h3><a href="#" id="dialogColumnData">Oszlop adatok</a></h3>
