@@ -58,6 +58,7 @@
     <Content Include="Column.aspx" />
     <Content Include="ColumnType.aspx" />
     <Content Include="Documentation.aspx" />
+    <Content Include="Query.aspx" />
     <Content Include="Scripts\Control\QBDropDownModule.js" />
     <Content Include="Scripts\Control\QBGridModule.js" />
     <Content Include="Scripts\Core\Constant.js" />
@@ -67,6 +68,7 @@
     <Content Include="Scripts\jquery-fieldselection.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-uniform.js" />
+    <Content Include="Scripts\jquery.smartWizard-2.0.js" />
     <Content Include="Scripts\jquery.stepy.js" />
     <Content Include="Scripts\jquery.tmpl.js" />
     <Content Include="Scripts\json2.min.js" />
@@ -75,14 +77,17 @@
     <Content Include="Scripts\Module\ColumnTypeModule.js" />
     <Content Include="Scripts\Control\QBDialogWindowModule.js" />
     <Content Include="Scripts\Module\QueryBuilderModule.js" />
+    <Content Include="Scripts\Module\QueryModule.js" />
     <Content Include="Scripts\Module\TableAndColumnModule.js" />
     <Content Include="Scripts\Pages\CalculatedColumn.js" />
     <Content Include="Scripts\Pages\Column.js" />
     <Content Include="Scripts\Pages\ColumnType.js" />
     <Content Include="Scripts\Pages\Default.js" />
     <Content Include="Scripts\Pages\Documentation.js" />
+    <Content Include="Scripts\Pages\Query.js" />
     <Content Include="Scripts\xFilter.js" />
     <Content Include="Services\ColumnType.asmx" />
+    <Content Include="Services\Query.asmx" />
     <Content Include="Services\TableAndColumn.asmx" />
     <Content Include="Styles\absolution.css" />
     <Content Include="Styles\absolution.mobile.css" />
@@ -93,6 +98,7 @@
     <Content Include="Styles\images\icons-18-white.png" />
     <Content Include="Styles\images\icons-36-black.png" />
     <Content Include="Styles\images\icons-36-white.png" />
+    <Content Include="Styles\images\loader.gif" />
     <Content Include="Styles\images\selector.png" />
     <Content Include="Styles\images\ui-icons_222222_256x240.png" />
     <Content Include="Styles\images\ui-icons_eeeeee_256x240.png" />
@@ -100,6 +106,7 @@
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Styles\smart_wizard.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -151,8 +158,19 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query.aspx.cs">
+      <DependentUpon>Query.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Query.aspx.designer.cs">
+      <DependentUpon>Query.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Services\ColumnType.asmx.cs">
       <DependentUpon>ColumnType.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\Query.asmx.cs">
+      <DependentUpon>Query.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Services\TableAndColumn.asmx.cs">

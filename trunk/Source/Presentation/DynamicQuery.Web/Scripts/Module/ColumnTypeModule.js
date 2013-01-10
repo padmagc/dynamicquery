@@ -1,11 +1,11 @@
 ﻿var DQ = DQ || {};
 
 DQ.ColumnType = function () {
-    var/********** Variables **********/
+    var /********** Variables **********/
         className = 'DQ.ColumnType',
         url = "Services/ColumnType.asmx/",
-        /********** GET field types **********/
-        getSubType = function(typeid, callback) {
+    /********** GET field types **********/
+        getSubType = function (typeid, callback) {
             if (!$.localStorage.getItem(CONST_FieldType)) {
                 $.Utils.logToConsole(className, 'get data from database');
                 $.ajax({
@@ -14,7 +14,7 @@ DQ.ColumnType = function () {
                     data: null,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    success: (function(data, status) {
+                    success: (function (data, status) {
                         $.localStorage.setItem(CONST_FieldType, data.d);
                         $.each(data.d, function (i, v) {
                             if (v.Id == typeid) {
@@ -22,18 +22,20 @@ DQ.ColumnType = function () {
                             }
                         });
                     }),
-                    error: (function(response, status, error) {
+                    error: (function (response, status, error) {
                         $.Utils.showError(response.statusText);
                     })
                 });
             }
-            $.each($.localStorage.getItem(CONST_FieldType), function(i, v) {
+            $.each($.localStorage.getItem(CONST_FieldType), function (i, v) {
                 if (v.Id == typeid) {
                     callback(v.SubType);
                 }
             });
+            // if no callback
+            callback([]);
         },
-        getType = function(callback) {
+        getType = function (callback) {
             if (!$.localStorage.getItem(CONST_FieldType)) {
                 $.Utils.logToConsole(className, 'get data from database');
                 $.ajax({
@@ -42,11 +44,11 @@ DQ.ColumnType = function () {
                     data: null,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    success: (function(data, status) {
+                    success: (function (data, status) {
                         $.localStorage.setItem(CONST_FieldType, data.d);
                         callback(data.d);
                     }),
-                    error: (function(response, status, error) {
+                    error: (function (response, status, error) {
                         $.Utils.showError(response.statusText);
                     })
                 });
@@ -55,7 +57,7 @@ DQ.ColumnType = function () {
                 callback($.localStorage.getItem(CONST_FieldType));
             }
         },
-        setTypeStatus = function(id, callback) {
+        setTypeStatus = function (id, callback) {
             var parameters = "{" + "id:" + id + "}";
             $.ajax({
                 type: "POST",
@@ -73,7 +75,7 @@ DQ.ColumnType = function () {
                 })
             });
         },
-        setSubTypeStatus = function(id, callback) {
+        setSubTypeStatus = function (id, callback) {
             var parameters = "{" + "id:" + id + "}";
             $.ajax({
                 type: "POST",
@@ -127,7 +129,7 @@ DQ.ColumnType = function () {
                 })
             });
         };
-        return {
+    return {
         GetColumType: getType,
         GetColumSubType: getSubType,
         SetTypeStatus: setTypeStatus,

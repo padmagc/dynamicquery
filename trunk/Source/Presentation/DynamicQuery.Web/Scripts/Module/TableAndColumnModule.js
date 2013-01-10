@@ -30,6 +30,60 @@ DQ.TableAndColumn = function () {
                 callback(collectData($.localStorage.getItem(columnConstans), tableId, typeId, subTypeId));
             }
         },
+        getAllColumns = function (callback, tableId, typeId, subTypeId) {
+            if (!$.localStorage.getItem(columnConstans)) {
+                $.Utils.logToConsole(className, 'get table data from database');
+                $.ajax({
+                    type: "POST",
+                    url: url + 'GetTables',
+                    data: null,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $.localStorage.setItem(columnConstans, data.d);
+                        callback(collectData(data.d, tableId, typeId, subTypeId));
+                    },
+                    error: (function (response, status, error) {
+                        $.Utils.showError(className + "::" +response.statusText);
+                    })
+                });
+            } else {
+                $.Utils.logToConsole(className, 'get table data from cache');
+                /* Search colums */
+                callback(collectAllData($.localStorage.getItem(columnConstans), tableId, typeId, subTypeId));
+            }
+        },
+        collectAllData = function (tables, id, typeId, subTypeId) {
+            var t = tables.filter(function (element) { return element.Id == id; })[0];
+            if (t == null || t === 'undefined') return null;
+
+            var records = {
+                Id: id,
+                Columns: t.Columns.filter(function (element) {
+                    if (typeId == -1) {
+                        return true;
+                    } else {
+                        if (subTypeId > -1) {
+                            return element.Type == typeId && element.SubType == subTypeId;
+                        } else {
+                            return element.Type == typeId;
+                        }
+                    }
+                }),
+                CalculatedColumns: t.CalculatedColumns.filter(function (element) {
+                    if (typeId == -1) {
+                        return true;
+                    } else {
+                        if (subTypeId > -1) {
+                            return element.Type == typeId && element.SubType == subTypeId;
+                        } else {
+                            return element.Type == typeId;
+                        }
+                    }
+                })
+            };
+            return records;
+        },
         collectData = function (tables, id, typeId, subTypeId) {
             var t = tables.filter(function (element) { return element.Id == id; })[0];
             if (t == null || t === 'undefined') return null;
@@ -47,7 +101,7 @@ DQ.TableAndColumn = function () {
                         }
                     }
                 }),
-                /*CalculatedColumns: t.CalculatedColumns.filter(function (element) {
+                CalculatedColumns: t.CalculatedColumns.filter(function (element) {
                     if (typeId == -1) {
                         return true;
                     } else {
@@ -57,7 +111,7 @@ DQ.TableAndColumn = function () {
                             return element.Type == typeId;
                         }
                     }
-                })*/
+                })
             };
             return records;
         },

@@ -7,10 +7,11 @@
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/absolution.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/absolution.mobile.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/smart_wizard.css" rel="stylesheet" type="text/css" />
     
     <script type="text/javascript" src="/Scripts/jquery-1.7.2.js"></script>
     <script type="text/javascript" src="/Scripts/jquery-ui.js"></script>
-    <script type="text/javascript" src="/Scripts/jquery.stepy.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.smartWizard-2.0.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.tmpl.js"></script>
     <script type="text/javascript" src="/Scripts/jquery-uniform.js"></script>
     <script type="text/javascript" src="/Scripts/jquery-fieldselection.js"></script>
@@ -28,6 +29,7 @@
     <script type="text/javascript" src="/Scripts/Module/TableAndColumnModule.js"></script>
     <script type="text/javascript" src="/Scripts/Module/CalculatedColumnModule.js"></script>
     <script type="text/javascript" src="/Scripts/Module/QueryBuilderModule.js"></script>
+    <script type="text/javascript" src="/Scripts/Module/QueryModule.js"></script>
     
     <script type="text/javascript" src="/Scripts/Pages/Default.js"></script>
     <script type="text/javascript" src="/Scripts/Pages/Documentation.js"></script>
