@@ -91,7 +91,6 @@
     <Content Include="Services\Query.asmx" />
     <Content Include="Services\TableAndColumn.asmx" />
     <Content Include="Styles\absolution.css" />
-    <Content Include="Styles\absolution.mobile.css" />
     <Content Include="Styles\images\ajax-loader.gif" />
     <Content Include="Styles\images\ajax-loader.png" />
     <Content Include="Styles\images\corner.png" />
