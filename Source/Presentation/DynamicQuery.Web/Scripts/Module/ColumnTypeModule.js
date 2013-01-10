@@ -6,6 +6,7 @@ DQ.ColumnType = function () {
         url = "Services/ColumnType.asmx/",
     /********** GET field types **********/
         getSubType = function (typeid, callback) {
+            var successCallback = false;
             if (!$.localStorage.getItem(CONST_FieldType)) {
                 $.Utils.logToConsole(className, 'get data from database');
                 $.ajax({
@@ -18,6 +19,7 @@ DQ.ColumnType = function () {
                         $.localStorage.setItem(CONST_FieldType, data.d);
                         $.each(data.d, function (i, v) {
                             if (v.Id == typeid) {
+                                successCallback = true;
                                 callback(v.SubType);
                             }
                         });
@@ -29,11 +31,14 @@ DQ.ColumnType = function () {
             }
             $.each($.localStorage.getItem(CONST_FieldType), function (i, v) {
                 if (v.Id == typeid) {
+                    successCallback = true;
                     callback(v.SubType);
                 }
             });
             // if no callback
-            callback([]);
+            if(successCallback==false) {
+                callback([]);   
+            }
         },
         getType = function (callback) {
             if (!$.localStorage.getItem(CONST_FieldType)) {
@@ -71,7 +76,7 @@ DQ.ColumnType = function () {
                 }),
                 error: (function Error(request, status, error) {
                     // Hiba
-                    alert(request.statusText);
+                    $.Utils.showError(request.statusText);
                 })
             });
         },
@@ -89,7 +94,7 @@ DQ.ColumnType = function () {
                 }),
                 error: (function Error(request, status, error) {
                     // Hiba
-                    alert(request.statusText);
+                    $.Utils.showError(request.statusText);
                 })
             });
         },
@@ -107,7 +112,7 @@ DQ.ColumnType = function () {
                 }),
                 error: (function Error(request, status, error) {
                     // Hiba
-                    alert(request.statusText);
+                    $.Utils.showError(request.statusText);
                 })
             });
         },
@@ -125,7 +130,7 @@ DQ.ColumnType = function () {
                 }),
                 error: (function Error(request, status, error) {
                     // Hiba
-                    alert(request.responseText);
+                    $.Utils.showError(request.responseText);
                 })
             });
         };
