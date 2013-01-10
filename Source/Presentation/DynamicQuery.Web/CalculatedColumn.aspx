@@ -21,7 +21,7 @@
             </td>
         </tr>
     </script>
-    <div id="ccdialog" title="Összerakott mező">
+    <div id="ccdialog" title="Dinamikus mező">
 			<div id="accordion">
 				<form action="">
 					<h3><a href="#" id="dialogColumnData">Oszlop adatok</a></h3>
@@ -47,29 +47,31 @@
 
     <!-- Templates -->
     <h2>
-        Összerakot oszlop
+        Dinamikus oszlop
     </h2>
     <p>
+        <form class="simple">
         <label>Tábla :</label>
         <select id="Table"></select>
+        </form>
     </p>
     <p>
-        <div id="placeholderColumn" style="margin-top: 10px; margin-bottom: 10px">
-            <table cellspacing="1" style="width: 99%" >
+        <div id="placeholderColumn" style="margin-top: 30px; margin-bottom: 10px">
+            <table cellspacing="1"  class="qbtable"  style="width: 99%" >
                 <thead>
                     <tr>
-                        <th style="text-align:left !important;  width: 20% !important; padding-left: 5px;">
+                        <th class="ui-state-default"  style="text-align:left !important;  width: 20% !important; padding-left: 5px;">
                             Név
                         </th>
-                        <th style="text-align:left !important; width: 30% !important; padding-left: 5px;">
+                        <th class="ui-state-default"  style="text-align:left !important; width: 30% !important; padding-left: 5px;">
                             Leírás
                         </th>
-                        <th style="text-align:left !important; width: 30% !important; padding-left: 5px;">
+                        <th class="ui-state-default"  style="text-align:left !important; width: 30% !important; padding-left: 5px;">
                             SQL
                         </th>
-                        <th colspan="2" style="text-align:center !important; width: 20% !important; padding-left: 5px;">
+                        <th class="ui-state-default"  colspan="2" style="text-align:center !important; width: 20% !important; padding-left: 5px;">
                             Funkciók
-                        </th>
+                        </>
                     </tr>
                 </thead>
                 <tbody id="rowPlaceholder">
@@ -78,8 +80,8 @@
         </div>
     </p>
     <p>
-        <button type="button" id="btnNewCalculatedColumn" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" style="visibility: hidden" role="button" aria-disabled="false">
-            <span class="ui-button-text">Új összreakott oszlop</span>
+        <button type="button" id="btnNewCalculatedColumn" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only biggerbutton" style="visibility: hidden" role="button" aria-disabled="false">
+            <span class="ui-button-text biggertext">Új összreakott oszlop</span>
         </button>
     </p>
 </asp:Content>

@@ -79,7 +79,7 @@
 		                    <a href="Column.aspx">Oszlop</a>
 		                </li>
 		                <li class="ui-state-default ui-corner-top">
-		                    <a href="CalculatedColumn.aspx">Összerakott oszlop</a>
+		                    <a href="CalculatedColumn.aspx">Dinamikus oszlop</a>
 		                </li>
 		                <li class="ui-state-default ui-corner-top">
 		                    <a href="Query.aspx">Lekérdezés varázsló</a>
