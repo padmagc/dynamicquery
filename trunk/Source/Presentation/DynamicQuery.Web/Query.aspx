@@ -90,14 +90,6 @@
                     </span>
                 </a>
   			</li>
-  			<li>
-  			    <a href="#step-3">
-                    <span class="stepDesc">
-                        <label>3</label>
-                        <small>Cikk csoportok</small>
-                    </span>
-                </a>
-  			</li>
             <li>
   			    <a href="#step-4">
                     <span class="stepDesc">
@@ -163,10 +155,6 @@
                     </td>
                 </tr>
             </table>
-        </div>	
-        <div id="step-3">
-            <h2 class="StepTitle">Cikk csoport választás</h2>
-
         </div>	
         <div id="step-4">
             <h2 class="StepTitle">Mező, feltétel vagy rendezés hozzáadása a lekérdezéshez</h2>

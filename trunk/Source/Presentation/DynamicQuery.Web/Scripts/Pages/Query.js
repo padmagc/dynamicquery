@@ -148,9 +148,6 @@ function InitForm() {
 function LeaveAStepCallback(obj) {
     $.Utils.hideInfo();
     var stepNum = obj.attr('rel');
-    if(stepNum == 4) {
-        
-    }
     return ValidateSteps(stepNum);
 }
 /*
@@ -158,7 +155,7 @@ function LeaveAStepCallback(obj) {
 */
 function OnShowStepCallback(obj) {
     var stepNum = obj.attr('rel');
-    if(stepNum == 5) {
+    if(stepNum == 4) {
     var html = '<b>Lekérdezés neve :</b> {0}<br />' +
                     '<b>Lekérdezés leírása :</b> {1}<br />' +
                     '<br />' +

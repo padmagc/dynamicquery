@@ -87,6 +87,24 @@ namespace DynamicQuery.Logic.Mapping
                     );
                 }
             }
+            if (query.DynamicQueryQueryCalculatedColumn != null)
+            {
+                foreach (var column in query.DynamicQueryQueryCalculatedColumn)
+                {
+                    entity.Columns.Add(
+                        new DynamicQueryColumn
+                        {
+                            Id = column.Id,
+                            TableId = column.TableId,
+                            TableName = column.TableName,
+                            ColumnId = column.ColumnId,
+                            ColumnName = column.ColumnName,
+                            Calculated = column.Calculated,
+                            IsSelected = column.IsSelected,
+                        }
+                    );
+                }
+            }
 
             return entity;
         }
