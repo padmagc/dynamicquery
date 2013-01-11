@@ -110,7 +110,7 @@ namespace DynamicQuery.Logic.QueryBuilder
 
             if (routeToMainTable.Depth == int.MaxValue)
             {
-                Warnings.Add(String.Format("Can't connect these tables : {0}, {1}", mainTable, joinedTable));
+                Warnings.Add(String.Format("Nincs kapcsolat a táblák között : {0}, {1}", mainTable, joinedTable));
                 sql.Append(String.Format(", {0}", joinedTable));
             }
             else
@@ -131,14 +131,19 @@ namespace DynamicQuery.Logic.QueryBuilder
             var hasGroupBy = false;
             foreach (var column in Columns)
             {
-                if(result.Length > 0) result.Append(", ");
-                
+               
                 if (!column.CalculatedField)
                 {
-                    result.Append(String.Format("[{0}].[{1}] AS '{2}'", column.TableName, column.Name,
-                                                column.Description));
+                    if (column.Id > 0)
+                    {
+                        if (result.Length > 0) result.Append(", ");
+                        result.Append(String.Format("[{0}].[{1}] AS '{2}'", column.TableName, column.Name,
+                            !String.IsNullOrEmpty(column.Description) ? column.Description : String.Format("{0}{1}", column.TableName, column.Name)));
+                    }
+
                     if (groupBycolumns.Length > 0) groupBycolumns.Append(", ");
                     groupBycolumns.Append(String.Format("[{0}].[{1}]", column.TableName, column.Name));
+                    
                     if(!String.IsNullOrEmpty(column.Other))
                     {
                         if (orderBycolumns.Length > 0) orderBycolumns.Append(", ");
@@ -147,6 +152,7 @@ namespace DynamicQuery.Logic.QueryBuilder
                 } 
                 else
                 {
+                    if (result.Length > 0) result.Append(", ");
                     result.Append(String.Format("{0} AS '{1}'", column.Name, column.Description));
                     if (column.GroupBy)
                     {
@@ -194,10 +200,20 @@ namespace DynamicQuery.Logic.QueryBuilder
                 AddTableWithAssociation(Tables[0].Name, tableName);
             }
         }
-        public void AddOrderBy(string columnName, string tableName, string direction)
+        public void AddOrderBy(string columnName, string tableName, string direction, bool isSelected)
         {
             if (OrderByStatement.Length > 0) OrderByStatement.Append(", ");
             OrderByStatement.Append(String.Format("[{0}].[{1}] {2}", tableName, columnName, direction));
+            if(!isSelected)
+            {
+                Columns.Add(new DynamicQueryTableColumn
+                                {
+                                    TableName = tableName,
+                                    Name = columnName,
+                                    Id = -1,
+                                    CalculatedField = false
+                                });
+            }
         }
         /*public void AddOrderBy(string field, Sorting sortOrder)
         {

@@ -76,10 +76,11 @@ namespace DynamicQuery.Web.Services
             }
         }
         [WebMethod(true)]
-        public string GenerateQuery(Entity.QueryBuilder.DynamicQueryQuery query, string whereStatement)
+        public List<string> GenerateQuery(Entity.QueryBuilder.DynamicQueryQuery query, string whereStatement)
         {
             try
             {
+                var result = new List<string>();
                 var builder = new QueryBuilder();
                 foreach (var column in query.Columns)
                 {
@@ -87,6 +88,7 @@ namespace DynamicQuery.Web.Services
                     {
                         builder.AddColumn(new DynamicQueryTableColumn
                                               {
+                                                  Id = column.Id == 0 ? column.ColumnId : column.Id,
                                                   CalculatedField = column.Calculated,
                                                   Name = column.ColumnName,
                                                   TableName = column.TableName
@@ -101,11 +103,27 @@ namespace DynamicQuery.Web.Services
                     {
                         builder.AddOrderByTable(column.TableName);
                         builder.AddOrderBy(column.ColumnName, column.TableName,
-                                           column.Direction == "Csökkenő" ? "ASC" : "DESC");
+                                           column.Direction == "Csökkenő" ? "ASC" : "DESC",
+                                           column.IsSelected);
                     }
                 }
                 builder.WhereStatement = whereStatement;
-                return builder.ToString();
+
+                result.Add(builder.ToString());
+                string w = "";
+                if (builder.Warnings.Count > 0)
+                {
+                    foreach (var warning in builder.Warnings)
+                    {
+                        if (!w.Contains(warning))
+                        {
+                            if (w.Length > 0) w += ", ";
+                            w += warning;
+                        }
+                    }
+                    result.Add(w);
+                }
+                return result;
             }
             catch (Exception exception)
             {

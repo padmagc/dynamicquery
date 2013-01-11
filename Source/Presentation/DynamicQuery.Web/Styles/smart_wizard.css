@@ -140,8 +140,8 @@
 }
 .swMain ul.anchor li a.selected{
   color:#F8F8F8;
-  background: #EA8511;  /* EA8511 */
-  border: 1px solid #EA8511;
+  background: #268ac1;  /* EA8511 */
+  border: 1px solid #268ac1;
   cursor:text;
   -moz-box-shadow: 5px 5px 8px #888;
   -webkit-box-shadow: 5px 5px 8px #888;
@@ -149,7 +149,7 @@
 }
 .swMain ul.anchor li a.selected:hover {
   color:#F8F8F8;  
-  background: #EA8511;  
+  background: #49a7db;  
 }
 
 .swMain ul.anchor li a.done { 
@@ -223,7 +223,7 @@
   -webkit-border-radius: 5px;    
 }
 .swMain .buttonFinish {
-  display:block;
+  display:none;
   float:right;
   margin:5px 10px 0 3px;
   padding:5px;

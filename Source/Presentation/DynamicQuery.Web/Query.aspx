@@ -41,7 +41,6 @@
                     <a href="javascript:void(0);" class="addcolumn">Kiválaszt</a>
                 {{/if}}                
                 {{if Calculated == false}}
-                <a href="javascript:void(0);" class="where" >Feltétel</a>
                     {{if IsOrderBy == true }}
                         <a href="javascript:void(0);" class="removeorderby" >Nem rendez</a>
                     {{else}}
@@ -49,6 +48,24 @@
                     {{/if}}                
                 {{/if}}
             {{/if}}
+            </td>
+        </tr>
+     </script>
+    <script id="columnRowTemplate0" type="text/x-jquery-tmpl">
+        {{if Calculated == true}}
+            <tr style="background-color: #E0ECF8">
+        {{else}}
+            <tr>
+        {{/if}}
+            <td style="padding-left: 5px;">${TableName}</td>
+            <td style="padding-left: 5px;">${ColumnName}</td>
+            <td style="text-align: center !important; padding-left: 5px;">
+                {{if IsSelected == true }}
+                    <a href="javascript:void(0);" class="removecolumn">Töröl</a>
+                {{/if}}
+                {{if IsOrderBy == true }}
+                    <a href="javascript:void(0);" class="removeorderby" >Nem rendez</a>
+                {{/if}}                
             </td>
         </tr>
      </script>
@@ -72,10 +89,10 @@
         </form>
     </div>
     <!-- Dialog -->
-    <div id="wizard" class="swMain">
+    <div id="wizard" class="swMain" style="font-size: 0.9em">
         <ul>
   			<li>
-  			    <a href="#step-1">
+  			    <a href="#step-1" id="firststep">
                     <span class="stepDesc">
                         <label>1</label>
                         <small>Mentett lekérdezések</small>
@@ -90,11 +107,19 @@
                     </span>
                 </a>
   			</li>
+  			<li>
+  			    <a href="#step-3">
+                    <span class="stepDesc">
+                        <label>3</label>
+                        <small>Lekérdezés mezői</small>
+                    </span>
+                </a>
+  			</li>
             <li>
   			    <a href="#step-4">
                     <span class="stepDesc">
                         <label>4</label>
-                        <small>Táblák és mezők</small>
+                        <small>Oszlop választás</small>
                     </span>
                 </a>
   			</li>
@@ -111,19 +136,19 @@
             <h2 class="StepTitle">Mentett lekérdezések választása / Új lekérdezés létrehozása</h2>
             <p>
                 <div id="placeholderQuery" style="margin-top: 10px; margin-bottom: 10px">
-                    <button type="button" id="btnNewQuery" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
-                        <span class="ui-button-text">Új lekérdezés</span>
+                    <button type="button" id="btnNewQuery" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only biggerbutton" role="button" aria-disabled="false">
+                        <span class="ui-button-text biggertext">Új lekérdezés</span>
                     </button>                    
-                    <table cellspacing="1" style="width: 99%" >
+                    <table cellspacing="1" class="qbtable" style="width: 99%" >
                         <thead>
                             <tr>
-                                <th style="text-align:left !important;  width: 30% !important; padding-left: 5px;">
+                                <th class="ui-state-default" style="text-align:left !important;  width: 30% !important; padding-left: 5px;">
                                     Név
                                 </th>
-                                <th style="text-align:left !important; width: 50% !important; padding-left: 5px;">
+                                <th class="ui-state-default" style="text-align:left !important; width: 50% !important; padding-left: 5px;">
                                     Leírás
                                 </th>
-                                <th colspan="2" style="text-align:center !important; width: 20% !important; padding-left: 5px;">
+                                <th class="ui-state-default" colspan="2" style="text-align:center !important; width: 20% !important; padding-left: 5px;">
                                     Funkciók
                                 </th>
                             </tr>
@@ -156,26 +181,53 @@
                 </tr>
             </table>
         </div>	
-        <div id="step-4">
+        <div id="step-3" >
+            <h2 class="StepTitle">Lekérdezéshez már hozzáadott mezők</h2>
+            <div id="placeholderColumns0" style="margin-top: 10px; margin-bottom: 10px; width: 99%">
+            <table class="qbtable" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th class="ui-state-default"  style="text-align:left !important;  width: 20% !important; padding-left: 5px;">
+                            Tábla
+                        </th>
+                        <th class="ui-state-default"  style="text-align:left !important;  width: 20% !important; padding-left: 5px;">
+                            Név
+                        </th>
+                        <th class="ui-state-default"  colspan="2" style="text-align:center !important; width: 40% !important; padding-left: 5px;">
+                            Funkciók
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="columnRowPlaceholder0">
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div id="step-4" >
             <h2 class="StepTitle">Mező, feltétel vagy rendezés hozzáadása a lekérdezéshez</h2>
             <form>
             <table style="width: 100%;">
                 <tbody>
                     <tr>
-                        <td style="width: 5%;">
-                            <label>Tábla:</label>        
+                        <td style="width: 5%; text-align: right">
+                            <label style="width: 100%;">Tábla:</label>        
                         </td>
-                        <td style="width: 30%;">
+                        <td style="width: 15%;">
                             <select id="Table" style="float: left;width: 100%;"></select>
                         </td>
-                        <td style="width: 5%;">
-                            <label>Típus:</label>        
+                        <td style="width: 15%; text-align: center">
+                            <button type="button" id="btnWhere" style="width: 80%" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only biggerbutton" role="button" aria-disabled="false">
+                                <span class="ui-button-text biggertext">Feltétel</span>
+                            </button>
+                        </td>
+                        <td style="width: 5%; text-align: right">
+                            <label style="width: 100%;">Típus:</label>        
                         </td>
                         <td style="width: 15%;">
                             <select id="ColumnType" style="float: left;width: 100%;"></select>
                         </td>
-                        <td style="width: 7%;">
-                            <label style="width: 60%;">Al típus:</label>        
+                        <td style="width: 8%; text-align: right">
+                            <label style="width: 100%;">Altípus:</label>        
                         </td>
                         <td style="width: 15%;">
                             <select id="ColumnSubType" style="float: left;width: 95%;"></select>
@@ -185,19 +237,19 @@
             </table>
             </form>
             <div id="placeholderColumns" style="margin-top: 10px; margin-bottom: 10px; width: 99%">
-            <table>
+            <table class="qbtable" style="width: 100%">
                 <thead>
                     <tr>
-                        <th style="text-align:left !important;  width: 20% !important; padding-left: 5px;">
+                        <th class="ui-state-default"  style="text-align:left !important;  width: 20% !important; padding-left: 5px;">
                             Név
                         </th>
-                        <th style="text-align:left !important; width: 40% !important; padding-left: 5px;">
+                        <th class="ui-state-default"  style="text-align:left !important; width: 30% !important; padding-left: 5px;">
                             Leírás
                         </th>
-                        <th style="text-align:left !important; width: 30% !important; padding-left: 5px;">
+                        <th class="ui-state-default"  style="text-align:left !important; width: 30% !important; padding-left: 5px;">
                             Egyéb
                         </th>
-                        <th colspan="2" style="text-align:center !important; width: 40% !important; padding-left: 5px;">
+                        <th class="ui-state-default"  colspan="2" style="text-align:center !important; width: 40% !important; padding-left: 5px;">
                             Funkciók
                         </th>
                     </tr>
