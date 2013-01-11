@@ -7,6 +7,7 @@ var ddlColumnType = '';
 var ddlColumnSubType = '';
 /**/
 var gridSavedQueries = '';
+var gridColumns0 = '';
 var gridColumns = '';
 var selectedColumn = '';
 /**/
@@ -22,7 +23,11 @@ function InitForm() {
         onShowStep: OnShowStepCallback,
         enableFinishButton: false
     });
+    $(".buttonPrevious").text('Előző');
+    $(".buttonNext").text('Következő');
+
     $('#btnNewQuery').click(function (e) {
+        $.Utils.hideInfo();
         SetControlsToBase();
         $(".buttonNext").click();
         e.preventDefault();
@@ -35,6 +40,40 @@ function InitForm() {
             datamoduleQuery.NewQuery(actualQuery, Callback_ReloadQueries);
         } else {
             datamoduleQuery.UpdateQuery(actualQuery, Callback_ReloadQueries);
+        }
+    });
+    $('#btnWhere').click(function() {
+        if(ddlTable.GetValue() != -1) {
+            sqlfilter.columns = [];
+            
+            sqlfilter.columns.push({
+                "name": 'Válassz...',
+                "index": -1,
+                "table": ddlTable.GetText(),
+                "tableId": ddlTable.GetValue()
+            });
+            if(sqlfilter.selectedColumns.length > 0) {
+                $.each(sqlfilter.selectedColumns, function(index, element) {
+                    sqlfilter.columns.push({
+                        "name": element.name,
+                        "index": element.id,
+                        "table": element.table,
+                        "tableId": element.tableId
+                    });
+                });
+            }
+            $.each(gridColumns.GetDatasource(), function(index, element) {
+                if(!element.Calculated) {
+                    sqlfilter.columns.push({
+                        "name": element.Name,
+                        "index": element.Id,
+                        "table": ddlTable.GetText(),
+                        "tableId": ddlTable.GetValue()
+                    });
+                }
+            });
+            sqlfilter.reDraw();
+            $('#dialogWhere').dialog('open');
         }
     });
     $('#dialogOrderBy').dialog({
@@ -128,6 +167,9 @@ function InitForm() {
     gridColumns = new DQ.Grid();
     gridColumns.Init($('#placeholderColumns'), $("#columnRowPlaceholder"), $("#columnRowTemplate"), gridColumnsFunction);
 
+    gridColumns0 = new DQ.Grid();
+    gridColumns0.Init($('#placeholderColumns0'), $("#columnRowPlaceholder0"), $("#columnRowTemplate0"), gridColumns0Function);
+
     ddlTable = new DQ.DropDown($('#Table'), 'Id', 'Name');
     ddlColumnType = new DQ.DropDown($('#ColumnType'), 'Id', 'Name');
     ddlColumnSubType = new DQ.DropDown($('#ColumnSubType'), 'Id', 'Name');
@@ -155,7 +197,13 @@ function LeaveAStepCallback(obj) {
 */
 function OnShowStepCallback(obj) {
     var stepNum = obj.attr('rel');
-    if(stepNum == 4) {
+    if(stepNum==3) {
+        gridColumns0.SetDatasource(actualQuery.Columns.filter(function (element) {
+            return element.IsSelected || element.IsOrderBy || element.IsWhere;
+        }));
+
+    }
+    else if(stepNum == 5) {
     var html = '<b>Lekérdezés neve :</b> {0}<br />' +
                     '<b>Lekérdezés leírása :</b> {1}<br />' +
                     '<br />' +
@@ -177,11 +225,22 @@ function OnShowStepCallback(obj) {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: (function (data, status) {
-                $('#queryDataResult').html(
-                html.toString()
-                    .replace('{0}', $('#QueryName').val())
-                    .replace('{1}', $('#QueryDescription').val())
-                    .replace('{2}', data.d));
+                actualQuery.SelectStatement = data.d[0];
+                if(data.d.length == 1) {
+                    $('#queryDataResult').html(
+                        html.toString()
+                            .replace('{0}', $('#QueryName').val())
+                            .replace('{1}', $('#QueryDescription').val())
+                            .replace('{2}', data.d));
+                } else {
+                    html += '<br /><b style=\'color:red;\'>FIGYELMEZTETÉS<b><br />{3}';  
+                     $('#queryDataResult').html(
+                        html.toString()
+                            .replace('{0}', $('#QueryName').val())
+                            .replace('{1}', $('#QueryDescription').val())
+                            .replace('{2}', data.d[0])
+                            .replace('{3}', data.d[1]));
+                }
             }),
             error: (function (response, status, error) {
                 $.Utils.showError(response.statusText);
@@ -223,6 +282,7 @@ function ValidateSteps(step) {
 * 'SavedQueries' grid events
 */
 function gridSavedQueriesGridFunction(functionname, data) {
+    $.Utils.hideInfo();
     $.Utils.logToConsole("Call " + functionname + " method", data.Id);
     switch (functionname) {
         case 'inactive':
@@ -242,8 +302,9 @@ function gridSavedQueriesGridFunction(functionname, data) {
 * Reload queries
 */
 function Callback_ReloadQueries(data) {
-    $("#wizard").selected = 0;
     SetControlsToBase();
+    $.Utils.showSuccess("Sikeres mentés");
+    $("#firstep").click();
     datamoduleQuery.GetQueries(Callback_QueryGetQueries);
 }
 /*
@@ -257,6 +318,9 @@ function Callback_QueryGetQueries(data) {
 */
 function Callback_LoadSelectedQuery(data) {
     SetControlsToBase(data);
+    gridColumns0.SetDatasource(actualQuery.Columns.filter(function (element) {
+        return element.IsSelected || element.IsOrderBy || element.IsWhere;
+    }));
     $(".buttonNext").click();
 }
 /*
@@ -293,7 +357,7 @@ function Event_ChangeTable(data) {
 * - filter columns
 */
 function Event_ChangeColumnType(data) {
-    //datamoduleTable.GetColumns(Callback_ShowColumns, ddlTable.GetValue(), ddlColumnType.GetValue(), ddlColumnSubType.GetValue());
+    datamoduleTable.GetColumns(Callback_ShowColumns, ddlTable.GetValue(), ddlColumnType.GetValue(), ddlColumnSubType.GetValue());
     datamoduleType.GetColumSubType(data, Callback_QueryGetSubType);
 }
 /*
@@ -433,6 +497,31 @@ function gridColumnsFunction(functionname, data) {
             });
             sqlfilter.reDraw();
             $('#dialogWhere').dialog('open');
+            break;
+        default:
+            $.Utils.logToConsole('Warning', 'Unknown function called');
+    }
+}
+function gridColumns0Function(functionname, data) {
+    switch (functionname) {
+        case 'removecolumn':
+            var ac = actualQuery.Columns.filter(function (element) { return element.ColumnId == data.ColumnId; });
+            if (ac.length > 0) {
+                ac[0].IsSelected = false;
+            }
+            gridColumns0.SetDatasource(actualQuery.Columns.filter(function (element) {
+                return element.IsSelected || element.IsOrderBy || element.IsWhere;
+            }));
+
+            break;
+        case 'removeorderby':
+            var c = actualQuery.Columns.filter(function (element) { return element.ColumnId  == data.ColumId; });
+            c[0].IsOrderBy = false;
+            c[0].Direction = null;
+            c[0].Position = null;
+            gridColumns0.SetDatasource(actualQuery.Columns.filter(function (element) {
+                return element.IsSelected || element.IsOrderBy || element.IsWhere;
+            }));
             break;
         default:
             $.Utils.logToConsole('Warning', 'Unknown function called');
