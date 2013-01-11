@@ -188,6 +188,10 @@ namespace DynamicQuery.Logic.QueryBuilder
         }
         public void AddWhereTable(string tableName)
         {
+            if (Tables.SingleOrDefault(w => w.Name == tableName) == null)
+            {
+                Tables.Add(new DynamicQueryTable { Name = tableName });
+            }
             if (Tables.Count > 1)
             {
                 AddTableWithAssociation(Tables[0].Name, tableName);
@@ -195,6 +199,10 @@ namespace DynamicQuery.Logic.QueryBuilder
         }
         public void AddOrderByTable(string tableName)
         {
+            if (Tables.SingleOrDefault(w => w.Name == tableName) == null)
+            {
+                Tables.Add(new DynamicQueryTable { Name = tableName });
+            }
             if (Tables.Count > 1)
             {
                 AddTableWithAssociation(Tables[0].Name, tableName);

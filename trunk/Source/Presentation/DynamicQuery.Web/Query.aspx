@@ -65,7 +65,10 @@
                 {{/if}}
                 {{if IsOrderBy == true }}
                     <a href="javascript:void(0);" class="removeorderby" >Nem rendez</a>
-                {{/if}}                
+                {{/if}}      
+                {{if IsWhere == true }}
+                    Feltételben szerepel
+                {{/if}}      
             </td>
         </tr>
      </script>
