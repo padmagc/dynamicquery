@@ -11,7 +11,7 @@ namespace DynamicQuery.EFTSQLDocumentationGenerator
     class Program
     {
         private const string ConnectionString = "Data Source=.;Initial Catalog=QbPharmaSpec;Integrated Security=true";
-        private const string EdmxFilePath = @"D:\Fejlesztes\DynamicQuery\Source\DataAccess\Documentation\DynamicQuery.DocumentationDataAccess\DocumentationModel.edmx";
+        private const string EdmxFilePath = @"D:\Work\r-codes\DynamicQuery\Source\DataAccess\Documentation\DynamicQuery.DocumentationDataAccess\DocumentationModel.edmx";
         private readonly SqlConnection _connection;
 
         static void Main()
