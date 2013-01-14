@@ -39,6 +39,8 @@
     <script type="text/javascript" src="/Scripts/Pages/ColumnType.js"></script>
     <script type="text/javascript" src="/Scripts/Pages/Column.js"></script>
     <script type="text/javascript" src="/Scripts/Pages/CalculatedColumn.js"></script>
+    <script type="text/javascript" src="Scripts/Pages/Query.js"></script>
+    <script type="text/javascript" src="Scripts/Pages/Query2.js"></script>
     
 
     <script type="text/javascript">

@@ -84,6 +84,14 @@ xFilter.prototype.reDraw = function () {
     // the xFilter. Because the "filter" property
     // is the base filter entity, we well use it
     // as a start point
+    if (this.filter == null) {
+        this.filter = {
+            groupOp: this.groupOps[0],
+            rules: [],
+            groups: []
+        };
+    }
+
     var t = this.createTableForGroup(this.filter, null);
 
     this.domContainer.appendChild(t);

@@ -60,6 +60,7 @@
     <Content Include="Documentation.aspx" />
     <Content Include="Documentation\QBDatabaseDocumentation.xml" />
     <Content Include="Query.aspx" />
+    <Content Include="Query2.aspx" />
     <Content Include="Scripts\Control\QBDropDownModule.js" />
     <Content Include="Scripts\Control\QBGridModule.js" />
     <Content Include="Scripts\Core\Constant.js" />
@@ -86,6 +87,7 @@
     <Content Include="Scripts\Pages\Default.js" />
     <Content Include="Scripts\Pages\Documentation.js" />
     <Content Include="Scripts\Pages\Query.js" />
+    <Content Include="Scripts\Pages\Query2.js" />
     <Content Include="Scripts\xFilter.js" />
     <Content Include="Services\ColumnType.asmx" />
     <Content Include="Services\Query.asmx" />
@@ -165,6 +167,13 @@
     </Compile>
     <Compile Include="Query.aspx.designer.cs">
       <DependentUpon>Query.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Query2.aspx.cs">
+      <DependentUpon>Query2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Query2.aspx.designer.cs">
+      <DependentUpon>Query2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Services\ColumnType.asmx.cs">
       <DependentUpon>ColumnType.asmx</DependentUpon>
