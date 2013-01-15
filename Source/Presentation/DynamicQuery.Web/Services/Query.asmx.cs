@@ -76,7 +76,7 @@ namespace DynamicQuery.Web.Services
             }
         }
         [WebMethod(true)]
-        public List<string> GenerateQuery(Entity.QueryBuilder.DynamicQueryQuery query, string whereStatement)
+        public List<string> GenerateQuery(Entity.QueryBuilder.DynamicQueryQuery query, string where)
         {
             try
             {
@@ -84,30 +84,21 @@ namespace DynamicQuery.Web.Services
                 var builder = new QueryBuilder();
                 foreach (var column in query.Columns)
                 {
-                    if(column.IsSelected)
+                    builder.AddColumn(column);
+                }
+                foreach (var column in query.CalculatedColumns)
+                {
+                    if (column.IsSelected)
                     {
-                        builder.AddColumn(new DynamicQueryTableColumn
-                                              {
-                                                  Id = column.Id == 0 ? column.ColumnId : column.Id,
-                                                  CalculatedField = column.Calculated,
-                                                  Name = column.ColumnName,
-                                                  TableName = column.TableName
-                                              });
-                    }
-                    
-                    if(!column.IsSelected && column.IsWhere)
-                    {
-                        builder.AddWhereTable(column.TableName);
-                    }
-                    if(column.IsOrderBy)
-                    {
-                        builder.AddOrderByTable(column.TableName);
-                        builder.AddOrderBy(column.ColumnName, column.TableName,
-                                           column.Direction == "Csökkenő" ? "ASC" : "DESC",
-                                           column.IsSelected);
+                        builder.AddCalculatedColumn(column);
                     }
                 }
-                builder.WhereStatement = whereStatement;
+
+                if (!String.IsNullOrEmpty(where)) builder.WhereStatement = where;
+
+                result.Add(builder.ToString());
+
+                /*builder.WhereStatement = whereStatement;
 
                 result.Add(builder.ToString());
                 string w = "";
@@ -122,7 +113,7 @@ namespace DynamicQuery.Web.Services
                         }
                     }
                     result.Add(w);
-                }
+                }*/
                 return result;
             }
             catch (Exception exception)

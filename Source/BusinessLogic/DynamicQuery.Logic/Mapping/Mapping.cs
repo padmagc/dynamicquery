@@ -76,13 +76,12 @@ namespace DynamicQuery.Logic.Mapping
                             TableName = column.TableName,
                             ColumnId = column.ColumnId,
                             ColumnName = column.ColumnName,
-                            Calculated = column.Calculated,
+                            ColumnSqlName = column.ColumnSQLName,
                             IsSelected = column.IsSelected,
                             IsOrderBy = column.IsOrderBy,
                             Direction = column.Direction,
                             Position = column.Position,
                             IsWhere = column.IsWhere,
-                            //WhereCounter = column.IsWhere ? Regex.Matches(query.WhereStatement, String.Format("[{0}].[{1}]", column.TableName, column.ColumnName)).Count :0
                         }
                     );
                 }
@@ -91,18 +90,16 @@ namespace DynamicQuery.Logic.Mapping
             {
                 foreach (var column in query.DynamicQueryQueryCalculatedColumn)
                 {
-                    entity.Columns.Add(
-                        new DynamicQueryColumn
-                        {
-                            Id = column.Id,
-                            TableId = column.TableId,
-                            TableName = column.TableName,
-                            ColumnId = column.ColumnId,
-                            ColumnName = column.ColumnName,
-                            Calculated = column.Calculated,
-                            IsSelected = column.IsSelected,
-                        }
-                    );
+                    entity.CalculatedColumns.Add(new DynamicQueryQueryCalculatedColumn
+                                                    {
+                                                        Id = column.Id,
+                                                        TableId = column.TableId,
+                                                        TableName = column.TableName,
+                                                        ColumnId = column.ColumnId,
+                                                        ColumnName = column.ColumnName,
+                                                        ColumnSqlName = column.ColumnSQLName,
+                                                        IsSelected = column.IsSelected
+                                                    });
                 }
             }
 

@@ -225,7 +225,7 @@ function OnShowStepCallback(obj) {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: (function (data, status) {
-                actualQuery.SelectStatement = data.d[0];
+                //actualQuery.SelectStatement = data.d[0];
                 if(data.d.length == 1) {
                     $('#queryDataResult').html(
                         html.toString()
@@ -319,7 +319,7 @@ function Callback_QueryGetQueries(data) {
 function Callback_LoadSelectedQuery(data) {
     SetControlsToBase(data);
     gridColumns0.SetDatasource(actualQuery.Columns.filter(function (element) {
-        return element.IsSelected || element.IsOrderBy || element.IsWhere;
+       return element.IsSelected || element.IsOrderBy || element.IsWhere;
     }));
     $(".buttonNext").click();
 }

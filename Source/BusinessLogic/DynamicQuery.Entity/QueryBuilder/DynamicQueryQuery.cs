@@ -15,12 +15,14 @@ namespace DynamicQuery.Entity.QueryBuilder
         public string WhereStatement { get; set; }
         public string SelectStatement { get; set; }
         public List<DynamicQueryColumn> Columns { get; set; }
+        public List<DynamicQueryQueryCalculatedColumn> CalculatedColumns { get; set; }
         #endregion
 
         #region Konstruktor
         public DynamicQueryQuery()
         {
             Columns = new List<DynamicQueryColumn>();
+            CalculatedColumns = new List<DynamicQueryQueryCalculatedColumn>();
         }
         #endregion
     }

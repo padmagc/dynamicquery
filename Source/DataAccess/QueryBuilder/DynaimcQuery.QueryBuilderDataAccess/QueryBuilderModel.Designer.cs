@@ -1465,12 +1465,13 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         /// <param name="tableName">Initial value of the TableName property.</param>
         /// <param name="columnId">Initial value of the ColumnId property.</param>
         /// <param name="columnName">Initial value of the ColumnName property.</param>
+        /// <param name="columnSQLName">Initial value of the ColumnSQLName property.</param>
         /// <param name="calculated">Initial value of the Calculated property.</param>
         /// <param name="isSelected">Initial value of the IsSelected property.</param>
         /// <param name="isOrderBy">Initial value of the IsOrderBy property.</param>
         /// <param name="lastChangeDate">Initial value of the LastChangeDate property.</param>
         /// <param name="isWhere">Initial value of the IsWhere property.</param>
-        public static DynamicQueryColumn CreateDynamicQueryColumn(global::System.Int32 id, global::System.Int32 dynamicQueryId, global::System.Int32 tableId, global::System.String tableName, global::System.Int32 columnId, global::System.String columnName, global::System.Boolean calculated, global::System.Boolean isSelected, global::System.Boolean isOrderBy, global::System.DateTime lastChangeDate, global::System.Boolean isWhere)
+        public static DynamicQueryColumn CreateDynamicQueryColumn(global::System.Int32 id, global::System.Int32 dynamicQueryId, global::System.Int32 tableId, global::System.String tableName, global::System.Int32 columnId, global::System.String columnName, global::System.String columnSQLName, global::System.Boolean calculated, global::System.Boolean isSelected, global::System.Boolean isOrderBy, global::System.DateTime lastChangeDate, global::System.Boolean isWhere)
         {
             DynamicQueryColumn dynamicQueryColumn = new DynamicQueryColumn();
             dynamicQueryColumn.Id = id;
@@ -1479,6 +1480,7 @@ namespace DynaimcQuery.QueryBuilderDataAccess
             dynamicQueryColumn.TableName = tableName;
             dynamicQueryColumn.ColumnId = columnId;
             dynamicQueryColumn.ColumnName = columnName;
+            dynamicQueryColumn.ColumnSQLName = columnSQLName;
             dynamicQueryColumn.Calculated = calculated;
             dynamicQueryColumn.IsSelected = isSelected;
             dynamicQueryColumn.IsOrderBy = isOrderBy;
@@ -1637,6 +1639,30 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         private global::System.String _ColumnName;
         partial void OnColumnNameChanging(global::System.String value);
         partial void OnColumnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ColumnSQLName
+        {
+            get
+            {
+                return _ColumnSQLName;
+            }
+            set
+            {
+                OnColumnSQLNameChanging(value);
+                ReportPropertyChanging("ColumnSQLName");
+                _ColumnSQLName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ColumnSQLName");
+                OnColumnSQLNameChanged();
+            }
+        }
+        private global::System.String _ColumnSQLName;
+        partial void OnColumnSQLNameChanging(global::System.String value);
+        partial void OnColumnSQLNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2205,11 +2231,12 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         /// <param name="tableName">Initial value of the TableName property.</param>
         /// <param name="columnId">Initial value of the ColumnId property.</param>
         /// <param name="columnName">Initial value of the ColumnName property.</param>
+        /// <param name="columnSQLName">Initial value of the ColumnSQLName property.</param>
         /// <param name="calculated">Initial value of the Calculated property.</param>
         /// <param name="isSelected">Initial value of the IsSelected property.</param>
         /// <param name="lastChangeDate">Initial value of the LastChangeDate property.</param>
         /// <param name="isWhere">Initial value of the IsWhere property.</param>
-        public static DynamicQueryQueryCalculatedColumn CreateDynamicQueryQueryCalculatedColumn(global::System.Int32 id, global::System.Int32 dynamicQueryId, global::System.Int32 tableId, global::System.String tableName, global::System.Int32 columnId, global::System.String columnName, global::System.Boolean calculated, global::System.Boolean isSelected, global::System.DateTime lastChangeDate, global::System.Boolean isWhere)
+        public static DynamicQueryQueryCalculatedColumn CreateDynamicQueryQueryCalculatedColumn(global::System.Int32 id, global::System.Int32 dynamicQueryId, global::System.Int32 tableId, global::System.String tableName, global::System.Int32 columnId, global::System.String columnName, global::System.String columnSQLName, global::System.Boolean calculated, global::System.Boolean isSelected, global::System.DateTime lastChangeDate, global::System.Boolean isWhere)
         {
             DynamicQueryQueryCalculatedColumn dynamicQueryQueryCalculatedColumn = new DynamicQueryQueryCalculatedColumn();
             dynamicQueryQueryCalculatedColumn.Id = id;
@@ -2218,6 +2245,7 @@ namespace DynaimcQuery.QueryBuilderDataAccess
             dynamicQueryQueryCalculatedColumn.TableName = tableName;
             dynamicQueryQueryCalculatedColumn.ColumnId = columnId;
             dynamicQueryQueryCalculatedColumn.ColumnName = columnName;
+            dynamicQueryQueryCalculatedColumn.ColumnSQLName = columnSQLName;
             dynamicQueryQueryCalculatedColumn.Calculated = calculated;
             dynamicQueryQueryCalculatedColumn.IsSelected = isSelected;
             dynamicQueryQueryCalculatedColumn.LastChangeDate = lastChangeDate;
@@ -2375,6 +2403,30 @@ namespace DynaimcQuery.QueryBuilderDataAccess
         private global::System.String _ColumnName;
         partial void OnColumnNameChanging(global::System.String value);
         partial void OnColumnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ColumnSQLName
+        {
+            get
+            {
+                return _ColumnSQLName;
+            }
+            set
+            {
+                OnColumnSQLNameChanging(value);
+                ReportPropertyChanging("ColumnSQLName");
+                _ColumnSQLName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ColumnSQLName");
+                OnColumnSQLNameChanged();
+            }
+        }
+        private global::System.String _ColumnSQLName;
+        partial void OnColumnSQLNameChanging(global::System.String value);
+        partial void OnColumnSQLNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

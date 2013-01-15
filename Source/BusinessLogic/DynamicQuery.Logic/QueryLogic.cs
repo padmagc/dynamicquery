@@ -58,39 +58,40 @@ namespace DynamicQuery.Logic
 
                 foreach (var column in query.Columns)
                 {
-                    if (column.Calculated)
-                    {
-                        q.DynamicQueryQueryCalculatedColumn.Add(new DynamicQueryQueryCalculatedColumn
-                        {
-                            TableId = column.TableId,
-                            TableName = column.TableName,
-                            ColumnId = column.ColumnId,
-                            ColumnName = column.ColumnName,
-                            Calculated = column.Calculated,
-                            IsSelected = column.IsSelected,
-                            IsWhere = false,
-                            LastChangeDate = now
-                        });
-                    }
-                    else
-                    {
-                        q.DynamicQueryColumn.Add(new DynamicQueryColumn
-                                                     {
-                                                         TableId = column.TableId,
-                                                         TableName = column.TableName,
-                                                         ColumnId = column.ColumnId,
-                                                         ColumnName = column.ColumnName,
-                                                         Calculated = column.Calculated,
-                                                         IsSelected = column.IsSelected,
-                                                         IsOrderBy = column.IsOrderBy,
-                                                         IsWhere = column.IsWhere,
-                                                         Direction = column.Direction,
-                                                         Position = column.Position,
-                                                         LastChangeDate = now
-                                                     });
-                    }
+                    q.DynamicQueryColumn.Add(new DynamicQueryColumn
+                                                {
+                                                    TableId = column.TableId,
+                                                    TableName = column.TableName,
+                                                    ColumnId = column.ColumnId,
+                                                    ColumnName = column.ColumnName,
+                                                    ColumnSQLName = column.ColumnSqlName,
+                                                    Calculated = false,
+                                                    IsSelected = column.IsSelected,
+                                                    IsWhere = column.IsWhere,
+                                                    IsOrderBy = column.IsOrderBy,
+                                                    Direction = column.Direction,
+                                                    Position = column.Position,
+                                                    LastChangeDate = now
+                                                });
+
                 }
 
+                foreach (var calculatedColumn in query.CalculatedColumns)
+                {
+                    q.DynamicQueryQueryCalculatedColumn.Add(new DynamicQueryQueryCalculatedColumn
+                    {
+                        TableId = calculatedColumn.TableId,
+                        TableName = calculatedColumn.TableName,
+                        ColumnId = calculatedColumn.ColumnId,
+                        ColumnName = calculatedColumn.ColumnName,
+                        ColumnSQLName = calculatedColumn.ColumnSqlName,
+                        Calculated = true,
+                        IsSelected = calculatedColumn.IsSelected,
+                        IsWhere = false,
+                        LastChangeDate = now
+                    });
+                    
+                }
                 context.DynamicQueryQuery.AddObject(q);
                 context.SaveChanges();
             }
@@ -124,41 +125,40 @@ namespace DynamicQuery.Logic
 
                 foreach (var column in query.Columns)
                 {
-                    if (column.Calculated)
+                    q.DynamicQueryColumn.Add(new DynamicQueryColumn
                     {
-                        q.DynamicQueryQueryCalculatedColumn.Add(new DynamicQueryQueryCalculatedColumn
-                        {
-                            TableId = column.TableId,
-                            TableName = column.TableName,
-                            ColumnId = column.ColumnId,
-                            ColumnName = column.ColumnName,
-                            Calculated = column.Calculated,
-                            IsSelected = column.IsSelected,
-                            IsWhere = false,
-                            LastChangeDate = now
-                        });
-                    }
-                    else
-                    {
-                        q.DynamicQueryColumn.Add(new DynamicQueryColumn
-                                                     {
-                                                         TableId = column.TableId,
-                                                         TableName = column.TableName,
-                                                         ColumnId = column.ColumnId,
-                                                         ColumnName = column.ColumnName,
-                                                         Calculated = column.Calculated,
-                                                         IsSelected = column.IsSelected,
-                                                         IsOrderBy = column.IsOrderBy,
-                                                         IsWhere = column.IsWhere,
-                                                         Direction = column.Direction,
-                                                         Position = column.Position,
-                                                         LastChangeDate = now
-                                                     });
-                    }
+                        TableId = column.TableId,
+                        TableName = column.TableName,
+                        ColumnId = column.ColumnId,
+                        ColumnName = column.ColumnName,
+                        ColumnSQLName = column.ColumnSqlName,
+                        Calculated = false,
+                        IsSelected = column.IsSelected,
+                        IsWhere = column.IsWhere,
+                        IsOrderBy = column.IsOrderBy,
+                        Direction = column.Direction,
+                        Position = column.Position,
+                        LastChangeDate = now
+                    });
+
                 }
 
+                foreach (var calculatedColumn in query.CalculatedColumns)
+                {
+                    q.DynamicQueryQueryCalculatedColumn.Add(new DynamicQueryQueryCalculatedColumn
+                    {
+                        TableId = calculatedColumn.TableId,
+                        TableName = calculatedColumn.TableName,
+                        ColumnId = calculatedColumn.ColumnId,
+                        ColumnName = calculatedColumn.ColumnName,
+                        ColumnSQLName = calculatedColumn.ColumnSqlName,
+                        Calculated = true,
+                        IsSelected = calculatedColumn.IsSelected,
+                        IsWhere = false,
+                        LastChangeDate = now
+                    });
 
-
+                }
 
                 context.SaveChanges();
             }
