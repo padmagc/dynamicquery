@@ -19,8 +19,13 @@ namespace DynamicQuery.Logic.QueryBuilder
         public List<DynamicQueryTable> Tables { get; set; }
         public List<string> Association { get; set; }
         public List<string> Warnings { get; set; }
+        
         public string WhereStatement { get; set; }
         public StringBuilder OrderByStatement { get; set; }
+        public StringBuilder SelectColumnStatement { get; set; }
+        public StringBuilder GroupByColumnStatement { get; set; }
+        private bool GroupBy { get; set; }
+
         //public List<QueryBuilderOrderByClause> OrderByClauses { get; set; }
         //protected WhereStatement WhereStatement { get; set; }
 
@@ -33,10 +38,14 @@ namespace DynamicQuery.Logic.QueryBuilder
             Columns = new List<DynamicQueryTableColumn>();
             Tables = new List<DynamicQueryTable>();
             Warnings = new List<string>();
-            OrderByStatement = new StringBuilder();
             DatabaseAssociations = new List<DynamicQueryTableAssociation>();
-            //OrderByClauses = new List<QueryBuilderOrderByClause>();
-            //WhereStatement = new WhereStatement();
+
+
+            SelectColumnStatement = new StringBuilder();
+            OrderByStatement = new StringBuilder();
+            GroupByColumnStatement = new StringBuilder();
+
+            GroupBy = false;
 
             var logic = new TableLogic();
             DatabaseTables = logic.GetTables();
@@ -50,7 +59,74 @@ namespace DynamicQuery.Logic.QueryBuilder
         #endregion
 
         #region Function
-        public void AddColumn(DynamicQueryTableColumn column)
+        public void AddColumn(DynamicQuery.Entity.QueryBuilder.DynamicQueryColumn column)
+        {
+            var t = DatabaseTables.SingleOrDefault(w => w.Id == column.TableId);
+            if (t == null) throw new Exception("Ismeretlen tábla : " + column.TableName);
+
+            if (column.IsSelected)
+            {
+                if (SelectColumnStatement.Length > 0) SelectColumnStatement.Append(",");
+                SelectColumnStatement.Append(column.ColumnSqlName);
+            }
+
+            if (column.IsOrderBy)
+            {
+                if (OrderByStatement.Length > 0) OrderByStatement.Append(",");
+                OrderByStatement.Append(String.Format("[{0}].[{1}] {2}", column.TableName, column.ColumnName, (column.Direction == "Csökkenő" ? "DESC" : "ASC")));
+            }
+
+            if (column.IsSelected || column.IsOrderBy)
+            {
+                if (GroupByColumnStatement.Length > 0) GroupByColumnStatement.Append(",");
+                GroupByColumnStatement.Append(String.Format("[{0}].[{1}]", column.TableName, column.ColumnName));
+            }
+
+            if (Tables.SingleOrDefault(w => w.Name == t.Name) == null)
+            {
+                Tables.Add(new DynamicQueryTable {Name = column.TableName});
+                if (Tables.Count > 1)
+                {
+                    AddTableWithAssociation(Tables[0].Name, column.TableName);
+                }
+            }
+            
+        }
+        public void AddCalculatedColumn(DynamicQuery.Entity.QueryBuilder.DynamicQueryQueryCalculatedColumn column)
+        {
+            var t = DatabaseTables.SingleOrDefault(w => w.Id == column.TableId);
+            if(t == null) throw new Exception("Ismeretlen tábla : " + column.TableName);
+
+            var c = t.CalculatedColumns.SingleOrDefault(w => w.Id == column.ColumnId);
+            if (c == null) throw new Exception("Ismeretlen mező : " + column.ColumnId);
+
+            if (SelectColumnStatement.Length > 0) SelectColumnStatement.Append(",");
+            SelectColumnStatement.Append(column.ColumnSqlName);
+
+            if(c.GroupBy) GroupBy = true;
+           
+            foreach (var usedTableAndColumn in c.UsedTablesAndColumns)
+            {
+                if(!c.GroupBy)
+                {
+                    if (GroupByColumnStatement.Length > 0) GroupByColumnStatement.Append(",");
+                    GroupByColumnStatement.Append(String.Format("[{0}].[{1}]", usedTableAndColumn.TableName, usedTableAndColumn.ColumnName));
+                }
+
+                if (Tables.SingleOrDefault(w => w.Name == usedTableAndColumn.TableName) == null)
+                {
+                    Tables.Add(new DynamicQueryTable { Name = usedTableAndColumn.TableName });
+                }
+                if (Tables.Count > 1)
+                {
+                    AddTableWithAssociation(Tables[0].Name, usedTableAndColumn.TableName);
+                }
+            }
+        }
+
+
+
+        /*public void AddColumn0(DynamicQueryTableColumn column)
         {
             var t = DatabaseTables.SingleOrDefault(w => w.Name == column.TableName);
             if(t != null)
@@ -100,7 +176,7 @@ namespace DynamicQuery.Logic.QueryBuilder
                 }
                 Columns.Add(column);
             }
-        }
+        }*/
         private void AddTableWithAssociation(string mainTable, string joinedTable)
         {
             var sql = new StringBuilder();
@@ -126,46 +202,8 @@ namespace DynamicQuery.Logic.QueryBuilder
         public override string ToString()
         {
             var result = new StringBuilder();
-            var groupBycolumns = new StringBuilder();
-            var orderBycolumns = new StringBuilder();
-            var hasGroupBy = false;
-            foreach (var column in Columns)
-            {
-               
-                if (!column.CalculatedField)
-                {
-                    if (column.Id > 0)
-                    {
-                        if (result.Length > 0) result.Append(", ");
-                        result.Append(String.Format("[{0}].[{1}] AS '{2}'", column.TableName, column.Name,
-                            !String.IsNullOrEmpty(column.Description) ? column.Description : String.Format("{0}{1}", column.TableName, column.Name)));
-                    }
-
-                    if (groupBycolumns.Length > 0) groupBycolumns.Append(", ");
-                    groupBycolumns.Append(String.Format("[{0}].[{1}]", column.TableName, column.Name));
-                    
-                    if(!String.IsNullOrEmpty(column.Other))
-                    {
-                        if (orderBycolumns.Length > 0) orderBycolumns.Append(", ");
-                        orderBycolumns.Append(column.Other);
-                    }
-                } 
-                else
-                {
-                    if (result.Length > 0) result.Append(", ");
-                    result.Append(String.Format("{0} AS '{1}'", column.Name, column.Description));
-                    if (column.GroupBy)
-                    {
-                        hasGroupBy = true;
-                    }
-                    else
-                    {
-                        if (groupBycolumns.Length > 0) groupBycolumns.Append(", ");
-                        groupBycolumns.Append(column.Other);
-                    }
-                }
-            }
-            result.Insert(0, "SELECT ");
+            result.Append("SELECT ");
+            result.Append(SelectColumnStatement.ToString());
             result.Append(" FROM ");
             foreach (var table in Tables)
             {
@@ -175,13 +213,13 @@ namespace DynamicQuery.Logic.QueryBuilder
             {
                 result.Append(String.Format(" WHERE {0} ", WhereStatement));
             }
-            if(hasGroupBy)
+            if(GroupBy)
             {
-                result.Append(String.Format(" GROUP BY {0}", groupBycolumns.ToString()));
+                result.Append(String.Format(" GROUP BY {0}", GroupByColumnStatement));
             }
             if(OrderByStatement.Length > 0)
             {
-                result.Append(String.Format(" ORDER BY {0}", OrderByStatement.ToString()));
+                result.Append(String.Format(" ORDER BY {0}", OrderByStatement));
             }
 
             return result.ToString();

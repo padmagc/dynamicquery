@@ -12,11 +12,10 @@ namespace DynamicQuery.Entity.QueryBuilder
         public string TableName { get; set; }
         public int ColumnId { get; set; }
         public string ColumnName { get; set; }
-        public bool Calculated { get; set; }
+        public string ColumnSqlName { get; set; }
         public bool IsSelected { get; set; }
-        public bool IsOrderBy { get; set; }
         public bool IsWhere { get; set; }
-        public int WhereCounter { get; set; }
+        public bool IsOrderBy { get; set; }
         public string Direction { get; set; }
         public int? Position { get; set; }
     }

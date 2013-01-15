@@ -137,6 +137,7 @@
           <Property Name="TableName" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="ColumnId" Type="int" Nullable="false" />
           <Property Name="ColumnName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="ColumnSQLName" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Calculated" Type="bit" Nullable="false" />
           <Property Name="IsSelected" Type="bit" Nullable="false" />
           <Property Name="IsOrderBy" Type="bit" Nullable="false" />
@@ -167,6 +168,7 @@
           <Property Name="TableName" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="ColumnId" Type="int" Nullable="false" />
           <Property Name="ColumnName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="ColumnSQLName" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Calculated" Type="bit" Nullable="false" />
           <Property Name="IsSelected" Type="bit" Nullable="false" />
           <Property Name="LastChangeDate" Type="datetime" Nullable="false" />
@@ -794,6 +796,7 @@
           <Property Type="String" Name="TableName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="ColumnId" Nullable="false" />
           <Property Type="String" Name="ColumnName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ColumnSQLName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Calculated" Nullable="false" />
           <Property Type="Boolean" Name="IsSelected" Nullable="false" />
           <Property Type="Boolean" Name="IsOrderBy" Nullable="false" />
@@ -851,6 +854,7 @@
           <Property Type="String" Name="TableName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="ColumnId" Nullable="false" />
           <Property Type="String" Name="ColumnName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ColumnSQLName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Calculated" Nullable="false" />
           <Property Type="Boolean" Name="IsSelected" Nullable="false" />
           <Property Type="DateTime" Name="LastChangeDate" Nullable="false" />
@@ -1028,6 +1032,7 @@
                 <ScalarProperty Name="IsOrderBy" ColumnName="IsOrderBy" />
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
                 <ScalarProperty Name="Calculated" ColumnName="Calculated" />
+                <ScalarProperty Name="ColumnSQLName" ColumnName="ColumnSQLName" />
                 <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
                 <ScalarProperty Name="ColumnId" ColumnName="ColumnId" />
                 <ScalarProperty Name="TableName" ColumnName="TableName" />
@@ -1044,6 +1049,7 @@
                 <ScalarProperty Name="LastChangeDate" ColumnName="LastChangeDate" />
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
                 <ScalarProperty Name="Calculated" ColumnName="Calculated" />
+                <ScalarProperty Name="ColumnSQLName" ColumnName="ColumnSQLName" />
                 <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
                 <ScalarProperty Name="ColumnId" ColumnName="ColumnId" />
                 <ScalarProperty Name="TableName" ColumnName="TableName" />
@@ -1093,12 +1099,12 @@
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTableSubType" >
           <ConnectorPoint PointX="3.09375" PointY="5" />
-          <ConnectorPoint PointX="3.09375" PointY="4.4511542909729487" />
-          <ConnectorPoint PointX="3.5104166666666665" PointY="4.4511542909729478" />
-          <ConnectorPoint PointX="3.6770833333333335" PointY="4.4511542909729487" />
-          <ConnectorPoint PointX="4.541666666666667" PointY="4.4511542909729478" />
-          <ConnectorPoint PointX="4.708333333333333" PointY="4.4511542909729487" />
-          <ConnectorPoint PointX="4.875" PointY="4.4511542909729487" />
+          <ConnectorPoint PointX="3.09375" PointY="4.4512128017491435" />
+          <ConnectorPoint PointX="3.5104166666666665" PointY="4.4512128017491426" />
+          <ConnectorPoint PointX="3.6770833333333335" PointY="4.4512128017491435" />
+          <ConnectorPoint PointX="4.541666666666667" PointY="4.4512128017491426" />
+          <ConnectorPoint PointX="4.708333333333333" PointY="4.4512128017491435" />
+          <ConnectorPoint PointX="4.875" PointY="4.4512128017491435" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryTableColumn_DynamicQueryTableType" >
           <ConnectorPoint PointX="2.625" PointY="1.8928464589843752" />
@@ -1106,10 +1112,10 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryCalculatedColumnTable" Width="3.125" PointX="0.5" PointY="8.125" Height="2.3648893229166674" />
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryColumn" >
-          <ConnectorPoint PointX="4.875" PointY="3.8743685907989733" />
-          <ConnectorPoint PointX="4.708333333333333" PointY="3.8743685907989729" />
-          <ConnectorPoint PointX="4.541666666666667" PointY="3.8743685907989733" />
-          <ConnectorPoint PointX="3.59375" PointY="3.8743685907989733" />
+          <ConnectorPoint PointX="4.875" PointY="3.8743978461870707" />
+          <ConnectorPoint PointX="4.708333333333333" PointY="3.8743978461870703" />
+          <ConnectorPoint PointX="4.541666666666667" PointY="3.8743978461870707" />
+          <ConnectorPoint PointX="3.59375" PointY="3.8743978461870707" />
           <ConnectorPoint PointX="3.59375" PointY="8.125" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryTable" >
@@ -1119,32 +1125,32 @@
         <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryCalculatedColumn" Width="2.5" PointX="9.375" PointY="7.375" Height="4.095602213541671" />
         <EntityTypeShape EntityType="QbDynamicQueryModel.sysdiagrams" Width="2.5" PointX="0.75" PointY="11.75" Height="1.9802864583333353" />
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTable" >
-          <ConnectorPoint PointX="8.25" PointY="8.600698242187498" />
-          <ConnectorPoint PointX="9.375" PointY="8.600698242187498" />
+          <ConnectorPoint PointX="8.25" PointY="8.6006982421875" />
+          <ConnectorPoint PointX="9.375" PointY="8.6006982421875" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableSubType" >
-          <ConnectorPoint PointX="3.5" PointY="6.0502018229166659" />
-          <ConnectorPoint PointX="3.5104166666666665" PointY="6.050201822916665" />
-          <ConnectorPoint PointX="3.6770833333333335" PointY="6.0502018229166659" />
-          <ConnectorPoint PointX="5.854166666666667" PointY="6.050201822916665" />
-          <ConnectorPoint PointX="6.020833333333333" PointY="6.0502018229166659" />
-          <ConnectorPoint PointX="8.7291691666666669" PointY="6.050201822916665" />
-          <ConnectorPoint PointX="8.8958358333333347" PointY="6.0502018229166659" />
-          <ConnectorPoint PointX="10.119789666666666" PointY="6.050201822916665" />
-          <ConnectorPoint PointX="10.286456333333334" PointY="6.0502018229166659" />
-          <ConnectorPoint PointX="10.757811499999999" PointY="6.0502018229166659" />
-          <ConnectorPoint PointX="10.757811499999999" PointY="7.375" />
+          <ConnectorPoint PointX="3.5" PointY="6.0189518229166659" />
+          <ConnectorPoint PointX="3.5104166666666665" PointY="6.018951822916665" />
+          <ConnectorPoint PointX="3.6770833333333335" PointY="6.0189518229166659" />
+          <ConnectorPoint PointX="5.854166666666667" PointY="6.018951822916665" />
+          <ConnectorPoint PointX="6.020833333333333" PointY="6.0189518229166659" />
+          <ConnectorPoint PointX="7.7916686666666672" PointY="6.018951822916665" />
+          <ConnectorPoint PointX="7.9583353333333333" PointY="6.0189518229166659" />
+          <ConnectorPoint PointX="10.244789666666666" PointY="6.018951822916665" />
+          <ConnectorPoint PointX="10.411456333333334" PointY="6.0189518229166659" />
+          <ConnectorPoint PointX="11.34375" PointY="6.0189518229166659" />
+          <ConnectorPoint PointX="11.34375" PointY="7.375" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumn_DynamicQueryTableType" >
           <ConnectorPoint PointX="2.625" PointY="2.7856929179687504" />
           <ConnectorPoint PointX="4.625" PointY="2.7856929179687504" />
-          <ConnectorPoint PointX="4.625" PointY="5.6629036458333317" />
-          <ConnectorPoint PointX="5.854166666666667" PointY="5.6629036458333308" />
-          <ConnectorPoint PointX="6.020833333333333" PointY="5.6629036458333317" />
-          <ConnectorPoint PointX="8.7291691666666669" PointY="5.6629036458333308" />
-          <ConnectorPoint PointX="8.8958358333333347" PointY="5.6629036458333317" />
-          <ConnectorPoint PointX="10.203123" PointY="5.6629036458333317" />
-          <ConnectorPoint PointX="10.203123" PointY="7.375" />
+          <ConnectorPoint PointX="4.625" PointY="5.7879036458333317" />
+          <ConnectorPoint PointX="5.854166666666667" PointY="5.7879036458333308" />
+          <ConnectorPoint PointX="6.020833333333333" PointY="5.7879036458333317" />
+          <ConnectorPoint PointX="7.7916686666666672" PointY="5.7879036458333308" />
+          <ConnectorPoint PointX="7.9583353333333333" PointY="5.7879036458333317" />
+          <ConnectorPoint PointX="10.328123" PointY="5.7879036458333317" />
+          <ConnectorPoint PointX="10.328123" PointY="7.375" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryCalculatedColumnTable_DynamicQueryCalculatedColumn" >
           <ConnectorPoint PointX="9.375" PointY="10.1006982421875" />
@@ -1153,38 +1159,38 @@
           <ConnectorPoint PointX="3.625" PointY="10.1006982421875" />
         </AssociationConnector>
         <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryQuery" Width="2.125" PointX="11.5" PointY="0.5" Height="2.7494921875" />
-        <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryColumn" Width="2.25" PointX="8" PointY="1.125" Height="4.0956022135416674" />
+        <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryColumn" Width="2.625" PointX="8.125" PointY="1.25" Height="4.2879036458333317" />
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryColumn_DynamicQueryQuery" >
-          <ConnectorPoint PointX="11.5" PointY="2.18724609375" />
-          <ConnectorPoint PointX="10.25" PointY="2.18724609375" />
+          <ConnectorPoint PointX="11.5" PointY="2.24974609375" />
+          <ConnectorPoint PointX="10.75" PointY="2.24974609375" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryColumn_DynamicQueryTable" >
-          <ConnectorPoint PointX="8.25" PointY="6.9062499999999991" />
-          <ConnectorPoint PointX="8.8125025" PointY="6.9062499999999991" />
-          <ConnectorPoint PointX="8.8125025" PointY="5.2206022135416674" />
+          <ConnectorPoint PointX="7.875002" PointY="6.5" />
+          <ConnectorPoint PointX="7.875002" PointY="5.5066536458333317" />
+          <ConnectorPoint PointX="8.125" PointY="5.5066536458333317" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryColumn_DynamicQueryTableColumn" >
-          <ConnectorPoint PointX="7" PointY="3.1728011067708337" />
-          <ConnectorPoint PointX="8" PointY="3.1728011067708337" />
+          <ConnectorPoint PointX="7" PointY="3.3314518229166659" />
+          <ConnectorPoint PointX="8.125" PointY="3.3314518229166659" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryQueryCalculatedColumn" Width="2.125" PointX="12.375" PointY="3.75" Height="3.5186979166666665" />
+        <EntityTypeShape EntityType="QbDynamicQueryModel.DynamicQueryQueryCalculatedColumn" Width="3.125" PointX="13.375" PointY="4" Height="3.7109993489583317" />
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryQueryCalculatedColumn_DynamicQueryCalculatedColumn" >
-          <ConnectorPoint PointX="11.874999999999991" PointY="7.375" />
-          <ConnectorPoint PointX="12.375" PointY="7.2686979166666674" />
+          <ConnectorPoint PointX="11.875" PointY="9.6869519973958322" />
+          <ConnectorPoint PointX="14.9375" PointY="9.6869519973958322" />
+          <ConnectorPoint PointX="14.9375" PointY="7.7109993489583317" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryQueryCalculatedColumn_DynamicQueryQuery" >
-          <ConnectorPoint PointX="13" PointY="3.2494921875" />
-          <ConnectorPoint PointX="13" PointY="3.75" />
+          <ConnectorPoint PointX="12.656249500000001" PointY="3.2494921875" />
+          <ConnectorPoint PointX="12.656249500000001" PointY="5.65625" />
+          <ConnectorPoint PointX="13.375" PointY="5.65625" />
         </AssociationConnector>
         <AssociationConnector Association="QbDynamicQueryModel.FK_DynamicQueryQueryCalculatedColumn_DynamicQueryTable" >
-          <ConnectorPoint PointX="8.25" PointY="6.640625" />
-          <ConnectorPoint PointX="8.7291691666666669" PointY="6.6406249999999991" />
-          <ConnectorPoint PointX="8.8958358333333347" PointY="6.640625" />
-          <ConnectorPoint PointX="10.119789666666666" PointY="6.6406249999999991" />
-          <ConnectorPoint PointX="10.286456333333334" PointY="6.640625" />
-          <ConnectorPoint PointX="10.674478166666665" PointY="6.6406249999999991" />
-          <ConnectorPoint PointX="10.841144833333333" PointY="6.640625" />
-          <ConnectorPoint PointX="12.375" PointY="6.640625" />
+          <ConnectorPoint PointX="8.25" PointY="6.90625" />
+          <ConnectorPoint PointX="10.244789666666666" PointY="6.9062499999999991" />
+          <ConnectorPoint PointX="10.411456333333334" PointY="6.90625" />
+          <ConnectorPoint PointX="11.260416666666666" PointY="6.9062499999999991" />
+          <ConnectorPoint PointX="11.427083333333334" PointY="6.90625" />
+          <ConnectorPoint PointX="13.375" PointY="6.90625" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

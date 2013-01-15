@@ -20,7 +20,85 @@
             </td>
         </tr>
     </script>
-        <div id="wizard" class="swMain" style="font-size: 0.9em">
+    <script id="columnRowTemplate" type="text/x-jquery-tmpl">
+        {{if Active == true}}
+            {{if Calculated == true}}
+                <tr style="background-color: #E0ECF8">
+            {{else}}
+                <tr>
+            {{/if}}
+        {{else}}
+        <tr style="background-color: #FF9999">
+        {{/if}}
+            <td style="padding-left: 5px;">${ColumnName}</td>
+            <td style="padding-left: 5px;">${Description}</td>
+            <td style="padding-left: 5px;">${Information}</td>
+            <td style="text-align: center !important; padding-left: 5px;">
+            {{if Active == true}}
+                {{if IsSelected == true }}
+                    <a href="javascript:void(0);" class="removecolumn">Töröl</a>
+                {{else}}
+                    <a href="javascript:void(0);" class="addcolumn">Kiválaszt</a>
+                {{/if}}                
+                {{if Calculated == false}}
+                    {{if IsOrderBy == true }}
+                        <a href="javascript:void(0);" class="removeorderby" >Nem rendez</a>
+                    {{else}}
+                        <a href="javascript:void(0);" class="addorderby" >Rendez</a>
+                    {{/if}}                
+                {{/if}}
+            {{/if}}
+            </td>
+        </tr>
+     </script>
+      <script id="columnRowTemplate0" type="text/x-jquery-tmpl">
+        {{if Calculated == true}}
+            <tr style="background-color: #E0ECF8">
+        {{else}}
+            <tr>
+        {{/if}}
+            <td style="padding-left: 5px;">${TableName}</td>
+            <td style="padding-left: 5px;">${ColumnName}</td>
+            <td style="text-align: center !important; padding-left: 5px;">
+                {{if IsSelected == true }}
+                    <a href="javascript:void(0);" class="removecolumn">Töröl</a>
+                {{/if}}
+                {{if IsOrderBy == true }}
+                    <a href="javascript:void(0);" class="removeorderby" >Nem rendez</a>
+                {{/if}}      
+                {{if IsWhere == true }}
+                    Feltételben szerepel
+                {{/if}}      
+            </td>
+        </tr>
+     </script>
+    <div id="dialogWhere" title="Feltétel">
+        <form action="">
+            <div>
+                <div id="filters" style="width:100%; height: 100%"></div>
+            </div>
+        </form>
+    </div> 
+    <div id="dialogWhereValues" title="Feltétel">
+        <form action="">
+            <div>
+                <div id="whereValues" style="width:100%; height: 100%"></div>
+            </div>
+        </form>
+    </div>    
+    <div id="dialogOrderBy" title="Mező rendezés">
+        <form action="">
+            <div>
+                <label>Irány :</label>
+                <select id="OrderByDirection">
+                    <option id="asc">Csökkenő</option>
+                    <option id="desc">Növekvő</option>
+                </select>
+            </div>
+        </form>
+    </div>    
+
+    <div id="wizard" class="swMain" style="font-size: 0.9em">
         <ul>
   			<li>
   			    <a href="#step-1" id="firststep">
@@ -108,6 +186,13 @@
                     </td>
                     <td style="width: 95%">
                         <textarea rows="3" id="QueryDescription" style="width: 95%; margin-left: 5px;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="button" id="btnDynamicWhere" style="width: 80%" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only biggerbutton" role="button" aria-disabled="false">
+                            <span class="ui-button-text biggertext">Feltétel</span>
+                        </button>
                     </td>
                 </tr>
             </table>

@@ -36,6 +36,8 @@ xFilter = function (container, opts) {
     this.domContainer = container;
     this.onchange = this.opts.onchange;
     this.selectedColumns = [];
+    this.dynamicCount = 0;
+    this.isbuild = true;
 
     this.ops = [
         { "name": "eq", "description": "=" },
@@ -72,6 +74,11 @@ xFilter = function (container, opts) {
     this.reDraw();
 };
 
+xFilter.prototype.reDrawToValues = function () {
+    this.isbuild = false;
+    this.reDraw();
+    this.isbuild = true;
+};
 
 xFilter.prototype.reDraw = function () {
 
@@ -138,74 +145,83 @@ xFilter.prototype.createTableForGroup = function (group, parentgroup) {
         o.appendChild(document.createTextNode(this.groupOps[i]));
         groupOpSelect.appendChild(o);
     }
+    if (!this.isbuild) {
+        groupOpSelect.setAttribute("disabled", "disabled");
+    }
 
 
     // button for adding a new subgroup
-    var inputAddSubgroup = document.createElement("input");
-    inputAddSubgroup.setAttribute("type", "button");
-    inputAddSubgroup.setAttribute("value", "+ {");
-    inputAddSubgroup.setAttribute("title", "Add subgroup");
-    inputAddSubgroup.setAttribute("class", "add-group");
-    inputAddSubgroup.onclick = function () {
-        if (group.groups == undefined)
-            group.groups = [];
+    if (this.isbuild) {
+        var inputAddSubgroup = document.createElement("input");
+        inputAddSubgroup.setAttribute("type", "button");
+        inputAddSubgroup.setAttribute("value", "+ {");
+        inputAddSubgroup.setAttribute("title", "Add subgroup");
+        inputAddSubgroup.setAttribute("class", "add-group");
+        inputAddSubgroup.onclick = function () {
+            if (group.groups == undefined)
+                group.groups = [];
 
-        group.groups.push({
-            groupOp: that.groupOps[0],
-            rules: [],
-            groups: []
-        }); // adding a new group
-
-        that.reDraw(); // the html has changed, force reDraw
-        // REMOVE 2013.01.03 Ricsi
-        // that.onchange(); // signals that the filter has changed
-    }
-    th.appendChild(inputAddSubgroup);
-
-    // button for adding a new rule
-    var inputAddRule = document.createElement("input");
-    inputAddRule.setAttribute("type", "button");
-    inputAddRule.setAttribute("value", "+");
-    inputAddRule.setAttribute("title", "Add rule");
-    inputAddRule.setAttribute("class", "add-rule");
-    inputAddRule.onclick = function () {
-        if (group.rules == undefined)
-            group.rules = [];
-
-        group.rules.push({
-            // TODO
-            field: "Válassz...",
-            op: that.ops[0].name,
-            data: ""
-        }); // adding a new rule
-
-        that.reDraw(); // the html has changed, force reDraw
-
-        // for the moment no change have been made to the rule, so
-        // this will not trigger onchange event
-    }
-    th.appendChild(inputAddRule);
-
-    // button for delete the group
-    if (parentgroup != null) { // ignore the first group
-        var inputDeleteGroup = document.createElement("input");
-        inputDeleteGroup.setAttribute("type", "button");
-        inputDeleteGroup.setAttribute("value", "-");
-        inputDeleteGroup.setAttribute("title", "Delete group");
-        inputDeleteGroup.setAttribute("class", "delete-group");
-        th.appendChild(inputDeleteGroup);
-        inputDeleteGroup.onclick = function () {
-            // remove group from parent
-            for (var i = 0; i < parentgroup.groups.length; i++) {
-                if (parentgroup.groups[i] == group) {
-                    parentgroup.groups.splice(i, 1);
-                    break;
-                }
-            }
+            group.groups.push({
+                groupOp: that.groupOps[0],
+                rules: [],
+                groups: []
+            }); // adding a new group
 
             that.reDraw(); // the html has changed, force reDraw
             // REMOVE 2013.01.03 Ricsi
             // that.onchange(); // signals that the filter has changed
+        }
+        th.appendChild(inputAddSubgroup);
+    }
+
+    if (this.isbuild) {
+        // button for adding a new rule
+        var inputAddRule = document.createElement("input");
+        inputAddRule.setAttribute("type", "button");
+        inputAddRule.setAttribute("value", "+");
+        inputAddRule.setAttribute("title", "Add rule");
+        inputAddRule.setAttribute("class", "add-rule");
+        inputAddRule.onclick = function () {
+            if (group.rules == undefined)
+                group.rules = [];
+
+            group.rules.push({
+                // TODO
+                field: "Válassz...",
+                op: that.ops[0].name,
+                data: ""
+            }); // adding a new rule
+
+            that.reDraw(); // the html has changed, force reDraw
+
+            // for the moment no change have been made to the rule, so
+            // this will not trigger onchange event
+        }
+        th.appendChild(inputAddRule);
+    }
+
+    if (this.isbuild) {
+        // button for delete the group
+        if (parentgroup != null) { // ignore the first group
+            var inputDeleteGroup = document.createElement("input");
+            inputDeleteGroup.setAttribute("type", "button");
+            inputDeleteGroup.setAttribute("value", "-");
+            inputDeleteGroup.setAttribute("title", "Delete group");
+            inputDeleteGroup.setAttribute("class", "delete-group");
+            th.appendChild(inputDeleteGroup);
+            inputDeleteGroup.onclick = function () {
+                // remove group from parent
+                for (var i = 0; i < parentgroup.groups.length; i++) {
+                    if (parentgroup.groups[i] == group) {
+                        parentgroup.groups.splice(i, 1);
+                        break;
+                    }
+                }
+
+                that.reDraw(); // the html has changed, force reDraw
+                // REMOVE 2013.01.03 Ricsi
+                // that.onchange(); // signals that the filter has changed
+            }
         }
     }
 
@@ -262,9 +278,7 @@ xFilter.prototype.createTableRowForRule = function (rule, group) {
     ruleFieldSelect.onchange = function () {
         rule.field = ruleFieldSelect.options[ruleFieldSelect.selectedIndex].text;
         rule.fieldId = ruleFieldSelect.options[ruleFieldSelect.selectedIndex].value;
-        rule.column = that.columns.filter(function (e) { return "[" + e.table + "].[" + e.name + "]" == rule.field; })[0].name;
-        rule.table = that.columns.filter(function (e) { return "[" + e.table + "].[" + e.name + "]" == rule.field; })[0].table;
-        rule.tableId = that.columns.filter(function (e) { return "[" + e.table + "].[" + e.name + "]" == rule.field; })[0].tableId;
+        /*rule.IsDynamic = that.columns.filter(function (e) { return "[" + e.table + "].[" + e.name + "]" == rule.field; })[0].IsDynamic;*/
         // REMOVE 2013.01.03 Ricsi
         //that.onchange(rule); // signals that the filter has changed
     }
@@ -274,30 +288,15 @@ xFilter.prototype.createTableRowForRule = function (rule, group) {
         var o = document.createElement("option");
         o.setAttribute("value", this.columns[i].index);
 
-        if (rule.field == "[" + this.columns[i].table + "].[" + this.columns[i].name + "]") {
+        //if (rule.field == "[" + this.columns[i].table + "].[" + this.columns[i].name + "]") {
+        if (rule.field == this.columns[i].name) {
             o.setAttribute("selected", "selected");
-            /*var tempsc = this.selectedColumns.filter(function (element) {
-            return element.name == rule.field;
-            });
-            if (tempsc == null) {
-            this.selectedColumns.push({
-            name: rule.field,
-            index: rule.fieldId,
-            table: this.columns[i].table,
-            tableId: this.columns[i].tableId,
-            counter: 1
-            });
-            } else {
-            tempsc[0].counter++;
-            }*/
         }
-
-        if (this.columns[i].index == -1) {
-            o.appendChild(document.createTextNode(this.columns[i].name));
-        } else {
-            o.appendChild(document.createTextNode("[" + this.columns[i].table + "].[" + this.columns[i].name + "]"));
-        }
+        o.appendChild(document.createTextNode(this.columns[i].name));
         ruleFieldSelect.appendChild(o);
+    }
+    if (!this.isbuild) {
+        ruleFieldSelect.setAttribute("disabled", "disabled");
     }
 
     // create operator container
@@ -307,6 +306,10 @@ xFilter.prototype.createTableRowForRule = function (rule, group) {
 
     // create it here so it can be referentiated in the onchange event
     var ruleDataInput = document.createElement("input");
+
+    // create it here so it can be referentiated in the onchange event
+    var ruleDataDynamicInput = document.createElement("input");
+
 
     // dropdown for: choosing operator
     var ruleOperatorSelect = document.createElement("select");
@@ -333,6 +336,9 @@ xFilter.prototype.createTableRowForRule = function (rule, group) {
         o.appendChild(document.createTextNode(this.ops[i].description));
         ruleOperatorSelect.appendChild(o);
     }
+    if (!this.isbuild) {
+        ruleOperatorSelect.setAttribute("disabled", "disabled");
+    }
 
     // TODO
     // create data container
@@ -344,40 +350,71 @@ xFilter.prototype.createTableRowForRule = function (rule, group) {
     // is created previously
     ruleDataInput.setAttribute("type", "text");
     ruleDataInput.setAttribute("value", rule.data);
-    ruleDataTd.appendChild(ruleDataInput);
-    ruleDataInput.onchange = function () {
-        rule.data = ruleDataInput.value;
-
-        // REMOVE 2013.01.03 Ricsi
-        //that.onchange(); // signals that the filter has changed
+    if (!this.isbuild && rule.isDynamic) {
+        ruleDataInput.setAttribute("style", "border-color: Red");
     }
-
-    // create action container
-    var ruleDeleteTd = document.createElement("td");
-    tr.appendChild(ruleDeleteTd);
-
-    // create button for: delete rule
-    var ruleDeleteInput = document.createElement("input");
-    ruleDeleteInput.setAttribute("type", "button");
-    ruleDeleteInput.setAttribute("value", "-");
-    ruleDeleteInput.setAttribute("title", "Delete rule");
-    ruleDeleteInput.setAttribute("class", "delete-rule");
-    ruleDeleteTd.appendChild(ruleDeleteInput);
-    ruleDeleteInput.onclick = function () {
-        // remove rule from group
-        for (var i = 0; i < group.rules.length; i++) {
-            if (group.rules[i] == rule) {
-                group.rules.splice(i, 1);
-                break;
+    ruleDataTd.appendChild(ruleDataInput);
+    if (this.isbuild) {
+        ruleDataInput.onchange = function() {
+            rule.data = ruleDataInput.value;
+            // REMOVE 2013.01.03 Ricsi
+            //that.onchange(); // signals that the filter has changed
+        }
+    } else if(!this.isbuild && rule.isDynamic) {
+        ruleDataInput.onchange = function () {
+            if(ruleDataInput.value != '') {
+                ruleDataInput.setAttribute("style", "border-color: #adadad");
+            } else {
+                ruleDataInput.setAttribute("style", "border-color: Red");
             }
         }
-
-        that.reDraw(); // the html has changed, force reDraw
-
-        // REMOVE 2013.01.03 Ricsi
-        // that.onchange(); // signals that the filter has changed
+        
     }
 
+
+    // textbox for: data
+    // is created previously
+    if (this.isbuild) {
+        ruleDataDynamicInput.setAttribute("type", "checkbox");
+        ruleDataDynamicInput.setAttribute("value", rule.isDynamic);
+        if (rule.isDynamic) {
+            ruleDataDynamicInput.setAttribute("checked", "checked");
+        }
+        ruleDataTd.appendChild(ruleDataDynamicInput);
+        ruleDataDynamicInput.onchange = function () {
+            rule.isDynamic = $(ruleDataDynamicInput).is(":checked");
+            // REMOVE 2013.01.03 Ricsi
+            //that.onchange(); // signals that the filter has changed
+        }
+    }
+
+    if (this.isbuild) {
+        // create action container
+        var ruleDeleteTd = document.createElement("td");
+        tr.appendChild(ruleDeleteTd);
+
+        // create button for: delete rule
+        var ruleDeleteInput = document.createElement("input");
+        ruleDeleteInput.setAttribute("type", "button");
+        ruleDeleteInput.setAttribute("value", "-");
+        ruleDeleteInput.setAttribute("title", "Delete rule");
+        ruleDeleteInput.setAttribute("class", "delete-rule");
+        ruleDeleteTd.appendChild(ruleDeleteInput);
+        ruleDeleteInput.onclick = function () {
+            // remove rule from group
+            for (var i = 0; i < group.rules.length; i++) {
+                if (group.rules[i] == rule) {
+                    group.rules.splice(i, 1);
+                    break;
+                }
+            }
+
+            that.reDraw(); // the html has changed, force reDraw
+
+            // REMOVE 2013.01.03 Ricsi
+            // that.onchange(); // signals that the filter has changed
+        }
+    }
     return tr;
 }
 xFilter.prototype.toString = function () {
@@ -426,6 +463,7 @@ xFilter.prototype.toString = function () {
 }
 xFilter.prototype.toUserFriendlyString = function () {
     this.selectedColumns = [];
+    this.dynamicCount = 0;
     return this.getUserFriendlyStringForGroup(this.filter);
 }
 xFilter.prototype.getUserFriendlyStringForGroup = function (group) {
@@ -452,15 +490,15 @@ xFilter.prototype.getUserFriendlyStringForGroup = function (group) {
 
                     if (tempsc.length == 0) {
                         this.selectedColumns.push({
-                            name: group.rules[index].column,
-                            index: group.rules[index].fieldId,
-                            table: group.rules[index].table,
-                            tableId: group.rules[index].tableId,
-                            counter: 1
+                            name: group.rules[index].field,
+                            id: group.rules[index].fieldId,
+                            //index: group.rules[index].fieldId,
+                            //table: group.rules[index].table,
+                            //tableId: group.rules[index].tableId,
+                            isDynamic: group.rules[index].isDynamic
+                            //counter: 1
                         });
-                    } else {
-                        tempsc[0].counter++;
-                    }
+                    } 
                 }
                 if (s.length > 1)
                     s += " " + group.groupOp + " ";
@@ -484,7 +522,12 @@ xFilter.prototype.getUserFriendlyStringForRule = function (rule) {
             break;
         }
     }
-    return rule.field + " " + opUF + " \'" + rule.data + "\'";
+    if (rule.isDynamic) {
+        this.dynamicCount++;
+        return rule.field + " " + opUF + " \'{D"+ this.dynamicCount +"}'";
+    } else {
+        return rule.field + " " + opUF + " \'" + rule.data + "\'";
+    }
 }
 xFilter.prototype.Apply = function (jsonObj) {
     // filters the JSON based on the current filter
